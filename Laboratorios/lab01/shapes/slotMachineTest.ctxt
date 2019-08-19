@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=slotMachineTest
+comment0.text=\r\n\ Prueba\ las\ funcionalidades\ de\ la\ clase\ slotMachine.\ Suspruebas\ estan\r\n\ basadas\ en\ la\ divisi\u00F3n\ por\ ciclos\ propuesta\ en\ el\ laboratorio.\r\n\r\n\ @author\ \ (Eduard\ Arias)\r\n\ @version\ (1.0,\ 2019-08-18)\r\n
+comment1.params=
+comment1.target=slotMachineTest()
+comment1.text=\r\n\ Default\ constructor\ for\ test\ class\ slotMachineTest\r\n
+comment2.params=
+comment2.target=void\ setUp()
+comment2.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\r\n\ Called\ before\ every\ test\ case\ method.\r\n
+comment3.params=
+comment3.target=void\ shouldPlayOK()
+comment4.params=
+comment4.target=void\ shouldShowPercentageOK()
+numComments=5
