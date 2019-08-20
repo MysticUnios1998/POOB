@@ -67,7 +67,10 @@ public class SquareSlotMachine{
                 c.changeColor(colors[randomIndex]);
             }
         }
-        if (isWinningState()) juegos[0]++;
+        if (isWinningState()){
+            JOptionPane.showMessageDialog(null, "¡¡GANASTE!!");
+            juegos[0]++;
+        }
         juegos[1]++;
     }
     
@@ -77,7 +80,7 @@ public class SquareSlotMachine{
      */
     public void pull(int row){
         int randomIndex;
-        if (2 > row || row > 5) JOptionPane.showMessageDialog(null,
+        if (1 > row || row > 5) JOptionPane.showMessageDialog(null,
             "El valor ha pasado los límites.",
             "Parámetro incorrecto",
             JOptionPane.ERROR_MESSAGE);
@@ -86,7 +89,10 @@ public class SquareSlotMachine{
                 randomIndex = (int)(Math.random()*10) % (size+1);
                 c.changeColor(colors[randomIndex]);
             }
-            if (isWinningState()) juegos[0]++;
+            if (isWinningState()){
+                JOptionPane.showMessageDialog(null, "¡¡GANASTE!!");
+                juegos[0]++;
+            }
             juegos[1]++;
         }
     }
@@ -107,6 +113,80 @@ public class SquareSlotMachine{
      */
     public double percentageOfWinning(){
         return juegos[0]*100.0/juegos[1];
+    }
+    
+    /**
+     * Juega un numero al azar para trucar el estado ganador. Si llega a haber un error
+     * el juego se cierra (Hack Failed).
+     * @param guess numero para jugar un pull trucado. Debe ser estar entre 0 y 9.
+     */
+    public void hackedPull(int guess){
+        int randomNumber = (int)(Math.random()*10) % (10);
+        if (guess != randomNumber){
+            JOptionPane.showMessageDialog(null,
+            "Hacked Failed: EXIT_FAILURE status",
+            "#$%&/%&(=_=)_",
+            JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }else{
+            JOptionPane.showMessageDialog(null, "¡¡GANASTE!!");
+            reset();
+        }
+    }
+    
+    /**
+     * Calcula los movimientos mínimos para ganar. El número calculado no será
+     * mayor a el tamaño de las filas/columnas de la  máquina.
+     * @return la cantidad de movimientos.
+     */
+    public int minimumMoves(){
+        int minimum = size;
+        int rowMin = size, colMin = size;
+        for (int i=0; i<size; i++){
+            for (int j=0; j<size; j++){
+                rowMin = 0;
+                colMin = 0;
+                for (int x=0; x<size; x++){
+                    if (j!=x && !elements.get(i).get(j).getColor().equals(elements.get(i).get(x).getColor())) colMin++;
+                    if (i!=x &&!elements.get(i).get(j).getColor().equals(elements.get(x).get(j).getColor())) rowMin++;
+                }
+                minimum = Math.min(minimum, Math.min(rowMin, colMin));
+            }
+        }
+        return minimum;
+    }
+    
+    /**
+     * Reliza una jugada alterada mínima.
+     */
+    public void minimumMovesPull(){
+        int minimum = size;
+        int[] arr = new int[3];
+        int rowMin = size, colMin = size;
+        int cellMin = size;
+        for (int i=0; i<size; i++){
+            for (int j=0; j<size; j++){
+                rowMin = 0;
+                colMin = 0;
+                for (int x=0; x<size; x++){
+                    if (j!=x && !elements.get(i).get(j).getColor().equals(elements.get(i).get(x).getColor())) colMin++;
+                    if (i!=x &&!elements.get(i).get(j).getColor().equals(elements.get(x).get(j).getColor())) rowMin++;
+                }
+                cellMin = Math.min(rowMin, colMin);
+                if (cellMin < minimum){
+                    minimum = cellMin;
+                    arr[0] = i;
+                    arr[1] = j;
+                    arr[2] = (cellMin == rowMin) ? 1: 0;
+                }
+            }
+        }
+        String minColor = elements.get(arr[0]).get(arr[1]).getColor();
+        for (int i=0; i<size; i++){
+            if (arr[2] == 1) elements.get(i).get(arr[1]).changeColor(minColor);
+            else elements.get(arr[0]).get(i).changeColor(minColor);
+        }
+        JOptionPane.showMessageDialog(null, "¡¡GANASTE!!");
     }
     
     private void makePretty(){
@@ -152,7 +232,7 @@ public class SquareSlotMachine{
         boolean d2 = true;
         String d1Color = elements.get(0).get(0).getColor();
         String d2Color = elements.get(0).get(size-1).getColor();
-        for (int i=0; i<size && (d1 || d2); i++){
+        for (int i=1; i<size && (d1 || d2); i++){
             if (d1 && !d1Color.equals(elements.get(i).get(i))) d1 = false;
             if (d2 && !d2Color.equals(elements.get(i).get(size-i-1).getColor())) d2 = false;
         }
