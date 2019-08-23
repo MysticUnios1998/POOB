@@ -152,51 +152,6 @@ public class Circle{
         color = newColor;
         draw();
     }
-    
-    /**
-     * Cambia el tamaño de la figura por un factor multiplicativo. Al final, el tamaño resultante
-     * será tamañoInicial*factor
-     * @param times multiplicador del tamaño. Debe ser un entero > 0.
-     */
-    public void growUp(int times){
-        int value = diameter;
-        for (int i=0; i<times; i++){
-            diameter += value;
-            draw();
-        }
-    }
-    
-    /**
-     * Retorna el area del círculo calculada como con la formula PI*r^2.
-     * @return area del circulo.
-     */
-    public double area(){
-        return Math.pow(diameter/2, 2)*PI;
-    }
-    
-    /**
-     * Hace que el círculo salte unos pixeles a la derecha.
-     */
-    public void jump(){
-        double angle = 45*Math.PI/180, g = 9.77;
-        int xPosIni = xPosition, yPosIni = yPosition, vel = 30;
-        double i = 0.0, steps = 2*vel*Math.sin(angle)/g;
-        while (i <= steps){
-            erase();
-            xPosition = (int)(vel*Math.cos(angle)*i+xPosIni);
-            yPosition = (int)((g/2)*Math.pow(i,2)-vel*Math.sin(angle)*i+yPosIni);
-            draw();
-            i += 0.05;
-        }
-    }
-    
-    /**
-     * Retorna el color del objeto como cadena
-     * @return el color del círculo
-     */
-    public String getColor(){
-        return color;
-    }
 
     /*
      * Draw the circle with current specifications on screen.
