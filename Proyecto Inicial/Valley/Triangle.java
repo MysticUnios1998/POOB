@@ -14,11 +14,23 @@ public class Triangle extends LinearFigure{
      * Create a new triangle at default position with default color.
      */
     public Triangle(){
-        height = 30;
-        width = 40;
-        xPosition = 140;
-        yPosition = 15;
-        color = "green";
+        this(30, 40, "green", 140, 15);
+    }
+    
+    /**
+     * Crea un nuevo triángulo con las especificaciones requeridas.
+     * @param height altura del triángulo.
+     * @param width largo del triángulo.
+     * @param color color del triángulo.
+     * @param xPos posicion del triángulo en el eje horizontal.
+     * @param yPos posicion del triángulo en el eje vertical.
+     */
+    public Triangle(int height, int width, String color, int xPos, int yPos){
+        this.height = height;
+        this.width = width;
+        this.color = color;
+        xPosition = xPos;
+        yPosition = yPos;
         isVisible = false;
     }
 

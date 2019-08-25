@@ -4,10 +4,13 @@ comment0.text=\r\n\ A\ circle\ that\ can\ be\ manipulated\ and\ that\ draws\ its
 comment1.params=
 comment1.target=Circle()
 comment1.text=\r\n\ Create\ a\ new\ circle\ at\ default\ position\ with\ default\ color.\r\n
-comment2.params=newDiameter
-comment2.target=void\ changeSize(int)
-comment2.text=\r\n\ Change\ the\ size.\r\n\ @param\ newDiameter\ the\ new\ size\ (in\ pixels).\ Size\ must\ be\ >\=0.\r\n
-comment3.params=
-comment3.target=void\ draw()
-comment3.text=\r\n\ Draw\ the\ circle\ with\ current\ specifications\ on\ screen.\r\n
-numComments=4
+comment2.params=diameter\ color\ xPos\ yPos
+comment2.target=Circle(int,\ java.lang.String,\ int,\ int)
+comment2.text=\r\n\ Crea\ un\ nuevo\ c\u00EDrculo\ con\ las\ especificaciones\ requeridas.\r\n\ @param\ diameter\ diametro\ del\ c\u00EDrculo.\r\n\ @param\ color\ color\ del\ c\u00EDrculo.\r\n\ @param\ xPos\ posici\u00F3n\ del\ c\u00EDrculo\ en\ el\ eje\ horizontal.\r\n\ @param\ yPos\ posici\u00F3n\ del\ c\u00EDrculo\ en\ el\ eje\ vertical.\r\n
+comment3.params=newDiameter
+comment3.target=void\ changeSize(int)
+comment3.text=\r\n\ Change\ the\ size.\r\n\ @param\ newDiameter\ the\ new\ size\ (in\ pixels).\ Size\ must\ be\ >\=0.\r\n
+comment4.params=
+comment4.target=void\ draw()
+comment4.text=\r\n\ Draw\ the\ circle\ with\ current\ specifications\ on\ screen.\r\n
+numComments=5

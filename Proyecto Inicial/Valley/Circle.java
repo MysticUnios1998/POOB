@@ -18,10 +18,21 @@ public class Circle extends Figure{
      * Create a new circle at default position with default color.
      */
     public Circle(){
-        diameter = 30;
-        xPosition = 20;
-        yPosition = 15;
-        color = "blue";
+        this(30, "blue", 20, 15);
+    }
+    
+    /**
+     * Crea un nuevo círculo con las especificaciones requeridas.
+     * @param diameter diametro del círculo.
+     * @param color color del círculo.
+     * @param xPos posición del círculo en el eje horizontal.
+     * @param yPos posición del círculo en el eje vertical.
+     */
+    public Circle(int diameter, String color, int xPos, int yPos){
+        this.diameter = diameter;
+        this.color = color;
+        xPosition = xPos;
+        yPosition = yPos;
         isVisible = false;
     }
 

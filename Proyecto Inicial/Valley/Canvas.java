@@ -22,13 +22,18 @@ public class Canvas{
     private static Canvas canvasSingleton;
 
     /**
-     * Factory method to get the canvas singleton object.
+     * Factory method to get the canvas singleton object with default size.
      */
     public static Canvas getCanvas(){
-        if(canvasSingleton == null) {
-            canvasSingleton = new Canvas("BlueJ Shapes Demo", 300, 300, 
-                                         Color.white);
-        }
+        return getCanvas(300, 300);
+    }
+    
+    /**
+     * Factory method to get the canvas singleton object.
+     */
+    public static Canvas getCanvas(int width, int height){
+        if(canvasSingleton == null) canvasSingleton = new Canvas("Valley - Simulator", 
+                                                            height, width, Color.white);
         canvasSingleton.setVisible(true);
         return canvasSingleton;
     }

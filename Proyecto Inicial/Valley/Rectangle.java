@@ -13,11 +13,23 @@ public class Rectangle extends LinearFigure{
      * Create a new rectangle at default position with default color.
      */
     public Rectangle(){
-        height = 30;
-        width = 40;
-        xPosition = 70;
-        yPosition = 15;
-        color = "magenta";
+        this(30, 40, "magenta", 70, 15);
+    }
+    
+    /**
+     * Crea un nuevo rectángulo con las especificaciones requeridas.
+     * @param height altura del rectángulo.
+     * @param width largo del rectángulo.
+     * @param color color del rectángulo.
+     * @param xPos posición del rectángulo en el eje horizontal.
+     * @param yPos posición del rectángulo en el eje vertical.
+     */
+    public Rectangle(int height, int width, String color, int xPos, int yPos){
+        this.height = height;
+        this.width = width;
+        this.color = color;
+        xPosition = xPos;
+        yPosition = yPos;
         isVisible = false;
     }
 
