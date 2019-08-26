@@ -4,9 +4,9 @@
  * Contiene los comportamientos para una figura se maneje en el canvas.
  *
  * @author (Eduard Arias)
- * @version 1.0 (2019-08-24)
+ * @version 1.1 (2019-08-24)
  */
-public abstract class Figure{
+public abstract class Figure implements Movable{
     
     protected int xPosition;
     protected int yPosition;

@@ -9,8 +9,10 @@ import java.util.*;
  */
 public class Valley{
     
+    private final Canvas canvasReference;
     private int height;
     private int width;
+    private boolean lastActionOK;
     
     /**
      * Constructor principal para la clase valley.
@@ -18,8 +20,11 @@ public class Valley{
      * @param height altura del simulador. Debe ser un entero mayor a 0.
      */
     public Valley(int width, int height){
+        if (width < 0 || height < 0) throw new ArithmeticException("Valores menores a 0.");
+        canvasReference = Canvas.getCanvas(width, height);
         this.height = height;
         this.width = width;
+        lastActionOK = true;
     }
     
     /**
@@ -96,6 +101,6 @@ public class Valley{
      * @return si l última acción se realizó con éxito o no.
      */
     public boolean ok(){
-        return true;
+        return lastActionOK;
     }
 }

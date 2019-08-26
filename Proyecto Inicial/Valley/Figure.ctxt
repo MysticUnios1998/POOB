@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Figure
-comment0.text=\r\n\ Esta\ clase\ tiene\ los\ aspectos\ b\u00E1sicos\ de\ toda\ figura\ en\ el\ programa.\r\n\ Contiene\ los\ comportamientos\ para\ una\ figura\ se\ maneje\ en\ el\ canvas.\r\n\r\n\ @author\ (Eduard\ Arias)\r\n\ @version\ 1.0\ (2019-08-24)\r\n
+comment0.text=\r\n\ Esta\ clase\ tiene\ los\ aspectos\ b\u00E1sicos\ de\ toda\ figura\ en\ el\ programa.\r\n\ Contiene\ los\ comportamientos\ para\ una\ figura\ se\ maneje\ en\ el\ canvas.\r\n\r\n\ @author\ (Eduard\ Arias)\r\n\ @version\ 1.1\ (2019-08-24)\r\n
 comment1.params=
 comment1.target=void\ makeVisible()
 comment1.text=\r\n\ Make\ this\ figure\ visible.\ If\ it\ was\ already\ visible,\ do\ nothing.\r\n

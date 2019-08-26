@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Movable
+comment0.text=\r\n\ La\ clase\ Movable\ contendr\u00E1\ los\ m\u00E9todos\ b\u00E1sicos\ para\ el\ movimiento\ de\ \r\n\ un\ objeto\ en\ la\ pantalla.\ Una\ clase\ que\ implemente\ esta\ interfaz\ \r\n\ deber\u00E1\ saber\ c\u00F3mo\ desplazarse\ en\ dos\ dimensiones.\r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 1.0\ (2019-08-25)\r\n
+comment1.params=distance
+comment1.target=void\ moveHorizontal(int)
+comment1.text=\r\n\ Controla\ el\ desplazamiento\ en\ el\ eje\ horizontal.\r\n\ @param\ distance\ distancia\ a\ recorrer\ en\ pixeles.\r\n
+comment2.params=distance
+comment2.target=void\ moveVertical(int)
+comment2.text=\r\n\ Controla\ el\ desplazamiento\ en\ el\ eje\ vertical.\r\n\ @param\ distance\ distancia\ a\ recorrer\ en\ pixeles.\r\n
+numComments=3

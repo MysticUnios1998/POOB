@@ -33,7 +33,7 @@ public class Canvas{
      */
     public static Canvas getCanvas(int width, int height){
         if(canvasSingleton == null) canvasSingleton = new Canvas("Valley - Simulator", 
-                                                            height, width, Color.white);
+                                                            width, height, Color.white);
         canvasSingleton.setVisible(true);
         return canvasSingleton;
     }
