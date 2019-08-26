@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Vineyard
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Vineyard\ here.\r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 1.0\ (2019-08-25)\r\n
+comment1.params=height\ width\ color\ xPos\ yPos
+comment1.target=Vineyard(int,\ int,\ java.lang.String,\ int,\ int)
+comment1.text=\r\n\ Constructor\ principal\ de\ la\ clase\ Vineyard\r\n\ @param\ height\ altura\ del\ vi\u00F1edo.\r\n\ @param\ width\ extensi\u00F3n\ del\ vi\u00F1edo.\r\n\ @param\ color\ identificador\ del\ vi\u00F1edo\ actual.\r\n\ @param\ xPos\ posici\u00F3n\ del\ vi\u00F1edo\ en\ el\ eje\ horizontal.\r\n\ @param\ yPos\ posici\u00F3n\ del\ vi\u00F1edo\ en\ el\ eje\ vertical.\r\n
+comment2.params=width\ color\ xPos\ yPos
+comment2.target=Vineyard(int,\ java.lang.String,\ int,\ int)
+comment2.text=\r\n\ Constructor\ principal\ sobrecargado\ de\ la\ clase\ Vineyard.\ Este\ crea\ un\ vi\u00F1edo\r\n\ con\ altura\ fija.\r\n\ @param\ width\ extensi\u00F3n\ del\ vi\u00F1edo.\r\n\ @param\ color\ identificador\ del\ vi\u00F1edo\ actual.\r\n\ @param\ xPos\ posici\u00F3n\ del\ vi\u00F1edo\ en\ el\ eje\ horizontal.\r\n\ @param\ yPos\ posici\u00F3n\ del\ vi\u00F1edo\ en\ el\ eje\ vertical.\r\n
+comment3.params=vineyard
+comment3.target=boolean\ intersect(Vineyard)
+comment3.text=\r\n\ Verifica\ si\ el\ vi\u00F1edo\ se\ cruza\ con\ otro.\ Se\ cruzan\ si\ tienen\ un\ rango\ de\ valores\r\n\ en\ com\u00FAn\ (teor\u00EDa\ de\ conjuntos).\r\n\ @param\ vineyard\ vi\u00F1edo\ contra\ el\ que\ se\ hace\ la\ verificaci\u00F3n.\r\n\ @return\ si\ se\ cruzan\ o\ no.\r\n
+numComments=4
