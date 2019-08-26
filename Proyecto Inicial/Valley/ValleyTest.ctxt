@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ValleyTest
-comment0.text=\r\n\ The\ test\ class\ ValleyTest.\r\n\r\n\ @author\ \ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ The\ test\ class\ ValleyTest.\r\n\r\n\ @author\ \ Eduard\ Arias\r\n\ @version\ 1.2\ (2019-08-25)\r\n
 comment1.params=
 comment1.target=ValleyTest()
 comment2.params=
@@ -9,4 +9,12 @@ comment3.params=
 comment3.target=void\ shouldCreate()
 comment4.params=
 comment4.target=void\ shouldNotCreate()
-numComments=5
+comment5.params=
+comment5.target=void\ shouldOpenVineyard()
+comment6.params=
+comment6.target=void\ shouldNotOpenVineyard()
+comment7.params=
+comment7.target=void\ shouldCloseVineyard()
+comment8.params=
+comment8.target=void\ shouldNotCloseVineyard()
+numComments=9

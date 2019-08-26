@@ -13,6 +13,7 @@ public class Valley{
     private int height;
     private int width;
     private boolean lastActionOK;
+    private HashMap<String, Vineyard> vineyards;
     
     /**
      * Constructor principal para la clase valley.
@@ -24,20 +25,48 @@ public class Valley{
         canvasReference = Canvas.getCanvas(width, height);
         this.height = height;
         this.width = width;
+        vineyards = new HashMap<String, Vineyard>();
         lastActionOK = true;
     }
     
     /**
-     * @param name
-     * @param xi
-     * @param xf
+     * Coloca un nuevo viñedo en el valle. Este debe estar "bien planteado"
+     * (que su inicio no sea mayor a su final) y no salirse del simulador.
+     * @param name color identificador del viñedo. Colores válidos: "red", "yellow", "blue", "green",
+     * "magenta", "orange" and "black".
+     * @param xi coordenada de inicio del viñedo.
+     * @param xf coordenada de final del viñedo.
      */
-    public void openYard(String name, int xi, int xf){}
+    public void openYard(String name, int xi, int xf){
+        lastActionOK = false;
+        xi--; xf--;
+        if (xi >= 0 && xf < width && xi < xf){
+            Vineyard newVineyard = new Vineyard(xf-xi, name, xi, height-Vineyard.fixedHeight);
+            if (!vineyards.containsKey(name)){
+                boolean sePuedeColocar = true;
+                for (Vineyard vy: vineyards.values()){
+                    if (newVineyard.intersect(vy)) sePuedeColocar = false;
+                }
+                if (sePuedeColocar){
+                    vineyards.put(name, newVineyard);
+                    lastActionOK = true;
+                }
+            }
+        }
+    }
     
     /**
-     * @param name
+     * Remueve un viñedo del valle. De no existir, no hace nada.
+     * @param name color identificador del viñedo a remover.
      */
-    public void closeYard(String name){}
+    public void closeYard(String name){
+        lastActionOK = false;
+        if (vineyards.containsKey(name)){
+            vineyards.get(name).makeInvisible();
+            vineyards.remove(name);
+            lastActionOK = true;
+        }
+    }
     
     /**
      * @param lowerEnd
