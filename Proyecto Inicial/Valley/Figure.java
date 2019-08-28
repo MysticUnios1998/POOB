@@ -6,7 +6,7 @@
  * @author (Eduard Arias)
  * @version 1.1 (2019-08-24)
  */
-public abstract class Figure implements Movable{
+public abstract class Figure implements Movable, Showable{
     
     protected int xPosition;
     protected int yPosition;

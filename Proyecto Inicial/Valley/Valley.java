@@ -7,13 +7,14 @@ import java.util.*;
  * @author Eduard Arias
  * @version 1.0 (2019-08-24)
  */
-public class Valley{
+public class Valley implements Showable{
     
     private final Canvas canvasReference;
     private int height;
     private int width;
     private boolean lastActionOK;
     private HashMap<String, Vineyard> vineyards;
+    //private ArrayList<Trap> traps;
     
     /**
      * Constructor principal para la clase valley.
@@ -26,6 +27,7 @@ public class Valley{
         this.height = height;
         this.width = width;
         vineyards = new HashMap<String, Vineyard>();
+      //  traps = new ArrayList<Trap>();
         lastActionOK = true;
     }
     
@@ -69,10 +71,14 @@ public class Valley{
     }
     
     /**
-     * @param lowerEnd
-     * @param higherEnd
+     * Coloca una nueva trampa (techo) en el simulador. Si las posiciones requeridas
+     * se salen de las dimensiones del simulador, no hace nada.
+     * @param lowerEnd array con las posiciones iniciales.
+     * @param higherEnd array con las posiciones finales.
      */
-    public void addTrap(int[] lowerEnd, int[] higherEnd){}
+    public void addTrap(int[] lowerEnd, int[] higherEnd){
+        lastActionOK = false;
+    }
     
     /**
      * @param position
