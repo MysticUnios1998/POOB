@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Showable
+comment0.text=\r\n\ Clase\ Showable\ que\ definidir\u00E1\ los\ comportamientos\ de\ todo\ objeto\ que\r\n\ se\ pueda\ mostrar\ en\ pantalla.\r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 1.0\ (2019-08-27)\r\n
+comment1.params=
+comment1.target=void\ makeVisible()
+comment1.text=\r\n\ Muestra\ en\ pantalla\ el\ objeto.\r\n
+comment2.params=
+comment2.target=void\ makeInvisible()
+comment2.text=\r\n\ Quita\ el\ objeto\ de\ pantalla.\r\n
+numComments=3
