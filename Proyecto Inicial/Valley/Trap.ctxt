@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=Trap
+comment0.text=\r\n\ Clase\ que\ encapsular\u00E1\ la\ informaci\u00F3n\ relacionada\ con\ las\ lonas\ en\ el\ \r\n\ simulador.\ Ofrecer\u00E1\ los\ servicios\ de\ estructura\ b\u00E1sica\ y\ dibujado\ en\ Canvas.\ \r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 2.0\ (2019-08-28)\r\n
+comment1.params=start\ end
+comment1.target=Trap(int[],\ int[])
+comment1.text=\r\n\ Constructor\ principal\ de\ la\ clase.\ Crea\ una\ l\u00EDnea\ a\ partir\ de\ \r\n\ coordenadas\ tipo\ (x,y).\r\n\ @param\ start\ array\ con\ las\ coordenadas\ del\ punto\ inicial.\r\n\ @param\ end\ array\ con\ las\ coordenadas\ del\ punto\ final.\r\n
+comment2.params=
+comment2.target=void\ makeVisible()
+comment2.text=\r\n\ Dibuja\ este\ objeto\ en\ pantalla\r\n
+comment3.params=
+comment3.target=void\ makeInvisible()
+comment3.text=\r\n\ Quita\ el\ objeto\ de\ pantalla\r\n
+comment4.params=
+comment4.target=java.awt.geom.Point2D.Double[]\ getLocation()
+comment4.text=\r\n\ Retorna\ la\ ubicaci\u00F3n\ de\ este\ objeto.\r\n\ @return\ array\ con\ las\ coordenadas\ en\ forma\ de\ puntos.\ \r\n
+comment5.params=
+comment5.target=void\ draw()
+comment6.params=
+comment6.target=void\ erase()
+numComments=7
