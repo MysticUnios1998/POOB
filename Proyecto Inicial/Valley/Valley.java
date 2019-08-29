@@ -14,7 +14,7 @@ public class Valley implements Showable{
     private int width;
     private boolean lastActionOK;
     private HashMap<String, Vineyard> vineyards;
-    //private ArrayList<Trap> traps;
+    private ArrayList<Trap> traps;
     
     /**
      * Constructor principal para la clase valley.
@@ -27,7 +27,7 @@ public class Valley implements Showable{
         this.height = height;
         this.width = width;
         vineyards = new HashMap<String, Vineyard>();
-      //  traps = new ArrayList<Trap>();
+        traps = new ArrayList<Trap>();
         lastActionOK = true;
     }
     
@@ -78,12 +78,32 @@ public class Valley implements Showable{
      */
     public void addTrap(int[] lowerEnd, int[] higherEnd){
         lastActionOK = false;
+        if (1<=lowerEnd[0] && lowerEnd[0]<=width && 1<=lowerEnd[1] && lowerEnd[1]<=height
+        && 1<=higherEnd[0] && higherEnd[0]<=width && 1<=higherEnd[1] && higherEnd[1]<=height){
+            Trap t = new Trap(lowerEnd, higherEnd);
+            boolean seChoca = false;
+            int i = 0;
+            while(i<traps.size() && !seChoca) seChoca = t.intersectsLine(traps.get(i++));
+            if (!seChoca){
+                traps.add(t);
+                lastActionOK = true;
+            }
+        }
     }
     
     /**
-     * @param position
+     * Remueve una lona del simulador. Funciona por orden de llegada.
+     * @param position número de la lona a eliminar. Debe ser un entero mayor a 0.
      */
-    public void removeTrap(int position){}
+    public void removeTrap(int position){
+        lastActionOK = false;
+        position--;
+        if (position >= 0 && position < traps.size()){
+            traps.get(position).makeInvisible();
+            traps.remove(position);
+            lastActionOK = true;
+        }
+    }
     
     /**
      * @param trap
@@ -117,12 +137,20 @@ public class Valley implements Showable{
     /**
      * Hace visible al simulador. Si ya es visible, no hace nada.
      */
-    public void makeVisible(){}
+    public void makeVisible(){
+        for (Vineyard vy: vineyards.values()) vy.makeVisible();
+        for (Trap t: traps) t.makeVisible();
+        lastActionOK = true;
+    }
     
     /**
      * Hace invisible al simulador. Si ya es invisible, no hace nada.
      */
-    public void makeInvisible(){}
+    public void makeInvisible(){
+        for (Vineyard vy: vineyards.values()) vy.makeInvisible();
+        for (Trap t: traps) t.makeInvisible();
+        lastActionOK = true;
+    }
     
     /**
      * Finaliza el proceso y sale del simulador.

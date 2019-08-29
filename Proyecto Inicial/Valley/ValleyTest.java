@@ -117,4 +117,69 @@ public class ValleyTest{
         v3.closeYard("blue");
         assertFalse(v3.ok());
     }
+    
+    @Test
+    public void shouldAddTrap(){
+        try{
+            v2 = new Valley(300, 300);
+            v2.addTrap(new int[]{20,20}, new int[]{100, 100});
+            assertTrue(v2.ok());
+            v2.addTrap(new int[]{21,20}, new int[]{150, 101});
+            assertTrue(v2.ok());
+            v2.addTrap(new int[]{100, 20}, new int[]{100, 20});
+            assertTrue(v2.ok());
+        }catch(Exception e){
+            fail();
+        }
+    }
+    
+    @Test
+    public void shouldNotAddTrap(){
+        v2 = new Valley(300, 300);
+        v3 = new Valley(300, 300);
+        v2.addTrap(new int[]{1,1}, new int[]{300,300});
+        assertTrue(v2.ok());
+        v2.addTrap(new int[]{20,20}, new int[]{250, 100});
+        assertFalse(v2.ok());
+        v2.addTrap(new int[]{1, 1}, new int[]{100, 101});
+        assertFalse(v2.ok());
+        v2.addTrap(new int[]{1, 300}, new int[]{300, 1});
+        assertFalse(v2.ok());
+        v2.addTrap(new int[]{21,20}, new int[]{101, 100});
+        assertTrue(v2.ok());
+        v2.addTrap(new int[]{22,20}, new int[]{101, 100});
+        assertFalse(v2.ok());
+    }
+    
+    @Test
+    public void shouldRemoveTrap(){
+        try{
+            v1 = new Valley(300, 300);
+            v1.addTrap(new int[]{1,1}, new int[]{300,300});
+            v1.removeTrap(1);
+            assertTrue(v1.ok());
+            v1.addTrap(new int[]{1,1}, new int[]{300,300});
+            assertTrue(v1.ok());
+            v1.addTrap(new int[]{22,20}, new int[]{101, 100});
+            v1.removeTrap(2);
+            assertTrue(v1.ok());
+        }catch(Exception e){
+            fail();
+        }
+    }
+    
+    @Test
+    public void shouldNotRemoveTrap(){
+        v1 = new Valley(300, 300);
+        v1.removeTrap(1);
+        assertFalse(v1.ok());
+        v1.addTrap(new int[]{1,1}, new int[]{9,9});
+        v1.addTrap(new int[]{10,1}, new int[]{9,90});
+        v1.removeTrap(10);
+        assertFalse(v1.ok());
+        v1.removeTrap(1);
+        assertTrue(v1.ok());
+        v1.removeTrap(2);
+        assertFalse(v1.ok());
+    }
 }

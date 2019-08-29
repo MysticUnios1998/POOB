@@ -84,6 +84,7 @@ public class Canvas{
             graphic.setColor(backgroundColour);
             graphic.fillRect(0, 0, size.width, size.height);
             graphic.setColor(Color.black);
+            graphic.setStroke(new BasicStroke(8));
         }
         frame.setVisible(visible);
     }
@@ -203,7 +204,11 @@ public class Canvas{
 
         public void draw(Graphics2D graphic){
             setForegroundColor(colorString);
-            graphic.fill(shape);
+            if (shape instanceof Trap){
+                java.awt.geom.Point2D.Double[] recieved = ((Trap)shape).getLocation();
+                graphic.drawLine((int)recieved[0].getX(), (int)recieved[0].getY(), 
+                    (int)recieved[1].getX(), (int)recieved[1].getY());
+            }else graphic.fill(shape);
         }
     }
 
