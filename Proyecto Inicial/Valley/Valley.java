@@ -13,6 +13,7 @@ public class Valley implements Showable{
     private int height;
     private int width;
     private boolean lastActionOK;
+    private boolean isVisible;
     private HashMap<String, Vineyard> vineyards;
     private ArrayList<Trap> traps;
     
@@ -29,6 +30,7 @@ public class Valley implements Showable{
         vineyards = new HashMap<String, Vineyard>();
         traps = new ArrayList<Trap>();
         lastActionOK = true;
+        isVisible = false;
     }
     
     /**
@@ -52,6 +54,7 @@ public class Valley implements Showable{
                 if (sePuedeColocar){
                     vineyards.put(name, newVineyard);
                     lastActionOK = true;
+                    if (isVisible) newVineyard.makeVisible();
                 }
             }
         }
@@ -87,6 +90,7 @@ public class Valley implements Showable{
             if (!seChoca){
                 traps.add(t);
                 lastActionOK = true;
+                if (isVisible) t.makeVisible();
             }
         }
     }
@@ -106,16 +110,37 @@ public class Valley implements Showable{
     }
     
     /**
-     * @param trap
-     * @param x
+     * Realiza una rotura en una trampa. De no existir la trampa no hace nada.
+     * @param trap posición en orden de llegada de la trampa requerida.
+     * Debe ser un entero mayor a 0.
+     * @param x posición sobre la trampa en donde se va a hacer el agujero.
      */
-    public void makePuncture(int trap, int x){}
+    public void makePuncture(int trap, int x){
+        lastActionOK = false;
+        trap--;
+        if (0<=trap && trap<traps.size()){
+            Trap t = traps.get(trap);
+            if (x <= t.getLength()){
+                t.makePuncture(x);
+                lastActionOK = true;
+            }
+        }
+    }
     
     /**
-     * @param trap
-     * @param position
+     * Repara un agujero de una trampa requerida. La trampa está por orden de llegada.
+     * Si en la posición solicitada no hay agujero, se considera un éxito.
+     * @param trap posición en orden de llegada de la trampa requerida.
+     * @param position ubicación del agujero en la trampa.
      */
-    public void patchPunture(int trap, int position){}
+    public void patchPuncture(int trap, int position){
+        lastActionOK = false;
+        trap--;
+        if (0<=trap && trap<traps.size()){
+            traps.get(trap).patchPuncture(position);
+            lastActionOK = true;
+        }
+    }
     
     /**
      * @param x
@@ -138,18 +163,24 @@ public class Valley implements Showable{
      * Hace visible al simulador. Si ya es visible, no hace nada.
      */
     public void makeVisible(){
-        for (Vineyard vy: vineyards.values()) vy.makeVisible();
-        for (Trap t: traps) t.makeVisible();
-        lastActionOK = true;
+        if (!isVisible){
+            for (Vineyard vy: vineyards.values()) vy.makeVisible();
+            for (Trap t: traps) t.makeVisible();
+            lastActionOK = true;
+            isVisible = true;
+        }
     }
     
     /**
      * Hace invisible al simulador. Si ya es invisible, no hace nada.
      */
     public void makeInvisible(){
-        for (Vineyard vy: vineyards.values()) vy.makeInvisible();
-        for (Trap t: traps) t.makeInvisible();
-        lastActionOK = true;
+        if (isVisible){
+            for (Vineyard vy: vineyards.values()) vy.makeInvisible();
+            for (Trap t: traps) t.makeInvisible();
+            lastActionOK = true;
+            isVisible = false;
+        }
     }
     
     /**

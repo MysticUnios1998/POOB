@@ -45,6 +45,14 @@ public class Circle extends Figure{
         diameter = newDiameter;
         draw();
     }
+    
+    /**
+     * Retorna la ubicación del círculo.
+     * @return punto2D con las coordenadas del círculo.
+     */
+    public Point2D.Double getLocation(){
+        return new Point2D.Double(xPosition, yPosition);
+    }
 
     /*
      * Draw the circle with current specifications on screen.

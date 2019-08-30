@@ -11,6 +11,9 @@ comment3.params=newDiameter
 comment3.target=void\ changeSize(int)
 comment3.text=\r\n\ Change\ the\ size.\r\n\ @param\ newDiameter\ the\ new\ size\ (in\ pixels).\ Size\ must\ be\ >\=0.\r\n
 comment4.params=
-comment4.target=void\ draw()
-comment4.text=\r\n\ Draw\ the\ circle\ with\ current\ specifications\ on\ screen.\r\n
-numComments=5
+comment4.target=java.awt.geom.Point2D.Double\ getLocation()
+comment4.text=\r\n\ Retorna\ la\ ubicaci\u00F3n\ del\ c\u00EDrculo.\r\n\ @return\ punto2D\ con\ las\ coordenadas\ del\ c\u00EDrculo.\r\n
+comment5.params=
+comment5.target=void\ draw()
+comment5.text=\r\n\ Draw\ the\ circle\ with\ current\ specifications\ on\ screen.\r\n
+numComments=6

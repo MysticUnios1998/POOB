@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.*;
+import java.util.ArrayList;
 /**
  * Clase que encapsulará la información relacionada con las lonas en el 
  * simulador. Ofrecerá los servicios de estructura básica y dibujado en Canvas. 
@@ -12,6 +13,7 @@ public class Trap extends Line2D.Double implements Showable{
     private Point2D.Double initialPoint;
     private Point2D.Double finalPoint;
     private boolean isVisible;
+    private ArrayList<Circle> punctures;
     
     /**
      * Constructor principal de la clase. Crea una línea a partir de 
@@ -23,6 +25,7 @@ public class Trap extends Line2D.Double implements Showable{
         super(--start[0], --start[1], --end[0], --end[1]);
         initialPoint = new Point2D.Double(start[0], start[1]);
         finalPoint = new Point2D.Double(end[0], end[1]);
+        punctures = new ArrayList<Circle>();
         isVisible = false;
     }
     
@@ -32,6 +35,7 @@ public class Trap extends Line2D.Double implements Showable{
     public void makeVisible(){
         isVisible = true;
         draw();
+        for (Circle c: punctures) c.makeVisible();
     }
     
     /**
@@ -43,6 +47,44 @@ public class Trap extends Line2D.Double implements Showable{
     }
     
     /**
+     * Crea un nuevo agujero en esta trampa. 
+     * @param x posición del agujero a lo largo de la trampa. Debe ser un 
+     * entero mayor a 0.
+     */
+    public void makePuncture(int x){
+        int xPos, yPos;
+        double l = getLength();
+        xPos = (int)Math.round((finalPoint.getX()*x + initialPoint.getX()*(l-x))/l);
+        yPos = (int)Math.round(Math.sqrt(Math.pow(x,2) - Math.pow(xPos- initialPoint.getX(), 2))+initialPoint.getY());
+        Circle c = new Circle(14, "white", xPos-7, yPos-7);
+        punctures.add(c);
+        if (isVisible) c.makeVisible();
+    }
+    
+    /**
+     * Repara un agujero que tenga la trampa.
+     * @param la posición del agujero.
+     */
+    public void patchPuncture(int pos){
+        int xPos, yPos;
+        double l = getLength();
+        xPos = (int)Math.round((finalPoint.getX()*pos + initialPoint.getX()*(l-pos))/l);
+        yPos = (int)Math.round(Math.sqrt(Math.pow(pos,2) - Math.pow(xPos- initialPoint.getX(), 2))+initialPoint.getY());
+        Point2D.Double pt;
+        Circle c;
+        ArrayList<Integer> removeCandidates = new ArrayList<Integer>();
+        for (int i=0; i<punctures.size(); i++){
+            c = punctures.get(i);
+            pt = c.getLocation();
+            if (pt.distance(xPos-7, yPos-7) <= 7){
+                c.makeInvisible();
+                removeCandidates.add(i);
+            }
+        }
+        for (int j=0; j<removeCandidates.size(); j++) punctures.remove(removeCandidates.get(j));
+    }
+    
+    /**
      * Retorna la ubicación de este objeto.
      * @return array con las coordenadas en forma de puntos. 
      */
@@ -50,17 +92,24 @@ public class Trap extends Line2D.Double implements Showable{
         return new Point2D.Double[]{initialPoint, finalPoint};
     }
     
+    /**
+     * Retorna la longitud de la trampa.
+     * @return la longitud calculada como distancia pitagótica entre los puntos
+     */
+    public double getLength(){
+        return Math.sqrt(Math.pow(initialPoint.getX()-finalPoint.getX(), 2)+
+        Math.pow(initialPoint.getY()-finalPoint.getY(), 2));
+    }
+    
     protected void draw(){
         if(isVisible){
             Canvas c = Canvas.getCanvas();
-            c.draw(this, "black", this);//No importa que Shape sea, ya que dibuja una línea
+            c.draw(this, "black", this);
             c.wait(10);
         }
     }
     
     protected void erase(){
-        if (isVisible){
-            Canvas.getCanvas().erase(this);
-        }
+        if (isVisible) Canvas.getCanvas().erase(this);
     }
 }

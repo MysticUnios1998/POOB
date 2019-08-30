@@ -182,4 +182,65 @@ public class ValleyTest{
         v1.removeTrap(2);
         assertFalse(v1.ok());
     }
+    
+    @Test
+    public void shouldMakePuncture(){
+        try{
+            v1 = new Valley(400, 400);
+            v1.addTrap(new int[]{10,10}, new int[]{100, 100});
+            v1.addTrap(new int[]{1,1}, new int[]{200, 1});
+            assertTrue(v1.ok());
+            v1.makePuncture(1, 40);
+            assertTrue(v1.ok());
+            v1.makePuncture(1, 80);
+            assertTrue(v1.ok());
+            v1.makePuncture(2, 20);
+            assertTrue(v1.ok());
+            v1.makePuncture(2, 40);
+            assertTrue(v1.ok());
+            v1.makePuncture(1, 1);
+            assertTrue(v1.ok());
+            v1.makePuncture(2, 199);
+            assertTrue(v1.ok());
+        }catch(Exception e){
+            fail();
+        }
+    }
+    
+    @Test
+    public void shouldPatchPuncture(){
+        try{
+            v4 = new Valley(300,300);
+            v4.addTrap(new int[]{1,1}, new int[]{1,200});
+            v4.addTrap(new int[]{30,30}, new int[]{70,70});
+            assertTrue(v4.ok());
+            v4.makePuncture(1, 30);
+            v4.makePuncture(1, 100);
+            v4.makePuncture(1, 150);
+            v4.makePuncture(2, 30);
+            v4.makePuncture(2, 34);
+            assertTrue(v4.ok());
+            v4.patchPuncture(1, 32);
+            assertTrue(v4.ok());
+            v4.patchPuncture(2, 32);
+            assertTrue(v4.ok());
+        }catch(Exception e){
+            fail();
+        }
+    }
+    
+    @Test
+    public void shouldNotPatchPunture(){
+        v4 = new Valley(300,300);
+        v4.addTrap(new int[]{1,1}, new int[]{200,200});
+        v4.addTrap(new int[]{30,30}, new int[]{70,70});
+        v4.patchPuncture(4, 30);
+        assertFalse(v4.ok());
+        v4.patchPuncture(3, 50);
+        assertFalse(v4.ok());
+        v4.makePuncture(1, 30);
+        v4.makePuncture(1, 100);
+        v4.patchPuncture(1, 30);
+        assertTrue(v4.ok());
+    }
 }
