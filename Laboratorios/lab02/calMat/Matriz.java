@@ -142,9 +142,16 @@ public class Matriz{
      * @return una cadena con los elementos de la matriz en el formato especificado.
      */
     @Override
-    public String toString () {
-          String s = "";
-          return s;
+    public String toString(){
+        StringBuffer s = new StringBuffer();
+        for (ArrayList<Integer> arr: matriz){
+            for (Integer elem: arr){
+                s.append(elem.toString());
+                s.append(" ");
+            }
+            s.append("\n");
+        }
+        return s.toString();
     }   
     
     //Retorna la matriz con el numero de filas o columnas

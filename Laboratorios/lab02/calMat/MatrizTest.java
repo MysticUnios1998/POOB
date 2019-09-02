@@ -7,20 +7,8 @@ import org.junit.Test;
  * @author   ECI
  * @version 2019-2
  */
-public class MatrizTest
-{
- 
+public class MatrizTest{
     
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
-    @Before
-    public void setUp(){
-        
-    }
- 
     @Test    
     public void deberiaPasar(){
         assertTrue(1==1);
@@ -103,16 +91,19 @@ public class MatrizTest
         assertEquals(new Matriz(-1),Matriz.UNCERO);       
 
     }   
-
-   
-
-    /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
-     */
-    @After
-    public void tearDown()
-    {
+    
+    @Test
+    public void shouldQueryOK(){
+        Matriz m;
+        int[][] d1 = {{1,2,3}, {4,5,6}, {7,8,9}};
+        int[] d2 = {1,2,3,4};
+        m = new Matriz(d1);
+        assertEquals(m.toString(), "1 2 3 \n4 5 6 \n7 8 9 \n");
+        m = new Matriz(d2);
+        assertEquals(m.toString(), "1 0 0 0 \n0 2 0 0 \n0 0 3 0 \n0 0 0 4 \n");
+        m = new Matriz(3, 3, 4);
+        assertEquals(m.toString(), "3 3 3 3 \n3 3 3 3 \n3 3 3 3 \n");
+        m = new Matriz(4);
+        assertEquals(m.toString(), "1 0 0 0 \n0 1 0 0 \n0 0 1 0 \n0 0 0 1 \n");
     }
 }
