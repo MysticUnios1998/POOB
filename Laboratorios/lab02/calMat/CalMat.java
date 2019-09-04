@@ -1,4 +1,4 @@
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Representa una calculadora de matrices
@@ -80,6 +80,36 @@ public class CalMat{
 
     // Los operadores binarios : + (suma), - (resta), . (multiplique elemento a elemento), * (multiplique matricial)
     public void opereMatrices(char operacion){
+        lastActionOK = false;
+        if (operandos.size() >= 2){
+            Matriz m1, m2, result, d1, d2;
+            m1 = operandos.pop();
+            m2 = operandos.pop();
+            d1 = m1.dimension();
+            d2 = m2.dimension();
+            if (operacion == '*'){
+                result = multiplicacionMatricial(m1,m2);
+                if (!result.equals(Matriz.UNCERO)) lastActionOK = true;
+            }else if(d1.equals(d2)){
+                int[][] newMatrix = new int[d1.get(0,0)][d2.get(0,1)];
+                int c;
+                for (int i=0; i<d1.get(0,0); i++){
+                    for (int j=0; j<d2.get(0,1); j++){
+                        c = m2.get(i,j);
+                        if (operacion == '+') c += m1.get(i,j);
+                        else if (operacion == '-') c -= m1.get(i,j);
+                        else if (operacion == '.') c *= m1.get(i,j);
+                        newMatrix[i][j] = c;
+                    }
+                }
+                result = new Matriz(newMatrix);
+                lastActionOK = true;
+            }else result = Matriz.UNCERO;
+            if (!ok()){
+                operandos.push(m2);
+                operandos.push(m1);
+            }else operandos.push(result);
+        }
     }
     
     //Los operadores son: + (suma),  - (promedio), m (minimo), M (maximo), d(dimensones)
@@ -104,6 +134,31 @@ public class CalMat{
      */
     public boolean ok(){
         return lastActionOK;
+    }
+    
+    private Matriz multiplicacionMatricial(Matriz m1, Matriz m2){
+        lastActionOK = false;
+        Matriz result, d1, d2;
+        d1 = m1.dimension();
+        d2 = m2.dimension();
+        System.out.println(d1);
+        System.out.println(d2);
+        if (d1.get(0,1) != d2.get(0,0)){
+            result = Matriz.UNCERO;
+        }else{
+            int[][] newMatrix = new int[d1.get(0,0)][d2.get(0,1)];
+            int c;
+            for (int i=0; i<d1.get(0,0); i++){
+                for (int j=0; j<d2.get(0,1); j++){
+                    c = 0;
+                    for (int x=0; x<d1.get(0,1); x++) c += m1.get(i,x)*m2.get(x,j);
+                    newMatrix[i][j] = c;
+                }
+            }
+            result = new Matriz(newMatrix);
+            lastActionOK = true;
+        }
+        return result;
     }
 }
     

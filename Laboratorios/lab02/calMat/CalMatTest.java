@@ -97,6 +97,53 @@ public class CalMatTest
         assertFalse(calculator.ok());
     }
     
+    @Test
+    public void shouldOperateMatrices(){
+        try{
+            calculator = new CalMat();
+            Matriz m1 = new Matriz(4,4,4);
+            Matriz m2 = new Matriz(new int[][]{{1,1,2,2}, {3,3,4,4}, {5,5,6,6}, {7,7,8,8}});
+            Matriz m3 = new Matriz(new int[]{1,2,3,4});
+            calculator.empile(4 ,4, 4);
+            calculator.empile(new int[][]{{1,1,2,2}, {3,3,4,4}, {5,5,6,6}, {7,7,8,8}});
+            calculator.opereMatrices('+');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "5 5 6 6 \n7 7 8 8 \n9 9 10 10 \n11 11 12 12 \n");
+            calculator.empile(4,4,4);
+            calculator.opereMatrices('-');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), m2.toString());
+            calculator.desempile();
+            calculator.empile(4);
+            calculator.empile(new int[][]{{1,23,4,67}, {12,2,45,-7}, {0, -0, 3, 34}, {0,0,0,4}});
+            calculator.opereMatrices('.');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), m3.toString());
+            calculator.empile(1,3,2);
+            calculator.empile(1,1,3);
+            calculator.opereMatrices('*');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "3 3 \n");
+        }catch(Exception e){
+            fail();
+        }
+    }
+    
+    @Test
+    public void shouldNotOperateMatrices(){
+        calculator = new CalMat();
+        calculator.empile(3,2,2);
+        calculator.opereMatrices('+');
+        assertFalse(calculator.ok());
+        assertEquals(calculator.consulte(), "3 3 \n3 3 \n");
+        calculator.empile(4);
+        calculator.opereMatrices('-');
+        assertFalse(calculator.ok());
+        calculator.opereMatrices('*');
+        assertFalse(calculator.ok());
+        assertNotEquals(calculator.consulte(), Matriz.UNCERO.toString());
+    }
+    
     @Test 
     public void shouldQuery(){
         try{

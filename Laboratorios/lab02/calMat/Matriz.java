@@ -101,7 +101,7 @@ public class Matriz{
      * los parámetros de la matriz.
      * @param f fila objetivo.
      * @param c columna objetivo.
-     * return elemento de la celda [f,c] de la matriz.
+     * @return elemento de la celda [f,c] de la matriz.
      */
     public int get(int f, int c){
         return matriz.get(f).get(c);
@@ -135,7 +135,6 @@ public class Matriz{
     public boolean equals(Object otra) {
         return equals((Matriz)otra);
     }
-    
     
     /** 
      * Retorna una cadena con los datos de la matriz alineado por columna
