@@ -158,9 +158,18 @@ public class Matriz{
         return null;
     }
     
-    //Retorna una matriz de un elemento
+    /**
+     * Retorna una matriz con la sumatoria de los elementos.
+     * @return matriz de 1x1 con el resultado de la suma.
+     */
     public Matriz sume(){
-           return null;
+        int [][] summation = new int[1][1];
+        int sumResult = 0;
+        for (ArrayList<Integer> f: matriz){    
+            for (Integer elem: f) sumResult += elem;
+        }
+        summation[0][0] = sumResult;
+        return new Matriz(summation);
     }    
 
     //foc: indica si la suma es por filas('f') o por columnas('c')
@@ -168,9 +177,42 @@ public class Matriz{
         return null;
     }
     
-
+    /**
+     * Retorna una matriz con el promedio matemático.
+     * @return matriz con el resultado.
+     */
+    public Matriz promedio(){
+        Matriz d = dimension();
+        return new Matriz(new int[][]{{Math.round(sume().get(0,0)/(d.get(0,0)*d.get(0,1)))}});
+    }
     
-
+    /**
+     * Retorna una matriz con el máximo.
+     * @return matriz con el resultado.
+     */
+    public Matriz maximo(){
+        int maximo = get(0,0);
+        for (ArrayList<Integer> f: matriz){
+            for (Integer elem: f){
+                if (elem > maximo) maximo = elem;
+            }
+        }
+        return new Matriz(new int[][]{{maximo}});
+    }
+    
+    /**
+     * Retorna una matriz con el máximo.
+     * @return matriz con el resultado.
+     */
+    public Matriz minimo(){
+        int minimo = get(0,0);
+        for (ArrayList<Integer> f: matriz){
+            for (Integer elem: f){
+                if (elem < minimo) minimo = elem;
+            }
+        }
+        return new Matriz(new int[][]{{minimo}});
+    }
     
  
 }

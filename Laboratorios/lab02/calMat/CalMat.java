@@ -112,9 +112,20 @@ public class CalMat{
         }
     }
     
-    //Los operadores son: + (suma),  - (promedio), m (minimo), M (maximo), d(dimensones)
-    //Los operadores consideran todos los elementos de la matriz
+    /**
+     *Los operadores son: + (suma),  - (promedio), m (minimo), M (maximo), d(dimensones).
+     *Los operadores consideran todos los elementos de la matriz.
+     */
     public void opereMatriz(char operacion){
+        lastActionOK = false;
+        if (!operandos.empty() && (operacion == '+' || operacion == '-' || operacion == 'm' || operacion == 'M' || operacion == 'd')){
+            if (operacion == '+') operandos.push(operandos.peek().sume());
+            else if(operacion == '-') operandos.push(operandos.peek().promedio());
+            else if(operacion == 'm') operandos.push(operandos.peek().minimo());
+            else if(operacion == 'M') operandos.push(operandos.peek().maximo());
+            else operandos.push(operandos.peek().dimension());
+            lastActionOK = true;
+        }
     }
     
     
@@ -141,8 +152,6 @@ public class CalMat{
         Matriz result, d1, d2;
         d1 = m1.dimension();
         d2 = m2.dimension();
-        System.out.println(d1);
-        System.out.println(d2);
         if (d1.get(0,1) != d2.get(0,0)){
             result = Matriz.UNCERO;
         }else{

@@ -185,4 +185,55 @@ public class CalMatTest
         calculator.desempile();
         assertNotEquals(calculator.consulte(), m2.toString());
     }
+    
+    @Test
+    public void shouldOperateSingleMatrix(){
+        try{
+            calculator = new CalMat();
+            calculator.empile(new int[][]{{1,2},{2,3},{-3,4},{0, -10}});
+            calculator.opereMatriz('+');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "-1 \n");
+            calculator.desempile();
+            calculator.opereMatriz('-');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "0 \n");
+            calculator.empile(new int [][]{{1,2,3,4}, {4,3,2,1}});
+            calculator.opereMatriz('m');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "1 \n");
+            calculator.desempile();
+            calculator.desempile();
+            calculator.desempile();
+            calculator.opereMatriz('m');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "-10 \n");
+            calculator.empile(new int[]{1,2,34});
+            calculator.opereMatriz('M');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "34 \n");
+            calculator.desempile();
+            calculator.opereMatriz('d');
+            assertTrue(calculator.ok());
+            assertEquals(calculator.consulte(), "3 3 \n");
+        }catch(Exception e){
+            fail();
+        }
+    }
+    
+    @Test
+    public void shouldNotOperateSingleMatrix(){
+        calculator = new CalMat();
+        calculator.opereMatriz('+');
+        assertFalse(calculator.ok());
+        calculator.empile(new int[]{1,2,3,4});
+        calculator.opereMatriz('p');
+        assertFalse(calculator.ok());
+        calculator.opereMatriz('@');
+        assertFalse(calculator.ok());
+        calculator.opereMatriz('Ñ');
+        assertFalse(calculator.ok());
+        calculator.opereMatriz(']');
+        assertFalse(calculator.ok());
+    }
 }

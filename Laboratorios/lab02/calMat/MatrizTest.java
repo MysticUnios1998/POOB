@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author   ECI
- * @version 2019-2
+ * @author   ECI, Eduard Arias, Juan Díaz
+ * @version 2.0 (2019-09-04)
  */
 public class MatrizTest{
     
@@ -93,7 +93,7 @@ public class MatrizTest{
     }   
     
     @Test
-    public void shouldQueryOK(){
+    public void shouldQuery(){
         Matriz m;
         int[][] d1 = {{1,2,3}, {4,5,6}, {7,8,9}};
         int[] d2 = {1,2,3,4};
@@ -105,5 +105,79 @@ public class MatrizTest{
         assertEquals(m.toString(), "3 3 3 3 \n3 3 3 3 \n3 3 3 3 \n");
         m = new Matriz(4);
         assertEquals(m.toString(), "1 0 0 0 \n0 1 0 0 \n0 0 1 0 \n0 0 0 1 \n");
+    }
+    
+    @Test
+    public void shouldSum(){
+        Matriz m1,m2,m3;
+        Matriz r1, r2, r3;
+        int[][] d1 = {{1,2,3}, {4,5,6}, {7,8,9}};
+        int[] d2 = {1,2,3,4,5,6,7,8,9};
+        int[] d3 = {-1,2-3,4,-5,6,-7,8,-9};
+        m1 = new Matriz(d1);
+        m2 = new Matriz(d2);
+        m3 = new Matriz(d3);
+        r1 = m1.sume();
+        r2 = m2.sume();
+        r3 = m3.sume();
+        assertEquals(r1.toString(), "45 \n");
+        assertEquals(r2.toString(), "45 \n");
+        assertEquals(r1.toString(), r2.toString());
+        assertTrue(r3.get(0,0) == -5);
+    }
+    
+    @Test
+    public void shouldCalculateAverage(){
+        Matriz m1,m2,m3;
+        Matriz r1, r2, r3;
+        int[][] d1 = {{1,2,3}, {4,5,6}, {7,8,9}};
+        int[] d2 = {1,2,3,4,5,6,7,8,9};
+        int[] d3 = {-1,2-3,4,-5,6,-7,8,-9};
+        m1 = new Matriz(d1);
+        m2 = new Matriz(d2);
+        m3 = new Matriz(d3);
+        r1 = m1.promedio();
+        r2 = m2.promedio();
+        r3 = m3.promedio();
+        assertEquals(r1.toString(), "5 \n");
+        assertEquals(r2.toString(), "0 \n");
+        assertEquals(r3.toString(), "0 \n");
+    }
+    
+    @Test
+    public void shouldCalculateMaximum(){
+        Matriz m1,m2,m3;
+        Matriz r1, r2, r3;
+        int[][] d1 = {{1,2,3}, {4,5,6}, {7,8,9}};
+        int[] d2 = {1,2,3,4,5,6,7,8,9};
+        int[] d3 = {-1,2-3,4,-5,6,-7,8,-9};
+        m1 = new Matriz(d1);
+        m2 = new Matriz(d2);
+        m3 = new Matriz(d3);
+        r1 = m1.maximo();
+        r2 = m2.maximo();
+        r3 = m3.maximo();
+        assertEquals(r1.toString(), "9 \n");
+        assertEquals(r2.toString(), "9 \n");
+        assertTrue(r1.get(0,0) == r2.get(0,0));
+        assertEquals(r3.toString(), "8 \n");
+    }
+    
+    @Test
+    public void shouldCalculateMinimum(){
+        Matriz m1,m2,m3;
+        Matriz r1, r2, r3;
+        int[][] d1 = {{1,2,3}, {4,5,6}, {7,8,9}};
+        int[] d2 = {1,2,3,4,5,6,7,8,9};
+        int[] d3 = {-1,2-3,4,-5,6,-7,8,-9};
+        m1 = new Matriz(d1);
+        m2 = new Matriz(d2);
+        m3 = new Matriz(d3);
+        r1 = m1.minimo();
+        r2 = m2.minimo();
+        r3 = m3.minimo();
+        assertEquals(r1.toString(), "1 \n");
+        assertEquals(r2.toString(), "0 \n");
+        assertEquals(r3.toString(), "-9 \n");
     }
 }

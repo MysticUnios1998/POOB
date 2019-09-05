@@ -35,4 +35,5 @@ comment8.params=operacion
 comment8.target=void\ opereMatrices(char)
 comment9.params=operacion
 comment9.target=void\ opereMatriz(char)
+comment9.text=\r\nLos\ operadores\ son\:\ +\ (suma),\ \ -\ (promedio),\ m\ (minimo),\ M\ (maximo),\ d(dimensones).\r\nLos\ operadores\ consideran\ todos\ los\ elementos\ de\ la\ matriz.\r\n
 numComments=14
