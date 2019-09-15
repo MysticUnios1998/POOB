@@ -208,6 +208,12 @@ public class Canvas{
                 java.awt.geom.Point2D.Double[] recieved = ((Trap)shape).getLocation();
                 graphic.drawLine((int)recieved[0].getX(), (int)recieved[0].getY(), 
                     (int)recieved[1].getX(), (int)recieved[1].getY());
+            }else if (shape instanceof Rain){
+                java.awt.geom.Point2D.Double[] recieved = ((Rain)shape).getPath();
+                for (int i=0; i<recieved.length-1;i++){
+                    graphic.drawLine((int)recieved[i].getX(), (int)recieved[i].getY(), 
+                    (int)recieved[i+1].getX(), (int)recieved[i+1].getY());
+                } 
             }else graphic.fill(shape);
         }
     }

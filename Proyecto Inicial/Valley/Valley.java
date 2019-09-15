@@ -16,6 +16,7 @@ public class Valley implements Showable{
     private boolean isVisible;
     private HashMap<String, Vineyard> vineyards;
     private ArrayList<Trap> traps;
+    private ArrayList<Rain> rains;
     
     /**
      * Constructor principal para la clase valley.
@@ -29,6 +30,7 @@ public class Valley implements Showable{
         this.width = width;
         vineyards = new HashMap<String, Vineyard>();
         traps = new ArrayList<Trap>();
+        rains = new ArrayList<Rain>();
         lastActionOK = true;
         isVisible = false;
     }
@@ -91,6 +93,7 @@ public class Valley implements Showable{
                 traps.add(t);
                 lastActionOK = true;
                 if (isVisible) t.makeVisible();
+                for (Rain r: rains) r.intersects(t);
             }
         }
     }
@@ -143,7 +146,8 @@ public class Valley implements Showable{
     }
     
     /**
-     * @param x
+     * Crea lluvia en el simulador, iniciando desde un punto específico.
+     * @param x posicion horizontal del inicio de la lluvia.
      */
     public void startRain(int x){}
     

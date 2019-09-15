@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Rain
+comment0.text=\r\n\ Clase\ Rain\ que\ hace\ referencia\ a\ la\ lluvia\ que\ debe\ caer\ en\ los\ VineYards\r\n\ \r\n\ @author\ Eduard\ Arias,\ Juan\ Diaz\r\n\ @version\ 2.0\ (12-09-2019)\r\n
+comment1.params=x
+comment1.target=Rain(int)
+comment1.text=\r\n\ Constructor\ principal\ de\ la\ clase\ Rain\ con\ valor\ fijos\r\n\ @param\ x\ Posicion\ en\ el\ eje\ horzontal\ de\ la\ lluvia\r\n
+comment2.params=
+comment2.target=java.awt.geom.Point2D.Double[]\ getPath()
+comment2.text=\r\n\ Retorna\ el\ camino\ que\ ha\ hecho\ la\ lluvia.\r\n\ @return\ Point2D[]\ con\ los\ pountos\ individuales\ del\ camino.\r\n
+comment3.params=trap
+comment3.target=void\ intersects(Trap)
+comment3.text=\r\n\ Verifica\ si\ una\ trampa\ se\ ubica\ en\ el\ camino\ de\ la\ lluvia.\r\n\ @param\ trap\ trampa\ contra\ la\ que\ se\ verifica\ la\ ubicaci\u00F3n.\r\n
+comment4.params=
+comment4.target=void\ makeVisible()
+comment5.params=
+comment5.target=void\ makeInvisible()
+comment6.params=x\ y
+comment6.target=void\ addPoint(int,\ int)
+comment7.params=
+comment7.target=void\ draw()
+comment8.params=
+comment8.target=void\ erase()
+numComments=9
