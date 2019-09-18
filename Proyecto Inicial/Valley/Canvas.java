@@ -136,6 +136,8 @@ public class Canvas{
             graphic.setColor(Color.white);
         else if(colorString.equals("orange"))
             graphic.setColor(Color.orange);
+        else if(colorString.equals("cyan"))
+            graphic.setColor(Color.cyan);
         else
             graphic.setColor(Color.black);
     }

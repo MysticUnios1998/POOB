@@ -92,8 +92,8 @@ public class Valley implements Showable{
             if (!seChoca){
                 traps.add(t);
                 lastActionOK = true;
+                for (Rain r: rains) r.calculatePath(traps, height, width);
                 if (isVisible) t.makeVisible();
-                for (Rain r: rains) r.intersects(t);
             }
         }
     }
@@ -109,6 +109,7 @@ public class Valley implements Showable{
             traps.get(position).makeInvisible();
             traps.remove(position);
             lastActionOK = true;
+            for (Rain r: rains) r.calculatePath(traps, height, width);
         }
     }
     
@@ -126,6 +127,7 @@ public class Valley implements Showable{
             if (x <= t.getLength()){
                 t.makePuncture(x);
                 lastActionOK = true;
+                for (Rain r: rains) r.calculatePath(traps, height, width);
             }
         }
     }
@@ -142,6 +144,7 @@ public class Valley implements Showable{
         if (0<=trap && trap<traps.size()){
             traps.get(trap).patchPuncture(position);
             lastActionOK = true;
+            for (Rain r: rains) r.calculatePath(traps, height, width);
         }
     }
     
@@ -149,12 +152,31 @@ public class Valley implements Showable{
      * Crea lluvia en el simulador, iniciando desde un punto específico.
      * @param x posicion horizontal del inicio de la lluvia.
      */
-    public void startRain(int x){}
+    public void startRain(int x){
+        lastActionOK = false;
+        if (1<=x && x<=width){
+            Rain r = new Rain(x);
+            r.calculatePath(traps, width, height);
+            rains.add(r);
+            if (isVisible) r.makeVisible();
+            lastActionOK = true;
+        }
+    }
     
     /**
-     * @param position
+     * Para la lluvia del simulador.
+     * @param position coordenada horizontal de la lluvia
      */
-    public void stopRain(int position){}
+    public void stopRain(int position){
+        lastActionOK = false;
+        int index = 0;
+        while (index < rains.size() && rains.get(index).getStart() != position) index++;
+        if (index < rains.size()){
+            rains.get(index).makeInvisible();
+            rains.remove(index);
+            lastActionOK = true;
+        }
+    }
     
     /**
      * 
@@ -170,6 +192,7 @@ public class Valley implements Showable{
         if (!isVisible){
             for (Vineyard vy: vineyards.values()) vy.makeVisible();
             for (Trap t: traps) t.makeVisible();
+            for (Rain r: rains) r.makeVisible();
             lastActionOK = true;
             isVisible = true;
         }
@@ -182,6 +205,7 @@ public class Valley implements Showable{
         if (isVisible){
             for (Vineyard vy: vineyards.values()) vy.makeInvisible();
             for (Trap t: traps) t.makeInvisible();
+            for (Rain r: rains) r.makeInvisible();
             lastActionOK = true;
             isVisible = false;
         }

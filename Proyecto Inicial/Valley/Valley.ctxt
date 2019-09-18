@@ -42,5 +42,5 @@ comment8.target=void\ startRain(int)
 comment8.text=\r\n\ Crea\ lluvia\ en\ el\ simulador,\ iniciando\ desde\ un\ punto\ espec\u00EDfico.\r\n\ @param\ x\ posicion\ horizontal\ del\ inicio\ de\ la\ lluvia.\r\n
 comment9.params=position
 comment9.target=void\ stopRain(int)
-comment9.text=\r\n\ @param\ position\r\n
+comment9.text=\r\n\ Para\ la\ lluvia\ del\ simulador.\r\n\ @param\ position\ coordenada\ horizontal\ de\ la\ lluvia\r\n
 numComments=15

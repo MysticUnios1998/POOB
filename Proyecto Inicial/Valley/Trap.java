@@ -101,6 +101,41 @@ public class Trap extends Line2D.Double implements Showable{
         Math.pow(initialPoint.getY()-finalPoint.getY(), 2));
     }
     
+    /**
+     * Retorna el primer agujero que esté en unas coordenadas. Si no hay 
+     * tal agujero, se retorna el punto con yMax.
+     * @param x coordenada horizontal.
+     * @param y coordenada vertical.
+     * @return punto 2D con el agujero dado las coordenadas.
+     */
+    public Point2D.Double holeNextTo(int x, int y){
+        Point2D.Double result = null;
+        Point2D.Double punct = null;
+        int i=0;
+        double minDistance = getLength();
+        for (; i<punctures.size(); i++){
+            punct = punctures.get(i).getLocation();
+            if (punct.distance(x,y) <= minDistance){
+                if (punct.getY() >= y){
+                    result = punct;
+                    minDistance = punct.distance(x,y);
+                }
+            }
+        }
+        if (result == null){
+            int xTranslation = 0;
+            Point2D.Double[] p = getLocation();
+            if (p[0].getY() >= p[1].getY()){
+                xTranslation = (p[0].getX() <= p[1].getX()) ? -4: +4;
+                result = new Point2D.Double(p[0].getX()+xTranslation, p[0].getY());
+            }else{
+                xTranslation = (p[1].getX() <= p[0].getX()) ? -4: +4;
+                result = new Point2D.Double(p[1].getX()+xTranslation, p[1].getY());
+            }
+        }
+        return result;
+    }
+    
     protected void draw(){
         if(isVisible){
             Canvas c = Canvas.getCanvas();
