@@ -243,4 +243,54 @@ public class ValleyTest{
         v4.patchPuncture(1, 30);
         assertTrue(v4.ok());
     }
+    
+    @Test
+    public void shouldRain(){
+        v1 = new Valley(400, 400);
+        v1.startRain(100);
+        assertTrue(v1.ok());
+        v1.startRain(200);
+        assertTrue(v1.ok());
+        for (int i=0; i<10; i++){
+            v1.startRain(100+i*2);
+            assertTrue(v1.ok());
+        }
+    }
+    @Test
+    public void shouldNotRain(){
+        v2 = new Valley(10,10);
+        v2.startRain(0);
+        assertFalse(v2.ok());
+        v2.startRain(100);
+        assertFalse(v2.ok());
+        v2.startRain(-1100);
+        assertFalse(v2.ok());
+    }
+    
+    @Test
+    public void shouldStopRain(){
+        v1 = new Valley(300,300);
+        v1.startRain(20);
+        v1.stopRain(20);
+        assertTrue(v1.ok());
+        v1.startRain(12);
+        v1.stopRain(10);
+        assertTrue(v1.ok());
+        v1.startRain(100);
+        v1.stopRain(102);
+        assertTrue(v1.ok());
+    }
+    @Test
+    public void shouldNotStopRain(){
+        v3 = new Valley(300, 300);
+        v3.stopRain(30);
+        assertFalse(v3.ok());
+        v3.stopRain(0);
+        assertFalse(v3.ok());
+        v3.startRain(100);
+        v3.stopRain(50);
+        assertFalse(v3.ok());
+        v3.stopRain(105);
+        assertFalse(v3.ok());
+    }
 }

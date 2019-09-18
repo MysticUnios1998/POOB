@@ -113,10 +113,10 @@ public class Trap extends Line2D.Double implements Showable{
         Point2D.Double punct = null;
         int i=0;
         double minDistance = getLength();
-        for (; i<punctures.size(); i++){
-            punct = punctures.get(i).getLocation();
-            if (punct.distance(x,y) <= minDistance){
-                if (punct.getY() >= y){
+        for (Circle p: punctures){
+            punct = p.getLocation();
+            if (punct.getY() >= y){
+                if (punct.distance(x,y) < minDistance){
                     result = punct;
                     minDistance = punct.distance(x,y);
                 }
@@ -132,6 +132,11 @@ public class Trap extends Line2D.Double implements Showable{
                 xTranslation = (p[1].getX() <= p[0].getX()) ? -4: +4;
                 result = new Point2D.Double(p[1].getX()+xTranslation, p[1].getY());
             }
+        }else{
+            double xf, yf;
+            xf = result.getX();
+            yf = result.getX();
+            result = new Point2D.Double(xf+7, yf+7);
         }
         return result;
     }

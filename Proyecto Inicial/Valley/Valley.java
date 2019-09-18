@@ -170,7 +170,7 @@ public class Valley implements Showable{
     public void stopRain(int position){
         lastActionOK = false;
         int index = 0;
-        while (index < rains.size() && rains.get(index).getStart() != position) index++;
+        while (index < rains.size() && Math.abs(rains.get(index).getStart()-position) > 4) index++;
         if (index < rains.size()){
             rains.get(index).makeInvisible();
             rains.remove(index);
