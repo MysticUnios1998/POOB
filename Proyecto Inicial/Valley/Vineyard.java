@@ -42,4 +42,8 @@ public class Vineyard extends Rectangle{
         return !(vineyard.xPosition+vineyard.width < xPosition ||
                 xPosition+width < vineyard.xPosition);
     }
+    
+    public int[] getPosition(){
+        return new int[]{xPosition, xPosition+width};
+    }
 }

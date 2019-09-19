@@ -293,4 +293,21 @@ public class ValleyTest{
         v3.stopRain(105);
         assertFalse(v3.ok());
     }
+    
+    @Test
+    public void shouldRainFalls(){
+        v1 = new Valley(200,200);
+        v1.openYard("blue", 100, 120);
+        v1.openYard("green", 1, 50);
+        v1.startRain(40);
+        assertEquals(v1.rainFalls(), new String[]{"green"});
+        v1.startRain(110);
+        assertEquals(v1.rainFalls(), new String[]{"green", "blue"});
+        v1.addTrap(new int[]{30, 30}, new int[]{70, 100});
+        assertEquals(v1.rainFalls(), new String[]{"blue"});
+        v1.startRain(30);
+        assertEquals(v1.rainFalls(), new String[]{"blue"});
+        v1.removeTrap(1);
+        assertEquals(v1.rainFalls(), new String[]{"green", "blue"});
+    }
 }

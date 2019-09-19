@@ -182,7 +182,21 @@ public class Valley implements Showable{
      * 
      */
     public String[] rainFalls(){
-        return new String[]{"Helo"};
+        ArrayList<String> vineyardsUnderRain = new ArrayList<String>();
+        /*boolean isWeathy;
+        for (Vineyard vy: vineyards.values()){
+            isWeathy = false;
+            for (int i=0; i<rains.size() && !isWeathy; i++){
+                int pos = rains.get(i).endPosition();
+                int[] vyPosition = vy.getPosition();
+                if (vyPosition[0] <= pos && pos <= vyPosition[1]){
+                    isWeathy = true;
+                    vineyardsUnderRain.add(vy.getName());
+                }
+                
+            }
+        }*/
+        return vineyardsUnderRain.toArray(new String[vineyardsUnderRain.size()]);
     }
     
     /**

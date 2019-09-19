@@ -10,4 +10,6 @@ comment2.text=\r\n\ Constructor\ principal\ sobrecargado\ de\ la\ clase\ Vineyar
 comment3.params=vineyard
 comment3.target=boolean\ intersect(Vineyard)
 comment3.text=\r\n\ Verifica\ si\ el\ vi\u00F1edo\ se\ cruza\ con\ otro.\ Se\ cruzan\ si\ tienen\ un\ rango\ de\ valores\r\n\ en\ com\u00FAn\ (teor\u00EDa\ de\ conjuntos).\r\n\ @param\ vineyard\ vi\u00F1edo\ contra\ el\ que\ se\ hace\ la\ verificaci\u00F3n.\r\n\ @return\ si\ se\ cruzan\ o\ no.\r\n
-numComments=4
+comment4.params=
+comment4.target=int[]\ getPosition()
+numComments=5
