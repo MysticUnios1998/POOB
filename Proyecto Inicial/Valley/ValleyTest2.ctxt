@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=ValleyTest2
+comment0.text=\r\n\ The\ test\ class\ ValleyTest2.\r\n\r\n\ @author\ \ Eduard\ Arias,\ Juan\ D\u00EDaz\r\n\ @version\ 1.0\ (21-09-2019)\r\n
+comment1.params=
+comment1.target=void\ shouldZoom()
+comment2.params=
+comment2.target=void\ shouldQueryVineyards()
+comment3.params=
+comment3.target=void\ shouldQueryTraps()
+comment4.params=
+comment4.target=void\ shouldUndoRedo()
+numComments=5

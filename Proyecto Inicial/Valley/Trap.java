@@ -98,6 +98,16 @@ public class Trap extends Line2D.Double implements Showable{
     }
     
     /**
+     * Devuelve las coordenadas horizontales de los huecos.
+     * @return array con las coordenadas.
+     */
+    public int[] getPuncturesCoordinate(){
+        int[] ans = new int[punctures.size()];
+        for(int i=0; i<punctures.size(); i++) ans[i] = punctures.get(i).xPosition;        
+        return (punctures.size() != 0) ? ans: new int[]{-1};
+    }
+    
+    /**
      * Retorna el primer agujero que esté en unas coordenadas. Si no hay 
      * tal agujero, se retorna el punto con yMax.
      * @param x coordenada horizontal.

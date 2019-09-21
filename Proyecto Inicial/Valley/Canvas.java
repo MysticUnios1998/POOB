@@ -155,6 +155,17 @@ public class Canvas{
             // ignoring exception at the moment
         }
     }
+    
+    /**
+     * Zoom the canvas' view
+     * @param c tipo de zoom a realizar
+     */
+    public void zoom(char c){
+        double fact = (c == '+') ? 1.1: 0.9;
+        erase();
+        graphic.scale(fact, fact);
+        redraw();
+    }
 
     /**
      * Redraw ell shapes currently on the Canvas.

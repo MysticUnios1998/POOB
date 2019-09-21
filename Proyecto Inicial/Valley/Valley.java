@@ -14,6 +14,7 @@ public class Valley implements Showable{
     private int width;
     private boolean lastActionOK;
     private boolean isVisible;
+    private State prev;
     private HashMap<String, Vineyard> vineyards;
     private ArrayList<Trap> traps;
     private ArrayList<Rain> rains;
@@ -28,6 +29,7 @@ public class Valley implements Showable{
         canvasReference = Canvas.getCanvas(width, height);
         this.height = height;
         this.width = width;
+        prev = new State();
         vineyards = new HashMap<String, Vineyard>();
         traps = new ArrayList<Trap>();
         rains = new ArrayList<Rain>();
@@ -54,6 +56,7 @@ public class Valley implements Showable{
                     if (newVineyard.intersect(vy)) sePuedeColocar = false;
                 }
                 if (sePuedeColocar){
+                    prevState();
                     vineyards.put(name, newVineyard);
                     lastActionOK = true;
                     if (isVisible) newVineyard.makeVisible();
@@ -69,6 +72,7 @@ public class Valley implements Showable{
     public void closeYard(String name){
         lastActionOK = false;
         if (vineyards.containsKey(name)){
+            prevState();
             vineyards.get(name).makeInvisible();
             vineyards.remove(name);
             lastActionOK = true;
@@ -90,6 +94,7 @@ public class Valley implements Showable{
             int i = 0;
             while(i<traps.size() && !seChoca) seChoca = t.intersectsLine(traps.get(i++));
             if (!seChoca){
+                prevState();
                 traps.add(t);
                 lastActionOK = true;
                 for (Rain r: rains) r.calculatePath(traps, height, width);
@@ -106,6 +111,7 @@ public class Valley implements Showable{
         lastActionOK = false;
         position--;
         if (position >= 0 && position < traps.size()){
+            prevState();
             traps.get(position).makeInvisible();
             traps.remove(position);
             lastActionOK = true;
@@ -125,6 +131,7 @@ public class Valley implements Showable{
         if (0<=trap && trap<traps.size()){
             Trap t = traps.get(trap);
             if (x <= t.getLength()){
+                prevState();
                 t.makePuncture(x);
                 lastActionOK = true;
                 for (Rain r: rains) r.calculatePath(traps, height, width);
@@ -142,6 +149,7 @@ public class Valley implements Showable{
         lastActionOK = false;
         trap--;
         if (0<=trap && trap<traps.size()){
+            prevState();
             traps.get(trap).patchPuncture(position);
             lastActionOK = true;
             for (Rain r: rains) r.calculatePath(traps, height, width);
@@ -155,6 +163,7 @@ public class Valley implements Showable{
     public void startRain(int x){
         lastActionOK = false;
         if (1<=x && x<=width){
+            prevState();
             Rain r = new Rain(x);
             r.calculatePath(traps, width, height);
             rains.add(r);
@@ -177,6 +186,7 @@ public class Valley implements Showable{
             }
         }
         if (eliminationCandidates.size() > 0){
+            prevState();
             for (Rain r: eliminationCandidates) rains.remove(r);
             lastActionOK = true;
         }
@@ -205,9 +215,28 @@ public class Valley implements Showable{
         return vineyardsUnderRain.toArray(new String[vineyardsUnderRain.size()]);
     }
     
+    /**
+     * Realiza la accion de intercambio de estados del simulador.
+     * @param d undo ('U') o redo ('R').
+     */
+    public void doAction(char d){
+        lastActionOK = false;
+        if (d=='U' || d=='R'){
+            State next = new State();
+            next.saveState(traps, rains, vineyards, isVisible);
+            makeInvisible();
+            prev.readState(traps, rains, vineyards);
+            isVisible = prev.getVisibility();
+            prev = next;
+            if(isVisible) makeVisible();
+            lastActionOK = true;
+        }
+    }
+    
     @Override
     public void makeVisible(){
         if (!isVisible){
+            prevState();
             for (Vineyard vy: vineyards.values()) vy.makeVisible();
             for (Trap t: traps) t.makeVisible();
             for (Rain r: rains) r.makeVisible();
@@ -219,12 +248,59 @@ public class Valley implements Showable{
     @Override
     public void makeInvisible(){
         if (isVisible){
+            prevState();
             for (Vineyard vy: vineyards.values()) vy.makeInvisible();
             for (Trap t: traps) t.makeInvisible();
             for (Rain r: rains) r.makeInvisible();
             lastActionOK = true;
             isVisible = false;
         }
+    }
+    
+    /**
+     * Realiza el zoom del simulador.
+     * @param z caracter que indica si es zoomIn (+) o zoomOut (-).
+     */
+    public void zoom(char z){
+        lastActionOK = false;
+        if(z == '+' || z == '-'){
+            canvasReference.zoom(z);
+            lastActionOK = true;
+        }
+    }
+    
+    /**
+     * Devuelve la información de los viñedos.
+     * @return arrayMatrix con las coordenadas de inicio y final de cada viñedo.
+     */
+    public int[][] vineyards(){
+        int[][] vys = new int[vineyards.size()][2];
+        int i = 0;
+        for (Vineyard vy : vineyards.values()){
+            vys[i][0] = vy.xPosition+1;
+            vys[i][1] = vy.xPosition+vy.width+1;
+            i++;
+        }        
+        return vys;
+    }
+    
+    /**
+     * Devuelve la información de las trampas.
+     * @return arrayCube con las coordenadas de inicio y final de 
+     * cada trampa, junto con las coordenadas horizontales de sus huecos.
+     */
+    public int[][][] traps(){
+        int[][][] trapInfo = null;
+        Trap tr;
+        for (int i=0; i<traps.size(); i++){
+            tr = traps.get(i);
+            int[] trPuncts = tr.getPuncturesCoordinate();
+            trapInfo = new int[traps.size()][3][trPuncts.length];
+            trapInfo[i][0] = new int[]{(int)tr.getX1()+1,(int)tr.getY1()+1};
+            trapInfo[i][1] = new int[]{(int)tr.getX2()+1,(int)tr.getY2()+1};
+            trapInfo[i][2] = tr.getPuncturesCoordinate();
+        }
+        return trapInfo;
     }
     
     /**
@@ -240,5 +316,41 @@ public class Valley implements Showable{
      */
     public boolean ok(){
         return lastActionOK;
+    }
+    
+    private void prevState(){
+        prev.saveState(traps, rains, vineyards, isVisible);
+    }
+    
+    private class State{
+        
+        private ArrayList<Trap> traps;
+        private ArrayList<Rain> rains;
+        private HashMap<String, Vineyard> vineyards;
+        private boolean visibility;
+        
+        public void saveState(ArrayList<Trap> trs, ArrayList<Rain> rns, HashMap<String, Vineyard> vys, boolean vis){
+            traps = new ArrayList<Trap>(trs);
+            rains = new ArrayList<Rain>(rns);
+            vineyards = new HashMap<String, Vineyard>(vys);
+            visibility = vis;
+        }
+        
+        public void readState(ArrayList<Trap> trs, ArrayList<Rain> rns, HashMap<String, Vineyard> vys){
+            trs = traps;
+            rns = rains;
+            vys = vineyards;
+        }
+        
+        public void reset(){
+            traps.clear();
+            rains.clear();
+            vineyards.clear();
+            visibility = false;
+        }
+        
+        public boolean getVisibility(){
+            return visibility;
+        }
     }
 }

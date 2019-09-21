@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * The test class ValleyTest.
  *
- * @author  Eduard Arias
+ * @author  Eduard Arias, Juan Díaz
  * @version 1.2 (2019-08-25)
  */
 public class ValleyTest{
