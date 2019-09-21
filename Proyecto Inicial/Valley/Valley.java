@@ -165,43 +165,47 @@ public class Valley implements Showable{
     
     /**
      * Para la lluvia del simulador.
-     * @param position coordenada horizontal de la lluvia
+     * @param position coordenada horizontal de la lluvia. Se toma un margen de 5 pixeles.
      */
     public void stopRain(int position){
         lastActionOK = false;
-        int index = 0;
-        while (index < rains.size() && Math.abs(rains.get(index).getStart()-position) > 4) index++;
-        if (index < rains.size()){
-            rains.get(index).makeInvisible();
-            rains.remove(index);
+        ArrayList<Rain> eliminationCandidates = new ArrayList<Rain>();
+        for (Rain r: rains){
+            if (Math.abs(r.getStart()-position) <= 4){
+                r.makeInvisible();
+                eliminationCandidates.add(r);
+            }
+        }
+        if (eliminationCandidates.size() > 0){
+            for (Rain r: eliminationCandidates) rains.remove(r);
             lastActionOK = true;
         }
     }
     
     /**
-     * 
+     * Devuelve los viñedos que están recibiendo cualquier lluvia.
+     * @return array con los nombres identificadores de los viñedos que
+     * cumplen la condición.
      */
     public String[] rainFalls(){
         ArrayList<String> vineyardsUnderRain = new ArrayList<String>();
-        /*boolean isWeathy;
+        boolean isWeathy;
         for (Vineyard vy: vineyards.values()){
+            int[] vyPosition = vy.getPosition();
             isWeathy = false;
             for (int i=0; i<rains.size() && !isWeathy; i++){
-                int pos = rains.get(i).endPosition();
-                int[] vyPosition = vy.getPosition();
+                int pos = rains.get(i).getEndPosition();
                 if (vyPosition[0] <= pos && pos <= vyPosition[1]){
                     isWeathy = true;
                     vineyardsUnderRain.add(vy.getName());
                 }
                 
             }
-        }*/
+        }
         return vineyardsUnderRain.toArray(new String[vineyardsUnderRain.size()]);
     }
     
-    /**
-     * Hace visible al simulador. Si ya es visible, no hace nada.
-     */
+    @Override
     public void makeVisible(){
         if (!isVisible){
             for (Vineyard vy: vineyards.values()) vy.makeVisible();
@@ -212,9 +216,7 @@ public class Valley implements Showable{
         }
     }
     
-    /**
-     * Hace invisible al simulador. Si ya es invisible, no hace nada.
-     */
+    @Override
     public void makeInvisible(){
         if (isVisible){
             for (Vineyard vy: vineyards.values()) vy.makeInvisible();

@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Clase que encapsulará la información relacionada con las lonas en el 
  * simulador. Ofrecerá los servicios de estructura básica y dibujado en Canvas. 
  *
- * @author Eduard Arias
+ * @author Eduard Arias, Juan Díaz
  * @version 2.0 (2019-08-28)
  */
 public class Trap extends Line2D.Double implements Showable{
@@ -29,18 +29,14 @@ public class Trap extends Line2D.Double implements Showable{
         isVisible = false;
     }
     
-    /**
-     * Dibuja este objeto en pantalla
-     */
+    @Override
     public void makeVisible(){
         isVisible = true;
         draw();
         for (Circle c: punctures) c.makeVisible();
     }
     
-    /**
-     * Quita el objeto de pantalla
-     */
+    @Override
     public void makeInvisible(){
         erase();
         isVisible = false;
@@ -115,11 +111,9 @@ public class Trap extends Line2D.Double implements Showable{
         double minDistance = getLength();
         for (Circle p: punctures){
             punct = p.getLocation();
-            if (punct.getY() >= y){
-                if (punct.distance(x,y) < minDistance){
-                    result = punct;
-                    minDistance = punct.distance(x,y);
-                }
+            if (punct.getY() >= y && punct.distance(x,y) < minDistance){
+                result = punct;
+                minDistance = punct.distance(x,y);
             }
         }
         if (result == null){

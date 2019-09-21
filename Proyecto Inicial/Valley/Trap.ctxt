@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Trap
-comment0.text=\r\n\ Clase\ que\ encapsular\u00E1\ la\ informaci\u00F3n\ relacionada\ con\ las\ lonas\ en\ el\ \r\n\ simulador.\ Ofrecer\u00E1\ los\ servicios\ de\ estructura\ b\u00E1sica\ y\ dibujado\ en\ Canvas.\ \r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 2.0\ (2019-08-28)\r\n
+comment0.text=\r\n\ Clase\ que\ encapsular\u00E1\ la\ informaci\u00F3n\ relacionada\ con\ las\ lonas\ en\ el\ \r\n\ simulador.\ Ofrecer\u00E1\ los\ servicios\ de\ estructura\ b\u00E1sica\ y\ dibujado\ en\ Canvas.\ \r\n\r\n\ @author\ Eduard\ Arias,\ Juan\ D\u00EDaz\r\n\ @version\ 2.0\ (2019-08-28)\r\n
 comment1.params=start\ end
 comment1.target=Trap(int[],\ int[])
 comment1.text=\r\n\ Constructor\ principal\ de\ la\ clase.\ Crea\ una\ l\u00EDnea\ a\ partir\ de\ \r\n\ coordenadas\ tipo\ (x,y).\r\n\ @param\ start\ array\ con\ las\ coordenadas\ del\ punto\ inicial.\r\n\ @param\ end\ array\ con\ las\ coordenadas\ del\ punto\ final.\r\n
@@ -8,10 +8,8 @@ comment10.params=
 comment10.target=void\ erase()
 comment2.params=
 comment2.target=void\ makeVisible()
-comment2.text=\r\n\ Dibuja\ este\ objeto\ en\ pantalla\r\n
 comment3.params=
 comment3.target=void\ makeInvisible()
-comment3.text=\r\n\ Quita\ el\ objeto\ de\ pantalla\r\n
 comment4.params=x
 comment4.target=void\ makePuncture(int)
 comment4.text=\r\n\ Crea\ un\ nuevo\ agujero\ en\ esta\ trampa.\ \r\n\ @param\ x\ posici\u00F3n\ del\ agujero\ a\ lo\ largo\ de\ la\ trampa.\ Debe\ ser\ un\ \r\n\ entero\ mayor\ a\ 0.\r\n

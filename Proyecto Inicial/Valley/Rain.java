@@ -66,6 +66,14 @@ public class Rain extends Line2D.Double implements Showable{
         return start;
     }
     
+    /**
+     * Devuelve la coordenada del final de la lluvia.
+     * @return posicion del final.
+     */
+    public int getEndPosition(){
+        return (int)path.get(path.size()-1).getX();
+    }
+    
     @Override
     public void makeVisible(){
         isVisible = true;

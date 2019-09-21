@@ -1,7 +1,7 @@
 /**
  * Write a description of class Vineyard here.
  *
- * @author Eduard Arias
+ * @author Eduard Arias, Juan Díaz
  * @version 1.0 (2019-08-25)
  */
 public class Vineyard extends Rectangle{
@@ -43,7 +43,19 @@ public class Vineyard extends Rectangle{
                 xPosition+width < vineyard.xPosition);
     }
     
+    /**
+     * Devuelve las coordenadas en el eje horizontal del viñedo.
+     * @return array con las posiciones.
+     */
     public int[] getPosition(){
         return new int[]{xPosition, xPosition+width};
+    }
+    
+    /**
+     * Devuelve el nombre identificador del viñedo.
+     * @return string con el nombre.
+     */
+    public String getName(){
+        return color;
     }
 }
