@@ -1,4 +1,5 @@
 import java.util.*;
+import java.awt.geom.Point2D;
 
 /**
  * Clase principal del proyecto Valley. Su objetivo es resonder a los 
@@ -290,17 +291,31 @@ public class Valley implements Showable{
      * cada trampa, junto con las coordenadas horizontales de sus huecos.
      */
     public int[][][] traps(){
-        int[][][] trapInfo = null;
-        Trap tr;
+        int [][][]trapInfo = new int[traps.size()][3][20];
         for (int i=0; i<traps.size(); i++){
-            tr = traps.get(i);
-            int[] trPuncts = tr.getPuncturesCoordinate();
-            trapInfo = new int[traps.size()][3][trPuncts.length];
-            trapInfo[i][0] = new int[]{(int)tr.getX1()+1,(int)tr.getY1()+1};
-            trapInfo[i][1] = new int[]{(int)tr.getX2()+1,(int)tr.getY2()+1};
-            trapInfo[i][2] = tr.getPuncturesCoordinate();
+            Point2D.Double[] tr = traps.get(i).getLocation();
+            for (int x=0; x<tr.length; x++) trapInfo[i][x] = new int[]{(int)tr[x].getX()+1, (int)tr[x].getY()+1};
+            trapInfo[i][2] = traps.get(i).getPuncturesCoordinate();
         }
         return trapInfo;
+    }
+    
+    /**
+     * Devuelve la información de las lluvias.
+     * @return arrayCube con las coordenadas de los puntos de recorrido de cada lluvia.
+     */
+    public int[][][] rains(){
+        int[][][] rainInfo = new int[rains.size()][100][2];
+        Point2D.Double[] rainPath;
+        for (int i=0; i<rains.size();i++){ 
+            System.out.println(i);
+            rainPath = rains.get(i).getPath();
+            for (int j=0; j<rainPath.length; j++){
+                rainInfo[i][j] = new int[]{(int)rainPath[j].getX()+1, (int)rainPath[j].getY()+1};
+                System.out.println(String.format("%d %d", rainInfo[i][j][0], rainInfo[i][j][1]));
+            }
+        }
+        return rainInfo;
     }
     
     /**
@@ -321,36 +336,5 @@ public class Valley implements Showable{
     private void prevState(){
         prev.saveState(traps, rains, vineyards, isVisible);
     }
-    
-    private class State{
-        
-        private ArrayList<Trap> traps;
-        private ArrayList<Rain> rains;
-        private HashMap<String, Vineyard> vineyards;
-        private boolean visibility;
-        
-        public void saveState(ArrayList<Trap> trs, ArrayList<Rain> rns, HashMap<String, Vineyard> vys, boolean vis){
-            traps = new ArrayList<Trap>(trs);
-            rains = new ArrayList<Rain>(rns);
-            vineyards = new HashMap<String, Vineyard>(vys);
-            visibility = vis;
-        }
-        
-        public void readState(ArrayList<Trap> trs, ArrayList<Rain> rns, HashMap<String, Vineyard> vys){
-            trs = traps;
-            rns = rains;
-            vys = vineyards;
-        }
-        
-        public void reset(){
-            traps.clear();
-            rains.clear();
-            vineyards.clear();
-            visibility = false;
-        }
-        
-        public boolean getVisibility(){
-            return visibility;
-        }
-    }
 }
+

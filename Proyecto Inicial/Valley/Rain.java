@@ -47,7 +47,7 @@ public class Rain extends Line2D.Double implements Showable{
                 if (t.intersectsLine(x, y, x, y+4)){
                     path.add(new Point2D.Double(x, y-4));
                     Point2D.Double nextPoint = t.holeNextTo(x,y);
-                    path.add(new Point2D.Double(nextPoint.getX(), nextPoint.getY()-5));
+                    path.add(new Point2D.Double(nextPoint.getX()+7, nextPoint.getY()+2));
                     x = (int)nextPoint.getX();
                     y = (int)nextPoint.getY();
                 }

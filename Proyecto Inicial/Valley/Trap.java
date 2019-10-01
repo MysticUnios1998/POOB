@@ -102,9 +102,13 @@ public class Trap extends Line2D.Double implements Showable{
      * @return array con las coordenadas.
      */
     public int[] getPuncturesCoordinate(){
-        int[] ans = new int[punctures.size()];
-        for(int i=0; i<punctures.size(); i++) ans[i] = punctures.get(i).xPosition;        
-        return (punctures.size() != 0) ? ans: new int[]{-1};
+        int len = punctures.size();
+        int[] ans = new int[(len > 0) ? len: 1];
+        if (len == 0) ans[0] = -1;
+        else{
+            for (int i=0; i<len;i++) ans[i] = (int)punctures.get(i).getLocation().getX()+1;
+        }
+        return ans;
     }
     
     /**
@@ -116,31 +120,15 @@ public class Trap extends Line2D.Double implements Showable{
      */
     public Point2D.Double holeNextTo(int x, int y){
         Point2D.Double result = null;
-        Point2D.Double punct = null;
-        int i=0;
-        double minDistance = getLength();
-        for (Circle p: punctures){
-            punct = p.getLocation();
-            if (punct.getY() >= y && punct.distance(x,y) < minDistance){
-                result = punct;
-                minDistance = punct.distance(x,y);
+        Point2D.Double punct;
+        for (Circle c: punctures){
+            punct = c.getLocation();
+            if (punct.getY() >= y){
+                if (result == null || punct.distance(x,y) <= 7) result = punct;
             }
         }
         if (result == null){
-            int xTranslation = 0;
-            Point2D.Double[] p = getLocation();
-            if (p[0].getY() >= p[1].getY()){
-                xTranslation = (p[0].getX() <= p[1].getX()) ? -4: +4;
-                result = new Point2D.Double(p[0].getX()+xTranslation, p[0].getY());
-            }else{
-                xTranslation = (p[1].getX() <= p[0].getX()) ? -4: +4;
-                result = new Point2D.Double(p[1].getX()+xTranslation, p[1].getY());
-            }
-        }else{
-            double xf, yf;
-            xf = result.getX();
-            yf = result.getX();
-            result = new Point2D.Double(xf+7, yf+7);
+            result = (initialPoint.getY() >= finalPoint.getY()) ? initialPoint: finalPoint;
         }
         return result;
     }

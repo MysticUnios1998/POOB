@@ -44,13 +44,21 @@ public class ValleyTest2{
     @Test
     public void shouldQueryTraps(){
         v1 = new Valley(300,300);
-        assertNull(v1.traps());
+        assertEquals(v1.traps(), new int[][][]{});
         v1.addTrap(new int[]{10,10}, new int[]{30,30});
         assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {-1}}});
         v1.addTrap(new int[]{50, 120}, new int[]{120, 240});
         assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {-1}}, {{50,120}, {120,240}, {-1}}});
         v1.makePuncture(1, 10);
-        assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {20}}, {{50,120}, {120,240}, {-1}}});
+        assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {10}}, {{50,120}, {120,240}, {-1}}});
+    }
+    
+    @Test
+    public void shouldQueryRains(){
+        v1 = new Valley(400,400);
+        assertEquals(v1.rains(), new int[][][]{});
+        v1.startRain(15);
+        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 400}}});
     }
     
     @Test
