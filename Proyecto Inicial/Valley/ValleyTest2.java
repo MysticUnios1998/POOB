@@ -51,6 +51,11 @@ public class ValleyTest2{
         assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {-1}}, {{50,120}, {120,240}, {-1}}});
         v1.makePuncture(1, 10);
         assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {10}}, {{50,120}, {120,240}, {-1}}});
+        v1.addTrap(new int[]{30,0}, new int[]{0, 40});
+        assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {10}}, {{50,120}, {120,240}, {-1}}});
+        v1.addTrap(new int[]{30,1}, new int[]{100, 1});
+        v1.makePuncture(3, 50);
+        assertEquals(v1.traps(), new int[][][]{{{10,10}, {30,30}, {10}}, {{50,120}, {120,240}, {-1}}, {{30, 1}, {100, 1}, {73}}});
     }
     
     @Test
@@ -58,18 +63,24 @@ public class ValleyTest2{
         v1 = new Valley(400,400);
         assertEquals(v1.rains(), new int[][][]{});
         v1.startRain(15);
-        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 400}}});
+        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 401}}});
+        v1.startRain(150);
+        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 401}}, {{150, 1}, {150, 401}}});
+        v1.startRain(149);
+        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 401}}, {{150, 1}, {150, 401}}, {{149, 1}, {149, 401}}});
+        v1.addTrap(new int[]{10,10}, new int[]{30,30});
+        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 9}, {36, 32}, {36, 401}}, {{150, 1}, {150, 401}}, {{149, 1}, {149, 401}}});
+        v1.startRain(100);
+        v1.addTrap(new int[]{80, 20}, new int[]{120, 20});
+        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 9}, {36, 32}, {36, 401}}, {{150, 1}, {150, 401}}, 
+            {{149, 1}, {149, 401}}, {{100,1}, {100, 13}, {72, 22}, {72, 401}}});
+        v1.makePuncture(2, 20);
+        assertEquals(v1.rains(), new int[][][]{{{15, 1}, {15, 9}, {36, 32}, {36, 401}}, {{150, 1}, {150, 401}}, 
+            {{149, 1}, {149, 401}}, {{100,1}, {100, 13}, {99, 15}, {99, 401}}});
     }
     
     @Test
     public void shouldUndoRedo(){
-        v2 = new Valley(400,400);
-        v2.openYard("green", 10,10);
-        v2.openYard("blue", 100, 130);
-        System.out.println(v2.vineyards().length);
-        assertEquals(v2.vineyards(), new int[][]{{10,10}, {100,130}});
-        v2.doAction('U');
-        assertTrue(v2.ok());
-        assertEquals(v2.vineyards(), new int[][]{{10,10}});
+        
     }
 }

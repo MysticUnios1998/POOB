@@ -123,8 +123,8 @@ public class Trap extends Line2D.Double implements Showable{
         Point2D.Double punct;
         for (Circle c: punctures){
             punct = c.getLocation();
-            if (punct.getY() >= y){
-                if (result == null || punct.distance(x,y) <= 7) result = punct;
+            if (punct.getY()+7 >= y){
+                if (result == null || punct.distance(x,y) <=7) result = punct;
             }
         }
         if (result == null){

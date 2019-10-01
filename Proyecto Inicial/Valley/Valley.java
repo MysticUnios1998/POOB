@@ -57,7 +57,6 @@ public class Valley implements Showable{
                     if (newVineyard.intersect(vy)) sePuedeColocar = false;
                 }
                 if (sePuedeColocar){
-                    prevState();
                     vineyards.put(name, newVineyard);
                     lastActionOK = true;
                     if (isVisible) newVineyard.makeVisible();
@@ -73,7 +72,6 @@ public class Valley implements Showable{
     public void closeYard(String name){
         lastActionOK = false;
         if (vineyards.containsKey(name)){
-            prevState();
             vineyards.get(name).makeInvisible();
             vineyards.remove(name);
             lastActionOK = true;
@@ -95,7 +93,6 @@ public class Valley implements Showable{
             int i = 0;
             while(i<traps.size() && !seChoca) seChoca = t.intersectsLine(traps.get(i++));
             if (!seChoca){
-                prevState();
                 traps.add(t);
                 lastActionOK = true;
                 for (Rain r: rains) r.calculatePath(traps, height, width);
@@ -112,7 +109,6 @@ public class Valley implements Showable{
         lastActionOK = false;
         position--;
         if (position >= 0 && position < traps.size()){
-            prevState();
             traps.get(position).makeInvisible();
             traps.remove(position);
             lastActionOK = true;
@@ -132,7 +128,6 @@ public class Valley implements Showable{
         if (0<=trap && trap<traps.size()){
             Trap t = traps.get(trap);
             if (x <= t.getLength()){
-                prevState();
                 t.makePuncture(x);
                 lastActionOK = true;
                 for (Rain r: rains) r.calculatePath(traps, height, width);
@@ -166,8 +161,8 @@ public class Valley implements Showable{
         if (1<=x && x<=width){
             prevState();
             Rain r = new Rain(x);
-            r.calculatePath(traps, width, height);
             rains.add(r);
+            r.calculatePath(traps, width, height);
             if (isVisible) r.makeVisible();
             lastActionOK = true;
         }
@@ -291,13 +286,17 @@ public class Valley implements Showable{
      * cada trampa, junto con las coordenadas horizontales de sus huecos.
      */
     public int[][][] traps(){
-        int [][][]trapInfo = new int[traps.size()][3][20];
+        int[][][] trapsResume = new int[traps.size()][][];
+        int[][] trapInfo;
+        int x;
         for (int i=0; i<traps.size(); i++){
             Point2D.Double[] tr = traps.get(i).getLocation();
-            for (int x=0; x<tr.length; x++) trapInfo[i][x] = new int[]{(int)tr[x].getX()+1, (int)tr[x].getY()+1};
-            trapInfo[i][2] = traps.get(i).getPuncturesCoordinate();
+            trapInfo = new int[3][];
+            for (x=0; x<2; x++) trapInfo[x] = new int[]{(int)tr[x].getX()+1,(int)tr[x].getY()+1};
+            trapInfo[x] = traps.get(i).getPuncturesCoordinate();
+            trapsResume[i] = trapInfo;
         }
-        return trapInfo;
+        return trapsResume;
     }
     
     /**
@@ -305,17 +304,16 @@ public class Valley implements Showable{
      * @return arrayCube con las coordenadas de los puntos de recorrido de cada lluvia.
      */
     public int[][][] rains(){
-        int[][][] rainInfo = new int[rains.size()][100][2];
+        int[][][] rainsResume = new int[rains.size()][][];
+        int[][] rainInfo;
         Point2D.Double[] rainPath;
         for (int i=0; i<rains.size();i++){ 
-            System.out.println(i);
             rainPath = rains.get(i).getPath();
-            for (int j=0; j<rainPath.length; j++){
-                rainInfo[i][j] = new int[]{(int)rainPath[j].getX()+1, (int)rainPath[j].getY()+1};
-                System.out.println(String.format("%d %d", rainInfo[i][j][0], rainInfo[i][j][1]));
-            }
+            rainInfo = new int[rainPath.length][2];
+            for (int j=0; j<rainPath.length; j++) rainInfo[j] = new int[]{(int)rainPath[j].getX(), (int)rainPath[j].getY()+1};
+            rainsResume[i] = rainInfo;
         }
-        return rainInfo;
+        return rainsResume;
     }
     
     /**

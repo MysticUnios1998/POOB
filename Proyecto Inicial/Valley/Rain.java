@@ -40,16 +40,20 @@ public class Rain extends Line2D.Double implements Showable{
     public void calculatePath(ArrayList<Trap> tr, int height, int width){
         erase();
         path.clear();
-        path.add(new Point2D.Double(start, 0));
         int x=start, y=0;
+        boolean seVaParaIzq;
+        Point2D.Double trapLoc;
+        path.add(new Point2D.Double(x,y));
         while (y < height){
             for (Trap t: tr){
                 if (t.intersectsLine(x, y, x, y+4)){
                     path.add(new Point2D.Double(x, y-4));
+                    trapLoc = t.getLocation()[0];
                     Point2D.Double nextPoint = t.holeNextTo(x,y);
-                    path.add(new Point2D.Double(nextPoint.getX()+7, nextPoint.getY()+2));
-                    x = (int)nextPoint.getX();
-                    y = (int)nextPoint.getY();
+                    seVaParaIzq = nextPoint.getX() <= trapLoc.getX();
+                    path.add(new Point2D.Double(nextPoint.getX()+ ((seVaParaIzq) ? -7: 7), nextPoint.getY()+2));
+                    x = (int)path.get(path.size()-1).getX();
+                    y = (int)nextPoint.getY()+9;
                 }
             }
             y+=2;
