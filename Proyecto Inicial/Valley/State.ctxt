@@ -1,14 +1,16 @@
 #BlueJ class context
 comment0.target=State
-comment0.text=\r\n\ La\ clase\ State\ se\ utiliar\u00E1\ como\ nodo\ de\ estado\ en\ el\ tiempo\ del\ simulador.\r\n\r\n\ @author\ Eduard\ Arias,\ Juan\ D\u00EDaz\r\n\ @version\ 1.0\ (27-09-2019)\r\n
-comment1.params=trs\ rns\ vys\ vis
-comment1.target=void\ saveState(java.util.ArrayList,\ java.util.ArrayList,\ java.util.HashMap,\ boolean)
-comment2.params=trs\ rns\ vys
-comment2.target=void\ readState(java.util.ArrayList,\ java.util.ArrayList,\ java.util.HashMap)
-comment3.params=s
-comment3.target=void\ copyState(State)
-comment4.params=
-comment4.target=void\ reset()
+comment0.text=\r\n\ La\ clase\ State\ se\ utiliar\u00E1\ como\ nodo\ de\ estado\ en\ el\ tiempo\ del\ simulador.\r\n\r\n\ @author\ Eduard\ Arias,\ Juan\ D\u00EDaz\r\n\ @version\ 2.0\ (03-10-2019)\r\n
+comment1.params=
+comment1.target=State()
+comment2.params=traps\ rains\ vineyards\ isVisible\ height\ width
+comment2.target=void\ saveState(java.util.ArrayList,\ java.util.ArrayList,\ java.util.HashMap,\ boolean,\ int,\ int)
+comment3.params=traps\ rains\ vineyards
+comment3.target=void\ readState(java.util.ArrayList,\ java.util.ArrayList,\ java.util.HashMap)
+comment4.params=s
+comment4.target=void\ copyState(State)
 comment5.params=
 comment5.target=boolean\ getVisibility()
-numComments=6
+comment6.params=
+comment6.target=void\ reset()
+numComments=7

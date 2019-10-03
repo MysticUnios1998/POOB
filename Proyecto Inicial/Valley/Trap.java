@@ -29,6 +29,13 @@ public class Trap extends Line2D.Double implements Showable{
         isVisible = false;
     }
     
+    /**
+     * Constructor por defecto de la clase. Crea una trampa en la posición (1,1) a la (1,2);
+     */
+    public Trap(){
+        this(new int[]{1,1}, new int[]{1,2});
+    }
+    
     @Override
     public void makeVisible(){
         isVisible = true;
@@ -112,6 +119,14 @@ public class Trap extends Line2D.Double implements Showable{
     }
     
     /**
+     * Retorna los puntos de los agujeros.
+     * @return ArrayList con los agujeros de la trampa.
+     */
+    public ArrayList<Circle> getPunctures(){
+        return punctures;
+    }
+    
+    /**
      * Retorna el primer agujero que esté en unas coordenadas. Si no hay 
      * tal agujero, se retorna el punto con yMax.
      * @param x coordenada horizontal.
@@ -127,10 +142,19 @@ public class Trap extends Line2D.Double implements Showable{
                 if (result == null || punct.distance(x,y) <=7) result = punct;
             }
         }
-        if (result == null){
-            result = (initialPoint.getY() >= finalPoint.getY()) ? initialPoint: finalPoint;
-        }
+        if (result == null) result = (initialPoint.getY() >= finalPoint.getY()) ? initialPoint: finalPoint;
         return result;
+    }
+    
+    /**
+     * Crea una copia de una trampa anterior.
+     * @param t trampa a clonar.
+     */
+    public void copyState(Trap t){
+        Point2D.Double[] location = t.getLocation();
+        initialPoint.setLocation(location[0]);
+        finalPoint.setLocation(location[1]);
+        for (Circle c: t.getPunctures()) punctures.add(new Circle(14, "white", c.xPosition, c.yPosition));
     }
     
     protected void draw(){

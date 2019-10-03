@@ -57,6 +57,7 @@ public class Valley implements Showable{
                     if (newVineyard.intersect(vy)) sePuedeColocar = false;
                 }
                 if (sePuedeColocar){
+                    prevState();
                     vineyards.put(name, newVineyard);
                     lastActionOK = true;
                     if (isVisible) newVineyard.makeVisible();
@@ -72,6 +73,7 @@ public class Valley implements Showable{
     public void closeYard(String name){
         lastActionOK = false;
         if (vineyards.containsKey(name)){
+            prevState();
             vineyards.get(name).makeInvisible();
             vineyards.remove(name);
             lastActionOK = true;
@@ -93,6 +95,7 @@ public class Valley implements Showable{
             int i = 0;
             while(i<traps.size() && !seChoca) seChoca = t.intersectsLine(traps.get(i++));
             if (!seChoca){
+                prevState();
                 traps.add(t);
                 lastActionOK = true;
                 for (Rain r: rains) r.calculatePath(traps, height, width);
@@ -109,6 +112,7 @@ public class Valley implements Showable{
         lastActionOK = false;
         position--;
         if (position >= 0 && position < traps.size()){
+            prevState();
             traps.get(position).makeInvisible();
             traps.remove(position);
             lastActionOK = true;
@@ -128,6 +132,7 @@ public class Valley implements Showable{
         if (0<=trap && trap<traps.size()){
             Trap t = traps.get(trap);
             if (x <= t.getLength()){
+                prevState();
                 t.makePuncture(x);
                 lastActionOK = true;
                 for (Rain r: rains) r.calculatePath(traps, height, width);
@@ -218,13 +223,18 @@ public class Valley implements Showable{
     public void doAction(char d){
         lastActionOK = false;
         if (d=='U' || d=='R'){
-            State next = new State();
-            next.saveState(traps, rains, vineyards, isVisible);
-            makeInvisible();
-            prev.readState(traps, rains, vineyards);
-            isVisible = prev.getVisibility();
-            prev = next;
-            if(isVisible) makeVisible();
+            //makeInvisible();
+            if (d == 'U'){
+                /*State newState = new State();
+                newState.copyState(prev);
+                prevState();
+                newState.readState(traps, rains, vineyards);*/
+                prev.readState(traps, rains, vineyards);
+                System.out.println(traps());
+                //isVisible = newState.getVisibility();
+                isVisible = prev.getVisibility();   
+            }
+            if (isVisible) makeVisible();
             lastActionOK = true;
         }
     }
@@ -332,7 +342,7 @@ public class Valley implements Showable{
     }
     
     private void prevState(){
-        prev.saveState(traps, rains, vineyards, isVisible);
+        prev.saveState(traps, rains, vineyards, isVisible, height, width);
     }
 }
 
