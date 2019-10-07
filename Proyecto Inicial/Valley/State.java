@@ -43,19 +43,27 @@ public class State{
         visibility = isVisible;
     }
     
-    public void readState(ArrayList<Trap> traps, ArrayList<Rain> rains, HashMap<String, Vineyard> vineyards){
-        traps = new ArrayList<Trap>(this.traps);
-        rains = new ArrayList<Rain>(this.rains);
-        vineyards = new HashMap<String, Vineyard>(this.vineyards);
-    }
-    
     public void copyState(State s){
-        s.readState(traps, rains, vineyards);
+        traps = s.getTraps();
+        rains = s.getRains();
+        vineyards = s.getVineyards();
         visibility = s.getVisibility();
     }
     
     public boolean getVisibility(){
         return visibility;
+    }
+    
+    public ArrayList<Trap> getTraps(){
+        return traps;
+    }
+    
+    public ArrayList<Rain> getRains(){
+        return rains;
+    }
+    
+    public HashMap<String, Vineyard> getVineyards(){
+        return vineyards;
     }
     
     private void reset(){

@@ -15,7 +15,8 @@ public class Valley implements Showable{
     private int width;
     private boolean lastActionOK;
     private boolean isVisible;
-    private State prev;
+    private Stack<State> undo;
+    private Stack<State> redo;
     private HashMap<String, Vineyard> vineyards;
     private ArrayList<Trap> traps;
     private ArrayList<Rain> rains;
@@ -30,7 +31,8 @@ public class Valley implements Showable{
         canvasReference = Canvas.getCanvas(width, height);
         this.height = height;
         this.width = width;
-        prev = new State();
+        undo = new Stack<State>();
+        redo = new Stack<State>();
         vineyards = new HashMap<String, Vineyard>();
         traps = new ArrayList<Trap>();
         rains = new ArrayList<Rain>();
@@ -223,24 +225,27 @@ public class Valley implements Showable{
     public void doAction(char d){
         lastActionOK = false;
         if (d=='U' || d=='R'){
-            //makeInvisible();
-            if (d == 'U'){
-                /*State newState = new State();
-                newState.copyState(prev);
-                prevState();
-                newState.readState(traps, rains, vineyards);*/
-                prev.readState(traps, rains, vineyards);
-                System.out.println(traps());
-                //isVisible = newState.getVisibility();
-                isVisible = prev.getVisibility();   
+            State newState = new State();
+            newState.saveState(traps, rains, vineyards, isVisible, height, width);
+            makeInvisible();
+            if (d == 'U' && undo.size() > 0){
+                redo.add(newState);
+                readState(undo.pop());
+                lastActionOK = true;
+            }else if(d == 'R' && redo.size() > 0){
+                undo.add(newState);
+                readState(redo.pop());
+                lastActionOK = true;
+            }else{
+                if (lastActionOK) makeVisible(); // este es porque el makeInvisible de arriba cambia la visibilidad y el lastActionOK
+                lastActionOK = false;
             }
-            if (isVisible) makeVisible();
-            lastActionOK = true;
         }
     }
     
     @Override
     public void makeVisible(){
+        lastActionOK = false;
         if (!isVisible){
             prevState();
             for (Vineyard vy: vineyards.values()) vy.makeVisible();
@@ -253,6 +258,7 @@ public class Valley implements Showable{
     
     @Override
     public void makeInvisible(){
+        lastActionOK = false;
         if (isVisible){
             prevState();
             for (Vineyard vy: vineyards.values()) vy.makeInvisible();
@@ -342,7 +348,17 @@ public class Valley implements Showable{
     }
     
     private void prevState(){
+        State prev = new State();
         prev.saveState(traps, rains, vineyards, isVisible, height, width);
+        undo.add(prev);
+        redo.clear();
+    }
+    
+    private void readState(State s){
+        traps = s.getTraps();
+        rains = s.getRains();
+        vineyards = s.getVineyards();
+        if (s.getVisibility()) makeVisible();
     }
 }
 

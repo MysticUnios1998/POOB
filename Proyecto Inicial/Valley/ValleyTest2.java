@@ -81,6 +81,21 @@ public class ValleyTest2{
     
     @Test
     public void shouldUndoRedo(){
-        
+        v1 = new Valley(400,400);
+        v1.addTrap(new int[]{10,10}, new int[]{50,50});
+        v1.addTrap(new int[]{20,10}, new int[]{150,50});
+        v1.doAction('U');
+        assertTrue(v1.ok());
+        assertEquals(v1.traps(), new int[][][]{{{10,10}, {50,50}, {-1}}});
+        v1.doAction('R');
+        assertTrue(v1.ok());
+        assertEquals(v1.traps(), new int[][][]{{{10,10}, {50,50}, {-1}}, {{20,10}, {150,50}, {-1}}});
+        v1.makePuncture(1, 20);
+        v1.makePuncture(1, 10);
+        v1.doAction('U');
+        assertTrue(v1.ok());
+        v1.doAction('U');
+        assertTrue(v1.ok());
+        assertEquals(v1.traps(), new int[][][]{{{10,10}, {50,50}, {-1}}, {{20,10}, {150,50}, {-1}}});
     }
 }
