@@ -10,10 +10,10 @@ import java.util.ArrayList;
  */
 public class Trap extends Line2D.Double implements Showable{
     
-    private Point2D.Double initialPoint;
-    private Point2D.Double finalPoint;
-    private boolean isVisible;
-    private ArrayList<Circle> punctures;
+    protected Point2D.Double initialPoint;
+    protected Point2D.Double finalPoint;
+    protected boolean isVisible;
+    protected ArrayList<Circle> punctures;
     
     /**
      * Constructor principal de la clase. Crea una línea a partir de 
@@ -155,6 +155,15 @@ public class Trap extends Line2D.Double implements Showable{
         initialPoint.setLocation(location[0]);
         finalPoint.setLocation(location[1]);
         for (Circle c: t.getPunctures()) punctures.add(new Circle(14, "white", c.xPosition, c.yPosition));
+    }
+    
+    /**
+     * Elimina la trampa de pantalla
+     * @return si se pudo eliminar o no
+     */
+    public boolean delete(){
+        makeInvisible();
+        return true;
     }
     
     protected void draw(){

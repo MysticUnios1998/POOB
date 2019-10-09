@@ -107,6 +107,28 @@ public class Valley implements Showable{
     }
     
     /**
+     * Coloca un tipo especial de trampa en el simulador.Si las posiciones requeridas
+     * se salen de las dimensiones del simulador, no hace nada.
+     * El tipo puede ser: "flexible", "hard", "radical".
+     * @param type tipo de trampa.  Si el tipo no coincide con
+     * los anteriores, se crea una trampa normal.
+     * @param lowerEnd array con las posiciones iniciales.
+     * @param higherEnd array con las posiciones finales.
+     */
+    public void addTrap(String type, int[] lowerEnd, int[] higherEnd){
+        addTrap(lowerEnd, higherEnd);
+        if (ok()){
+            if (type.equals("hard")){
+                traps.set(traps.size()-1, new HardTrap(lowerEnd, higherEnd));
+            }else if(type.equals("flexible")){
+                traps.set(traps.size()-1, new FlexibleTrap(lowerEnd, higherEnd));
+            }else if(type.equals("radical")){
+                traps.set(traps.size()-1, new RadicalTrap(lowerEnd, higherEnd));
+            }
+        }
+    }
+    
+    /**
      * Remueve una lona del simulador. Funciona por orden de llegada.
      * @param position número de la lona a eliminar. Debe ser un entero mayor a 0.
      */
@@ -115,10 +137,11 @@ public class Valley implements Showable{
         position--;
         if (position >= 0 && position < traps.size()){
             prevState();
-            traps.get(position).makeInvisible();
-            traps.remove(position);
-            lastActionOK = true;
-            for (Rain r: rains) r.calculatePath(traps, height, width);
+            if (traps.get(position).delete()){
+                traps.remove(position);
+                lastActionOK = true;
+                for (Rain r: rains) r.calculatePath(traps, height, width);
+            }
         }
     }
     
