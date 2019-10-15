@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=Teatro
+comment0.text=\r\n\ @author\ ECI\r\n\r\n
+comment1.params=
+comment1.target=Teatro\ demeTeatro()
+comment10.params=
+comment10.target=void\ corten()
+comment11.params=
+comment11.target=void\ decidan()
+comment2.params=
+comment2.target=void\ nuevoTeatro()
+comment3.params=d
+comment3.target=void\ cambieTeatro(Teatro)
+comment4.params=
+comment4.target=Teatro()
+comment5.params=
+comment5.target=void\ algunosEnEscena()
+comment6.params=n
+comment6.target=EnEscena\ demeEnEscena(int)
+comment7.params=e
+comment7.target=void\ adicione(EnEscena)
+comment8.params=
+comment8.target=int\ numeroEnEscena()
+comment9.params=
+comment9.target=void\ accion()
+numComments=12

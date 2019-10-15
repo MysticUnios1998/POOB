@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Elemento
+comment1.params=nombre\ posicionx\ posiciony
+comment1.target=Elemento(java.lang.String,\ int,\ int)
+comment1.text=Crea\ un\ nuevo\ elemento\ en\ la\ posicion\ (posicionx,\ posiciony)\r\n\ \ \ \ @param\ nombre\ nombre\ del\ elemento\r\n\ \ \ \ @param\ posicionx\ coordenada\ x\ de\ la\ posicion\ \r\n\ \ \ \ @param\ posiciony\ coordenada\ y\ de\ la\ posicion\r\n
+comment2.params=
+comment2.target=java.awt.Color\ getColor()
+comment2.text=Retorna\ el\ color\ del\ elemento
+comment3.params=color
+comment3.target=void\ setColor(java.lang.String)
+comment3.text=Cambia\ el\ color\ del\ elemento.\ Puede\ ser\ rojo,\ azul,\ naranja,\ amarillo,\ verde
+comment4.params=
+comment4.target=int\ getPosicionX()
+comment4.text=Retorna\ la\ coordenada\ x\ de\ la\ posicion
+comment5.params=
+comment5.target=int\ getPosicionY()
+comment5.text=Retorna\ la\ coordenada\ y\ de\ la\ posicion
+comment6.params=
+comment6.target=java.lang.String\ toString()
+comment6.text=\r\n\ Retorna\ el\ nombre\ del\ elemento\r\n\ @return\ Cadena\ con\ la\ informaci\u00F3n\ requerida\r\n
+numComments=7
