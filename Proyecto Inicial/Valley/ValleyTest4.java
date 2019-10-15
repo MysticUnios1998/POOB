@@ -66,4 +66,45 @@ public class ValleyTest4{
         v.makePuncture(1, 1);
         assertEquals(v.traps(), new int[][][]{{{10,10}, {10, 10}, {-1}}});
     }
+    
+    @Test
+    public void shouldManageAcidRains(){
+        int[][][] acidProgress;
+        v.startRain("acid",50);
+        assertTrue(v.ok());
+        acidProgress = v.rains();
+        assertEquals(acidProgress, new int[][][]{{{50,1}, {50,401}}});
+        v.addTrap(new int[]{10,10}, new int[]{100,100});
+        assertEquals(acidProgress, new int[][][]{{{50,1}, {50,401}}});
+        assertEquals(v.traps(), new int[][][]{{{10,10}, {100,100}, {42}}});
+        v.addTrap(new int[]{10,100}, new int[]{100,190});
+        v.addTrap(new int[]{10,150}, new int[]{100,240});
+        assertEquals(acidProgress, new int[][][]{{{50,1}, {50,401}}});
+        assertEquals(v.traps(), new int[][][]{{{10,10}, {100,100}, {42}}, {{10,100}, {100,190}, {42}}, {{10, 150}, {100, 240}, {42}}});
+    }
+    
+    @Test 
+    public void shouldManageStraightRains(){
+    
+    }
+    
+    @Test
+    public void shouldManageCrazyRains(){
+        v.startRain("crazy", 20);
+        int[][][] rainProgress1, rainProgress2;
+        assertTrue(v.ok());
+        rainProgress1 = v.rains();
+        rainProgress2 = rainProgress1;
+        assertNotEquals(rainProgress1, new int[][][]{{{20, 1}, {20,401}}});
+        v.makeVisible();
+        v.makeInvisible();
+        rainProgress1 = v.rains();
+        assertNotEquals(rainProgress2, rainProgress1);
+        rainProgress2 = rainProgress1;
+        v.makeVisible();
+        v.makeInvisible();
+        rainProgress1 = v.rains();
+        assertNotEquals(rainProgress2, rainProgress1);
+        rainProgress2 = rainProgress1;
+    }
 }

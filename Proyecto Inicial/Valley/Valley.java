@@ -205,6 +205,28 @@ public class Valley implements Showable{
     }
     
     /**
+     * Crea un tipo especial de lluvia. Los tipos disponibles son: "acid", "straight" y "rebel".
+     * Por defecto, se crea una lluvia normal.
+     * @param type tipo especial requerido de lluvia.
+     * @param x posicion horizontal del inicio de la lluvia.
+     */
+    public void startRain(String type, int x){
+        lastActionOK = false;
+        if (1<=x && x<=width){
+            prevState();
+            Rain r;
+            if (type.equals("acid")) r = new AcidRain(x);
+            else if (type.equals("straight")) r = new StraightRain(x);
+            else if (type.equals("crazy")) r = new CrazyRain(x, traps, height, width);
+            else r = new Rain(x);
+            rains.add(r);
+            r.calculatePath(traps, width, height);
+            if (isVisible) r.makeVisible();
+            lastActionOK = true;
+        }
+    }
+    
+    /**
      * Para la lluvia del simulador.
      * @param position coordenada horizontal de la lluvia. Se toma un margen de 5 pixeles.
      */

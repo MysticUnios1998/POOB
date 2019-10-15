@@ -11,9 +11,9 @@ public class Rain extends Line2D.Double implements Showable{
     
     public final static String RAIN_COLOR = "cyan";
     
-    private int start;
-    private ArrayList<Point2D.Double> path;
-    private boolean isVisible;
+    protected int start;
+    protected ArrayList<Point2D.Double> path;
+    protected boolean isVisible;
 
     /**
      * Constructor principal de la clase Rain con valor fijos
@@ -90,7 +90,7 @@ public class Rain extends Line2D.Double implements Showable{
         isVisible = false;
     }
     
-    private void draw(){
+    protected void draw(){
         if(isVisible){
             Canvas c = Canvas.getCanvas();
             c.draw(this, Rain.RAIN_COLOR, this);
@@ -98,7 +98,7 @@ public class Rain extends Line2D.Double implements Showable{
         }
     }
     
-    private void erase(){
+    protected void erase(){
         if (isVisible) Canvas.getCanvas().erase(this);
     }
 }
