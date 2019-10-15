@@ -1,6 +1,6 @@
 
 /**
- * Clase Trap tipo Hard.
+ * Clase Trap tipo Hard. Este tipo especial de trampa no puede ser agujereado ni eliminado.
  *
  * @author Eduard Arias, Juan Diaz
  * @version 1.0 (08-10-2019) 

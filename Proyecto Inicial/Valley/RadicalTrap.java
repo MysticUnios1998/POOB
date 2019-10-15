@@ -1,6 +1,6 @@
 
 /**
- * Clase Trap tipo Radical.
+ * Clase Trap tipo Radical. Este tipo especial de trampa desaparece si es agujereada.
  *
  * @author Eduard Arias, Juan Diaz
  * @version 1.0 (08-10-2019)
@@ -13,7 +13,6 @@ public class RadicalTrap extends Trap{
     
     @Override
     public void makePuncture(int x){
-        // por el momento hace lo mismo que la normal.
-        super.makePuncture(x);
+        makeInvisible(); // todavia no funciona eliminando la trampa
     }
 }

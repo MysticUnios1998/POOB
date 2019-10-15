@@ -1,6 +1,6 @@
 
 /**
- * Clase Trap tipo Flexible.
+ * Clase Trap tipo Flexible. Solo permite un agujero a la vez en su superficie (se "autoparchea").
  *
  * @author Eduard Arias
  * @version 1.0 (08-10-2019)

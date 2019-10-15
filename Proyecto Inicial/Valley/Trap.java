@@ -75,16 +75,15 @@ public class Trap extends Line2D.Double implements Showable{
         yPos = (int)Math.round(Math.sqrt(Math.pow(pos,2) - Math.pow(xPos- initialPoint.getX(), 2))+initialPoint.getY());
         Point2D.Double pt;
         Circle c;
-        ArrayList<Integer> removeCandidates = new ArrayList<Integer>();
         for (int i=0; i<punctures.size(); i++){
             c = punctures.get(i);
             pt = c.getLocation();
             if (pt.distance(xPos-7, yPos-7) <= 7){
                 c.makeInvisible();
-                removeCandidates.add(i);
+                punctures.remove(i);
+                break;
             }
         }
-        for (int j=0; j<removeCandidates.size(); j++) punctures.remove(removeCandidates.get(j));
     }
     
     /**

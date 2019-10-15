@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=HardTrap
-comment0.text=\r\n\ Clase\ Trap\ tipo\ Hard.\r\n\r\n\ @author\ Eduard\ Arias,\ Juan\ Diaz\r\n\ @version\ 1.0\ (08-10-2019)\ \r\n
+comment0.text=\r\n\ Clase\ Trap\ tipo\ Hard.\ Este\ tipo\ especial\ de\ trampa\ no\ puede\ ser\ agujereado\ ni\ eliminado.\r\n\r\n\ @author\ Eduard\ Arias,\ Juan\ Diaz\r\n\ @version\ 1.0\ (08-10-2019)\ \r\n
 comment1.params=lowerEnd\ higherEnd
 comment1.target=HardTrap(int[],\ int[])
 comment2.params=

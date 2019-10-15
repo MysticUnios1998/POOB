@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=FlexibleTrap
-comment0.text=\r\n\ Clase\ Trap\ tipo\ Flexible.\r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 1.0\ (08-10-2019)\r\n
+comment0.text=\r\n\ Clase\ Trap\ tipo\ Flexible.\ Solo\ permite\ un\ agujero\ a\ la\ vez\ en\ su\ superficie\ (se\ "autoparchea").\r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 1.0\ (08-10-2019)\r\n
 comment1.params=lowerEnd\ higherEnd
 comment1.target=FlexibleTrap(int[],\ int[])
 comment2.params=x
