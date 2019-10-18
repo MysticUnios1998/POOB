@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Clase Rain tipo Straight. Tipo especial de lluvia que se mantiene recta siempre que sea posible.
@@ -13,6 +14,11 @@ public class StraightRain extends Rain{
      */
     public StraightRain(int x){
         super(x);
+    }
+    
+    @Override
+    public void calculatePath(ArrayList<Trap> tr, int height, int width){
+        super.calculatePath(tr, height, width);
     }
     
 }

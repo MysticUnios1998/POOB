@@ -4,4 +4,6 @@ comment0.text=\r\n\ Clase\ Rain\ tipo\ Straight.\ Tipo\ especial\ de\ lluvia\ qu
 comment1.params=x
 comment1.target=StraightRain(int)
 comment1.text=\r\n\ Constructor\ principal\ de\ la\ clase\ StraightRain\r\n\ @param\ x\ posicion\ horizontal\ del\ inicio\ de\ la\ lluvia.\r\n
-numComments=2
+comment2.params=tr\ height\ width
+comment2.target=void\ calculatePath(java.util.ArrayList,\ int,\ int)
+numComments=3
