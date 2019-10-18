@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=CrazyRain
+comment0.text=\r\n\ Calse\ Rain\ tipo\ Crazy.\ Tipo\ especial\ de\ lluvia\ que\ cambia\ su\ posicion\ inicial\ cada\ vez\ que\ es\ invisible.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=x\ tr\ h\ w
+comment1.target=CrazyRain(int,\ java.util.ArrayList,\ int,\ int)
+comment1.text=\r\n\ Constructor\ principal\ de\ la\ clase\ Rebel\ Rain\r\n\ @param\ x\ posicion\ horizontal\ del\ inicio\ de\ la\ lluvia.\r\n
+comment2.params=
+comment2.target=void\ makeInvisible()
+numComments=3

@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=GlassTrap
+comment0.text=\r\n\ Clase\ Trap\ tipo\ Glass.\ Este\ tipo\ especial\ de\ trampa\ es\ transparente\ al\ usuario\ (siempre\ es\ invisible)\ y\ se\ "rompe"\r\n\ cuando\ le\ hacen\ un\ agujero.\r\n\r\n\ @author\ Eduard\ Arias,\ Juan\ Diaz\r\n\ @version\ 1.0(14-10-2019)\r\n
+comment1.params=lowerEnd\ higherEnd
+comment1.target=GlassTrap(int[],\ int[])
+comment2.params=
+comment2.target=void\ makeVisible()
+comment3.params=x
+comment3.target=void\ makePuncture(int)
+numComments=4

@@ -107,6 +107,47 @@ public class Valley implements Showable{
     }
     
     /**
+     * Coloca un tipo especial de trampa en el simulador.Si las posiciones requeridas
+     * se salen de las dimensiones del simulador, no hace nada.
+     * El tipo puede ser: "flexible", "hard", "radical".
+     * @param type tipo de trampa.  Si el tipo no coincide con
+     * los anteriores, se crea una trampa normal.
+     * @param lowerEnd array con las posiciones iniciales.
+     * @param higherEnd array con las posiciones finales.
+     */
+    public void addTrap(String type, int[] lowerEnd, int[] higherEnd){
+        addTrap(lowerEnd, higherEnd);
+        for (int i=0; i<=1; i++){ lowerEnd[i]++; higherEnd[i]++;}
+        if (ok()){
+            traps.get(traps.size()-1).makeInvisible();
+            if (type.equals("hard")) traps.set(traps.size()-1, new HardTrap(lowerEnd, higherEnd));
+            else if(type.equals("flexible")) traps.set(traps.size()-1, new FlexibleTrap(lowerEnd, higherEnd));
+            else if(type.equals("radical")) traps.set(traps.size()-1, new RadicalTrap(lowerEnd, higherEnd, traps));
+            else if(type.equals("glass")) traps.set(traps.size()-1, new GlassTrap(lowerEnd, higherEnd));
+        }else if(type.equals("flexible")){
+            int times = 20;
+            int[] endCoords, startCoords;
+            while (!ok() && times>10){
+                endCoords = FlexibleTrap.getFlexiblePoint(this.height, this.width);
+                addTrap(lowerEnd, endCoords);
+                times--;
+                if (ok()) higherEnd = endCoords;
+            }
+            while (!ok() && times>10){
+                startCoords = FlexibleTrap.getFlexiblePoint(this.height, this.width);
+                addTrap(startCoords, higherEnd);
+                times--;
+                if (ok()) lowerEnd = startCoords;
+            }
+            if (ok()){
+                traps.get(traps.size()-1).makeInvisible();
+                traps.set(traps.size()-1, new FlexibleTrap(lowerEnd, higherEnd));
+            }
+        }
+        if (ok() && isVisible) traps.get(traps.size()-1).makeVisible();
+    }
+    
+    /**
      * Remueve una lona del simulador. Funciona por orden de llegada.
      * @param position número de la lona a eliminar. Debe ser un entero mayor a 0.
      */
@@ -115,10 +156,11 @@ public class Valley implements Showable{
         position--;
         if (position >= 0 && position < traps.size()){
             prevState();
-            traps.get(position).makeInvisible();
-            traps.remove(position);
-            lastActionOK = true;
-            for (Rain r: rains) r.calculatePath(traps, height, width);
+            if (traps.get(position).delete()){
+                traps.remove(position);
+                lastActionOK = true;
+                for (Rain r: rains) r.calculatePath(traps, height, width);
+            }
         }
     }
     
@@ -168,6 +210,28 @@ public class Valley implements Showable{
         if (1<=x && x<=width){
             prevState();
             Rain r = new Rain(x);
+            rains.add(r);
+            r.calculatePath(traps, width, height);
+            if (isVisible) r.makeVisible();
+            lastActionOK = true;
+        }
+    }
+    
+    /**
+     * Crea un tipo especial de lluvia. Los tipos disponibles son: "acid", "straight" y "rebel".
+     * Por defecto, se crea una lluvia normal.
+     * @param type tipo especial requerido de lluvia.
+     * @param x posicion horizontal del inicio de la lluvia.
+     */
+    public void startRain(String type, int x){
+        lastActionOK = false;
+        if (1<=x && x<=width){
+            prevState();
+            Rain r;
+            if (type.equals("acid")) r = new AcidRain(x);
+            else if (type.equals("straight")) r = new StraightRain(x);
+            else if (type.equals("crazy")) r = new CrazyRain(x, traps, height, width);
+            else r = new Rain(x);
             rains.add(r);
             r.calculatePath(traps, width, height);
             if (isVisible) r.makeVisible();
