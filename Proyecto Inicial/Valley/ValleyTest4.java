@@ -51,7 +51,12 @@ public class ValleyTest4{
     
     @Test
     public void shouldManageRadicalTraps(){
-        
+        v.addTrap("radical", new int[]{10,10}, new int[]{40, 40});
+        assertTrue(v.ok());
+        assertEquals(v.traps(), new int[][][]{{{10,10}, {40,40}, {-1}}});
+        v.makePuncture(1, 20);
+        assertNotNull(v.traps());
+        assertEquals(v.traps(), new int[][][]{});
     }
     
     @Test
@@ -78,6 +83,8 @@ public class ValleyTest4{
         assertEquals(acidProgress, new int[][][]{{{50,1}, {50,401}}});
         assertEquals(v.traps(), new int[][][]{{{10,10}, {100,100}, {42}}});
         v.addTrap(new int[]{10,100}, new int[]{100,190});
+        assertEquals(acidProgress, new int[][][]{{{50,1}, {50,401}}});
+        assertEquals(v.traps(), new int[][][]{{{10,10}, {100,100}, {42}}, {{10,100}, {100, 190}, {42}}});
         v.addTrap(new int[]{10,150}, new int[]{100,240});
         assertEquals(acidProgress, new int[][][]{{{50,1}, {50,401}}});
         assertEquals(v.traps(), new int[][][]{{{10,10}, {100,100}, {42}}, {{10,100}, {100,190}, {42}}, {{10, 150}, {100, 240}, {42}}});

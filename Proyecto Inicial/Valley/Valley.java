@@ -117,21 +117,34 @@ public class Valley implements Showable{
      */
     public void addTrap(String type, int[] lowerEnd, int[] higherEnd){
         addTrap(lowerEnd, higherEnd);
-        for (int i=0; i<=1; i++){ // se hace para corregir las posiciones -> ver el constructor de Trap
-            lowerEnd[i]++; 
-            higherEnd[i]++;
-        }
+        for (int i=0; i<=1; i++){ lowerEnd[i]++; higherEnd[i]++;}
         if (ok()){
-            if (type.equals("hard")){
-                traps.set(traps.size()-1, new HardTrap(lowerEnd, higherEnd));
-            }else if(type.equals("flexible")){
+            traps.get(traps.size()-1).makeInvisible();
+            if (type.equals("hard")) traps.set(traps.size()-1, new HardTrap(lowerEnd, higherEnd));
+            else if(type.equals("flexible")) traps.set(traps.size()-1, new FlexibleTrap(lowerEnd, higherEnd));
+            else if(type.equals("radical")) traps.set(traps.size()-1, new RadicalTrap(lowerEnd, higherEnd, traps));
+            else if(type.equals("glass")) traps.set(traps.size()-1, new GlassTrap(lowerEnd, higherEnd));
+        }else if(type.equals("flexible")){
+            int times = 20;
+            int[] endCoords, startCoords;
+            while (!ok() && times>10){
+                endCoords = FlexibleTrap.getFlexiblePoint(this.height, this.width);
+                addTrap(lowerEnd, endCoords);
+                times--;
+                if (ok()) higherEnd = endCoords;
+            }
+            while (!ok() && times>10){
+                startCoords = FlexibleTrap.getFlexiblePoint(this.height, this.width);
+                addTrap(startCoords, higherEnd);
+                times--;
+                if (ok()) lowerEnd = startCoords;
+            }
+            if (ok()){
+                traps.get(traps.size()-1).makeInvisible();
                 traps.set(traps.size()-1, new FlexibleTrap(lowerEnd, higherEnd));
-            }else if(type.equals("radical")){
-                traps.set(traps.size()-1, new RadicalTrap(lowerEnd, higherEnd));
-            }else if(type.equals("glass")){
-                traps.set(traps.size()-1, new GlassTrap(lowerEnd, higherEnd));
             }
         }
+        if (ok() && isVisible) traps.get(traps.size()-1).makeVisible();
     }
     
     /**

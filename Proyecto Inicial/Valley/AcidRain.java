@@ -29,6 +29,7 @@ public class AcidRain extends Rain{
             for (Trap t: tr){
                 if (t.intersectsLine(x, y, x, y+4)){
                     trapLoc = t.getLocation()[0];
+                    t.patchPuncture((int)trapLoc.distance(x,y));
                     t.makePuncture((int)trapLoc.distance(x,y));
                     y+=4;
                 }

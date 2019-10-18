@@ -1,8 +1,11 @@
 #BlueJ class context
 comment0.target=FlexibleTrap
 comment0.text=\r\n\ Clase\ Trap\ tipo\ Flexible.\ Solo\ permite\ un\ agujero\ a\ la\ vez\ en\ su\ superficie\ (se\ "autoparchea").\r\n\r\n\ @author\ Eduard\ Arias\r\n\ @version\ 1.0\ (08-10-2019)\r\n
-comment1.params=lowerEnd\ higherEnd
-comment1.target=FlexibleTrap(int[],\ int[])
-comment2.params=x
-comment2.target=void\ makePuncture(int)
-numComments=3
+comment1.params=simHeight\ simWidth
+comment1.target=int[]\ getFlexiblePoint(int,\ int)
+comment1.text=\r\n\ Devuelve\ un\ punto\ al\ azar\ dentro\ de\ las\ fronteras\ del\ simulador.\r\n\ @param\ simHeight\ altura\ del\ simulador.\r\n\ @param\ simWidth\ largo\ del\ simulador.\r\n\ @return\ array\ con\ las\ coordenadas.\r\n
+comment2.params=lowerEnd\ higherEnd
+comment2.target=FlexibleTrap(int[],\ int[])
+comment3.params=x
+comment3.target=void\ makePuncture(int)
+numComments=4

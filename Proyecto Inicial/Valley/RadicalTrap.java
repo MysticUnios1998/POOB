@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Clase Trap tipo Radical. Este tipo especial de trampa desaparece si es agujereada.
@@ -7,12 +8,16 @@
  */
 public class RadicalTrap extends Trap{
     
-    public RadicalTrap(int[] lowerEnd, int[] higherEnd){
+    private final ArrayList<Trap> tr;
+    
+    public RadicalTrap(int[] lowerEnd, int[] higherEnd, ArrayList<Trap> tr){
         super(lowerEnd, higherEnd);
+        this.tr = tr;
     }
     
     @Override
     public void makePuncture(int x){
-        makeInvisible(); // todavia no funciona eliminando la trampa
+        makeInvisible();
+        tr.remove(this);
     }
 }

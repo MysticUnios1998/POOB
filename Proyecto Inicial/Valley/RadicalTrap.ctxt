@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=RadicalTrap
 comment0.text=\r\n\ Clase\ Trap\ tipo\ Radical.\ Este\ tipo\ especial\ de\ trampa\ desaparece\ si\ es\ agujereada.\r\n\r\n\ @author\ Eduard\ Arias,\ Juan\ Diaz\r\n\ @version\ 1.0\ (08-10-2019)\r\n
-comment1.params=lowerEnd\ higherEnd
-comment1.target=RadicalTrap(int[],\ int[])
+comment1.params=lowerEnd\ higherEnd\ tr
+comment1.target=RadicalTrap(int[],\ int[],\ java.util.ArrayList)
 comment2.params=x
 comment2.target=void\ makePuncture(int)
 numComments=3
