@@ -1,0 +1,2 @@
+Compilar y correr
+javac -d bin -sourcepath src src\presentacion\ReplicateGUI.java && java -classpath bin presentacion.ReplicateGUI
