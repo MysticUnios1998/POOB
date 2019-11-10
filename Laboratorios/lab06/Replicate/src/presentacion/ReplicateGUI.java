@@ -8,31 +8,38 @@ import java.util.*;
 import java.io.*;
 
 import aplicacion.Replicate;
+import aplicacion.ReplicateException;
 
 public class ReplicateGUI extends JFrame implements ActionListener{
 	//Ventana
 	private static ReplicateGUI gui;
+	
+	//Logica de Aplicacion
+	private Replicate rep;
+	private JButton replicar;
+	private JButton llenar; 
+	private JButton cambiarTam;
 
 	//Define los elementos que aparecerán en el menú de la ventana
-	private MenuBar menu = new MenuBar();
-	private Menu juego = new Menu("Menu");
-	private MenuItem guardar = new MenuItem("Guardar");
-	private MenuItem guardarComo = new MenuItem("Guardar como...");
-	private MenuItem nuevo = new MenuItem("Nuevo");
-	private MenuItem cargar = new MenuItem("Abrir");
-	private MenuItem salir = new MenuItem("Salir");
+	private MenuBar menu;
+	private Menu juego;
+	private MenuItem guardar;
+	private MenuItem guardarComo;
+	private MenuItem nuevo;
+	private MenuItem cargar;
+	private MenuItem salir;
 	
 	//Administrador de archivos
 	private JFileChooser fc = new JFileChooser();
 	
 	//Elementos del tablero	
-	private JButton[][] tablero = new JButton[9][9];
-	private JLabel titulo = new JLabel();
-	private JPanel tituloLayout = new JPanel(new FlowLayout());
-	private JPanel centroLayout = new JPanel(new GridLayout(10,10));
-	private JPanel botones = new JPanel(new FlowLayout());
-	private JPanel espacio = new JPanel(new FlowLayout());
-	private JPanel espacios = new JPanel(new BorderLayout());
+	private JButton[][] tablero;
+	private JLabel titulo;
+	private JPanel tituloLayout;
+	private JPanel centroLayout;
+	private JPanel botones;
+	private JPanel espacio;
+	private JPanel espacios;
 
 	//Elementos para el cambio de color
   	private JButton cambioColor = new JButton("Cambiar colores del tablero");
@@ -60,21 +67,43 @@ public class ReplicateGUI extends JFrame implements ActionListener{
       	//Centra la ventana      	
 		this.setLocationRelativeTo(null);
 		setResizable(false);
-		//Prepara los elementos visibles
-		setLayout(new BorderLayout());
-    	add(tituloLayout,BorderLayout.NORTH);
-    	add(centroLayout,BorderLayout.CENTER);
-    	add(botones,BorderLayout.SOUTH);
-    	add(cambioColor,BorderLayout.SOUTH);
-    	add(espacio,BorderLayout.WEST);
-    	add(espacios,BorderLayout.EAST);		
 		//Prepara otros elementos
+    	prepareReplicate();
 		prepareElementosMenu();
 		prepareElementosTablero();
 	}
+	
+	private void prepareReplicate() {
+		JTextField alt = new JTextField();
+		JTextField anch = new JTextField();
+		Object[] message = {
+		    "Altura:", alt,
+		    "Anchura:", anch
+		};
+		JOptionPane.showConfirmDialog(null, message, "Creacion de Tablero", JOptionPane.DEFAULT_OPTION);
+		try{
+			rep = new Replicate(
+				Integer.parseInt(alt.getText()),
+				Integer.parseInt(anch.getText())
+				);
+			replicar = new JButton("Replicar");
+			llenar = new JButton("Llenar");
+			cambiarTam = new JButton("Cambiar Tama�o");
+		}catch(ReplicateException e) {
+			JOptionPane.showConfirmDialog(null, e.getMessage(), "Ingreso Fallido", JOptionPane.DEFAULT_OPTION);
+			System.exit(1);
+		}
+	}
 
-	public void prepareElementosMenu(){
+	private void prepareElementosMenu(){
        	//Añade los elementos al menú desplegable
+		menu = new MenuBar();
+		juego = new Menu("Menu");
+		guardar = new MenuItem("Guardar");
+		guardarComo = new MenuItem("Guardar como...");
+		nuevo = new MenuItem("Nuevo");
+		cargar = new MenuItem("Abrir");
+		salir = new MenuItem("Salir");
     	this.setMenuBar(menu);
     	this.menu.add(juego);     	
     	this.juego.add(nuevo);
@@ -84,38 +113,44 @@ public class ReplicateGUI extends JFrame implements ActionListener{
 		this.juego.add(salir);		
     }
 
-	public void prepareElementosTablero(){
+	private void prepareElementosTablero(){
+		int a = rep.consulte().length;
+		int b = rep.consulte()[0].length;
+		tablero = new JButton[a][b];
+		titulo = new JLabel();
+		tituloLayout = new JPanel(new FlowLayout());
+		centroLayout = new JPanel(new GridLayout(a+1,b+1));
+		botones = new JPanel(new FlowLayout());
+		espacio = new JPanel(new FlowLayout());
+		espacios = new JPanel(new BorderLayout());
 		titulo.setText("Replicate");
     	titulo.setFont(new Font("Bradley Hand ITC",Font.BOLD,32));
     	tituloLayout.add(titulo);
+    	setLayout(new BorderLayout());
+    	add(tituloLayout,BorderLayout.NORTH);
+    	add(centroLayout,BorderLayout.CENTER);
+    	botones.add(cambioColor);
+    	botones.add(replicar);
+    	botones.add(llenar);
+    	botones.add(cambiarTam);
+    	add(botones,BorderLayout.SOUTH);
+    	add(espacio,BorderLayout.WEST);
+    	add(espacios,BorderLayout.EAST);
     	for (int i = 0; i < tablero.length; i++){
       		for (int j = 0; j < tablero[0].length; j++) {
         		tablero[i][j] = new JButton();
-        		centroLayout.add(tablero[i][j]);
-			tablero[i][j].setEnabled(false);        
+        		centroLayout.add(tablero[i][j]);     
       		}
     	}
-    	demo();		
+    	refresque();		
 	}
+	
 	private void refresque(){
-		for (int i = 0; i < tablero.length; i++){
-      		for (int j = 0; j < tablero[0].length; j++) {        
-        		demo();        
-        		tablero[i][j].setVisible(false);
-        		tablero[i][j].setVisible(true);
-      		}
-   		}
-	}
-
-	private void demo(){
+		boolean[][] replicateState = rep.consulte();
 		for (int i = 0; i < tablero.length; i++){
 			for (int j = 0; j < tablero[0].length; j++) {
-		        if (i==4 && j==4)
-		          tablero[i][j].setBackground(color1);
-		        else{
-		          tablero[i][j].setBackground(color2);
-		        }        
-		    tablero[i][j].setEnabled(false);
+				tablero[i][j].setBackground((replicateState[i][j]) ? color1:color2);
+				tablero[i][j].setEnabled(false);
 			}
 		}
 	}
@@ -126,10 +161,13 @@ public class ReplicateGUI extends JFrame implements ActionListener{
 		this.addWindowListener(new WindowAdapter(){public void windowClosing(WindowEvent evt){ exitAccion();}});
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		salir.addActionListener(this);
+		nuevo.addActionListener(this);
 		guardar.addActionListener(this);
 		cargar.addActionListener(this);
 		cambioColor.addActionListener(this);
-		
+		replicar.addActionListener(this);
+		llenar.addActionListener(this);
+		cambiarTam.addActionListener(this);
 	}
 
 	private void exitAccion(){
@@ -152,17 +190,76 @@ public class ReplicateGUI extends JFrame implements ActionListener{
 	}
 
 	private void cambiarColorAccion(){
-		color2 = panelColor.showDialog(null, "Escoger un color para las fichas", color2);
+		color2 = panelColor.showDialog(null, "Escoger un color para el tablero", color2);
     	if(color2==null) color2=(Color.blue);
     	refresque();	
  	}
+	
+	private void replicarAccion() {
+		if (rep.replicar()) refresque();
+	}
+	
+	private void llenarAccion() {
+		JTextField coorX = new JTextField();
+		JTextField coorY = new JTextField();
+		Object[] message = {
+		    "Coordenada X:", coorX,
+		    "Coordenada Y:", coorY
+		};
+		JOptionPane.showConfirmDialog(null, message, "Ingresar coordenadas", JOptionPane.DEFAULT_OPTION);
+		try {
+			if (rep.llenar(Integer.parseInt(coorX.getText()), Integer.parseInt(coorY.getText()))) {
+				tablero[Integer.parseInt(coorX.getText())][Integer.parseInt(coorY.getText())].setBackground(color1);
+			}
+		}catch (ReplicateException e) {
+			JOptionPane.showConfirmDialog(null, e.getMessage(), "Error en el Juego :c", JOptionPane.DEFAULT_OPTION);
+		}catch (NumberFormatException ne) {
+			JOptionPane.showConfirmDialog(null, ne.getMessage(), "Error en el Juego :c", JOptionPane.DEFAULT_OPTION);
+		}
+	}
+	
+	private void nuevoAccion() {
+		boolean[][] b = rep.consulte();
+		int height = b.length;
+		int width = b[0].length;
+		try {
+			rep = new Replicate(height, width);
+			refresque();
+		}catch (ReplicateException e) {
+			JOptionPane.showConfirmDialog(null, e.getMessage(), "Error en el Juego :c", JOptionPane.DEFAULT_OPTION);
+		}
+	} 
+	
+	private void cambiarTamAccion() {
+		JTextField alt = new JTextField();
+		JTextField anch = new JTextField();
+		Object[] message = {
+		    "Nueva Altura:", alt,
+		    "Nueva Anchura:", anch
+		};
+		JOptionPane.showConfirmDialog(null, message, "Creacion de Tablero", JOptionPane.DEFAULT_OPTION);
+		try {
+			Replicate auxRep = new Replicate(
+					Integer.parseInt(alt.getText()),
+					Integer.parseInt(anch.getText())
+					);
+			//rep = auxRep;
+			JOptionPane.showConfirmDialog(this, "Funcion en desarrollo :)", "Error en el Juego :c", JOptionPane.DEFAULT_OPTION);
+		}catch (ReplicateException e) {
+			JOptionPane.showConfirmDialog(null, e.getMessage(), "Error en el Juego :c", JOptionPane.DEFAULT_OPTION);
+		}
+	}
 
 
 	public void actionPerformed(ActionEvent evento){
 		if (evento.getSource()==salir){this.exitAccion();}
-		if (evento.getSource()==cargar){this.abrirAccion();}
-		if (evento.getSource()==guardar){this.guardarAccion();}
-		if (evento.getSource()==cambioColor){this.cambiarColorAccion();};
+		else if (evento.getSource()==nuevo){this.nuevoAccion();}
+		else if (evento.getSource()==cargar){this.abrirAccion();}
+		else if (evento.getSource()==guardar){this.guardarAccion();}
+		else if (evento.getSource()==cambioColor){this.cambiarColorAccion();}
+		else if (evento.getSource()==replicar) {this.replicarAccion();}
+		else if (evento.getSource()==llenar) {this.llenarAccion();}		
+		else if (evento.getSource()==cambiarTam) {this.cambiarTamAccion();}
 	}
 	
 }
