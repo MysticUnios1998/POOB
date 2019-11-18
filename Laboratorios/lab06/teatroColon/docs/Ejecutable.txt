@@ -1,0 +1,8 @@
+Sólo compilar:
+javac -cp src src\presentacion\TeatroColonGUI.java
+
+Compilar y ejecutar:
+javac -d bin -sourcepath src src\presentacion\TeatroColonGUI.java && java -classpath bin presentacion.TeatroColonGUI
+
+Documentación(desde src):
+javadoc  -d ../docs  *.java
