@@ -39,12 +39,11 @@ public class Ubicacion {
 
 	/**
 	 * Constructor principal de la clase Ubicacion.
-	 * @param xPos posicion en el eje horizontal.
-	 * @param yPos posicion en el eje vertical.
+	 * @param posArray array con las coordenadas de la ubicacion.
 	 */
-	public Ubicacion(int xPos, int yPos) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+	public Ubicacion(int[] posArray) {
+		this.cambiarCoorX(posArray[0]);
+		this.cambiarCoorY(posArray[1]);
 	}
 	
 	

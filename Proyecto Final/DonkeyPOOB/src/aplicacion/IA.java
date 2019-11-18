@@ -1,6 +1,6 @@
 package aplicacion;
 
-public class IA extends Jugador {
+public abstract class IA extends Jugador {
 
 	/**
 	 * Constructor principal de la clase IA

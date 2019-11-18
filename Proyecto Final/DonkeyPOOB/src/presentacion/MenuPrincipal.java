@@ -70,7 +70,7 @@ public class MenuPrincipal extends JFrame{
 	private void prepareAccionNuevo() {
 		nuevoJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.nuevoJuego();
+				mainFrame.nuevoJuego();
 			}
 		});
 	}

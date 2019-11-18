@@ -1,16 +1,8 @@
 package aplicacion;
 
-public class Jugador extends Personaje {
-	
-	private int puntos;
-	private int vidas;
+public class Princesa extends Personaje {
 
-	/**
-	 * Constructor principal de la clase Jugador
-	 * @param posX posicion del jugador en el eje horizontal.
-	 * @param posY posicion del jugador en el eje vertical.
-	 */
-	public Jugador(int posX, int posY) {
+	public Princesa(int posX, int posY) {
 		super(posX, posY);
 		// TODO Auto-generated constructor stub
 	}
@@ -30,7 +22,7 @@ public class Jugador extends Personaje {
 	@Override
 	public void destruir() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
