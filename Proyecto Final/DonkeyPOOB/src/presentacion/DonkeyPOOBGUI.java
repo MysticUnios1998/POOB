@@ -1,20 +1,33 @@
 package presentacion;
 
+import javax.swing.JOptionPane;
+
 import aplicacion.DonkeyPOOB;
 import aplicacion.DonkeyPOOBException;
-import java.util.*;
-import java.awt.*;
-import javax.swing.*;
 
-public class DonkeyPOOBGUI extends JFrame{
+public class DonkeyPOOBGUI{
 	
 	private int height;
 	private int width;
-	private JDialog nivel;
 	
 	// Logica del juego
 	private DonkeyPOOB logicaJuego;
 	
+	// Interfaz gráfica del juego
+	private MenuPrincipal menuP;
+	
+	private DonkeyPOOBGUI() {
+		menuP = new MenuPrincipal(this);
+		try {
+			logicaJuego = new DonkeyPOOB(500, 1000);
+		}catch (DonkeyPOOBException dke) {
+			JOptionPane.showConfirmDialog(null, dke.getStackTrace(), null, JOptionPane.OK_OPTION);
+		}
+	}
+	
+	public static void main(String[] args) {
+		new DonkeyPOOBGUI();
+	}
 	
 	
 }
