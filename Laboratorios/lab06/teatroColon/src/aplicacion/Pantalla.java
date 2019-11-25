@@ -3,12 +3,9 @@ import java.awt.Color;
 
 public class Pantalla extends Elemento implements EnEscena{
     
-    private Teatro teatro;
-    
     public Pantalla(Teatro teatro,String name,int posicionx, int posiciony){
         super(name,posicionx,posiciony);
-        this.teatro=teatro;
-        color=Color.BLACK;        
+        color="black";        
     }
     
     public void actue(){

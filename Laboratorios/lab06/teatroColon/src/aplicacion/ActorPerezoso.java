@@ -1,8 +1,10 @@
 package aplicacion;
 
 /**
- * Write a description of class ActorPerezoso here. *
+ * Clase especializada de Actor que no se mueve de su lugar al actuar.
  * 
+ * @author Eduard Arias
+ * @version 1.0
  */
 public class ActorPerezoso extends Actor{  
 

@@ -1,11 +1,20 @@
 package aplicacion;
-import java.awt.Color;
+import java.io.Serializable;
 
-public class Elemento {
+
+/**
+ * Clase Elemento que reune las cualidades de cualquier elemento en la pantalla.
+ * 
+ * @author Eduard Arias
+ * @version 2.0
+ *
+ */
+public class Elemento implements Serializable{
     
     private String nombre;      
-    protected Color color;
-    private int posicionx,posiciony;
+    protected String color;
+    private int posicionx;
+    private int posiciony;
     
     /**Crea un nuevo elemento en la posicion (posicionx, posiciony)
     @param nombre nombre del elemento
@@ -16,39 +25,59 @@ public class Elemento {
         this.posicionx=posicionx;
         this.posiciony=posiciony;
         this.nombre=nombre;        
-        color=Color.BLACK;
+        color="black";
     }
 
-    /**Retorna el color del elemento*/
-    public Color getColor(){
+    /**
+     * Retorna el color del elemento
+     * @return String con el color del elemento
+     */
+    public String getColor(){
         return color;
     }
     
-    /**Cambia el color del elemento. Puede ser rojo, azul, naranja, amarillo, verde*/
+    /**
+     * Cambia el color del elemento. Puede ser rojo, azul, naranja, amarillo, verde. Por defecto es "black"
+     * @param color nuevo color del objeto
+     */
     public void setColor(String color){
-        if(color.equals("rojo")) this.color=Color.RED;
-        else if(color.equals("azul")) this.color=Color.BLUE; 
-        else if(color.equals("naranja")) this.color=Color.ORANGE; 
-        else if(color.equals("amarillo")) this.color=Color.YELLOW; 
-        else if(color.equals("verde")) this.color=Color.GREEN; 
-        else this.color=Color.BLACK;
+    	if(color.equals("rojo")) this.color=color;
+        else if(color.equals("azul")) this.color=color;
+        else if(color.equals("naranja")) this.color=color; 
+        else if(color.equals("amarillo")) this.color=color; 
+        else if(color.equals("verde")) this.color=color; 
+        else this.color="black";
     }
     
-     /**Retorna la coordenada x de la posicion*/
+     /**
+      * Retorna la coordenada x de la posicion
+      * @return posicion en el eje horizontal
+      */
     public final int getPosicionX(){
         return posicionx;
     }
 
-    /**Retorna la coordenada y de la posicion*/
+    /**
+     * Retorna la coordenada y de la posicion
+     * @return posicion en el eje vertical
+     */
     public final int getPosicionY(){
         return posiciony;
     }
     
     /**
      * Retorna el nombre del elemento
-     * @return Cadena con la informaciÃ³n requerida
+     * @return Cadena con la información requerida
      */
     public String toString(){
         return nombre;
-    }   
+    }
+    
+    /**
+     * Consulta el nombre del elemento
+     * @return String con la información requerida
+     */
+    public String getName() {
+    	return toString();
+    }
 }

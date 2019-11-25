@@ -1,7 +1,13 @@
 package aplicacion;
-import java.awt.Color;
+import java.io.Serializable;
 
-public class Persona {
+
+/**
+ * La clase Persona permite el desarrollo de elementos cuya abstraccion sea humanoide dentro del canvas. 
+ * @author MasterX
+ *
+ */
+public class Persona implements Serializable{
 
     //Posiciones
     public final static int ARRIBA=0;
@@ -16,7 +22,7 @@ public class Persona {
     private int brazoDer;
     private int piernaIzq;
     private int piernaDer;
-    protected Color color;
+    protected String color;
 
     private int posicionx,posiciony;
 
@@ -33,29 +39,44 @@ public class Persona {
         brazoDer=ABAJO;
         piernaIzq=ABAJO;
         piernaDer=ABAJO;
-        color=Color.BLACK;
+        color="black";
     }
 
-    /**Retorna el color del vestido*/
-    public Color getColor(){
+    /**
+     * Consulta el color de la vestimenta de la Persona
+     * @return String con el color
+     */
+    public String getColor(){
         return color;
     }
     
-    /**Cambia el color del vestido. Puede ser rojo, azul, naranja, amarillo, verde*/
+    /**
+     * Consulta el nombre de la Persona
+     * @return String con el nombre de este objeto
+     */
+    public String getName() {
+    	return nombre;
+    }
+    
+    /**
+     * Cambia el color del vestido. Puede ser rojo, azul, naranja, amarillo, verde. Por defecto es "black"
+     * @param color nuevo color de la Persona.
+     */
     public void setColor(String color){
-        if(color.equals("rojo")) this.color=Color.RED;
-        else if(color.equals("azul")) this.color=Color.BLUE; 
-        else if(color.equals("naranja")) this.color=Color.ORANGE; 
-        else if(color.equals("amarillo")) this.color=Color.YELLOW; 
-        else if(color.equals("verde")) this.color=Color.GREEN; 
-        else this.color=Color.BLACK;
+        if(color.equals("rojo")) this.color=color;
+        else if(color.equals("azul")) this.color=color;
+        else if(color.equals("naranja")) this.color=color; 
+        else if(color.equals("amarillo")) this.color=color; 
+        else if(color.equals("verde")) this.color=color; 
+        else this.color="black";
     }
 
 
-    /**Mueve un brazo segun las indicaciones
-    @param c el brazo a mover: I(zquierdo) o D(erecho)
-    @param d el modo de moverlo: S(ubir) o B(ajar)
-    */
+    /**
+     * Mueve un brazo segun las indicaciones
+     * @param c el brazo a mover: I(zquierdo) o D(erecho)
+     * @param d el modo de moverlo: S(ubir) o B(ajar)
+     */
     public final void muevaBrazo(char c,char d){
         if ((c=='I') && (d=='S') && ((brazoIzq-1)>=0)) {
              brazoIzq-=1;
@@ -68,10 +89,11 @@ public class Persona {
         }
     }
 
-    /**Mueve una pierna segun las indicaciones
-    @param c la pierna a mover: I(zquierdo) o D(erecho)
-    @param d el modo de moverlo: S(ubir), B(ajar), P(iso)
-    */
+    /**
+     * Mueve una pierna segun las indicaciones
+     * @param c la pierna a mover: I(zquierdo) o D(erecho)
+     * @param d el modo de moverlo: S(ubir), B(ajar), P(iso)
+     */
     public final void muevaPierna(char c,char d){
         if ((c=='I') && (d=='S') && ((piernaIzq-1)>=0)){
              piernaIzq-=1;
@@ -88,25 +110,28 @@ public class Persona {
         }
     }
 
-    /**Retorna la posicion de un brazo
-    @param c el brazo de interes: I(zquierdo) o D(erecho)
-    @return la posicion del brazo indicada
-    */
+    /**
+     * Retorna la posicion de un brazo
+     * @param c el brazo de interes: I(zquierdo) o D(erecho)
+     * @return la posicion del brazo indicada
+     */
     public final int getPosicionBrazo(char c){
         return (c=='I'? brazoIzq: brazoDer);
     }
 
-    /**Retorna la posicion de una pierna
-    @param c la pierna de interes: I(zquierda) o D(erecha)
-    @return la posicion de la pierna indicada
-    */
+    /**
+     * Retorna la posicion de una pierna
+     * @param c la pierna de interes: I(zquierda) o D(erecha)
+     * @return la posicion de la pierna indicada
+     */
     public final int getPosicionPierna(char c){
         return (c=='I'? piernaIzq: piernaDer);
     }
     
-    /**Se mueve en la direccion indicada
-    @param c indica la direccion. N(orte), S(ur), E(ste), O(este)
-    */
+    /**
+     * Se mueve en la direccion indicada
+     * @param c indica la direccion. N(orte), S(ur), E(ste), O(este)
+     */
     public void muevase(char c){
         if (c=='E') {
             posicionx=getPosicionX()+PASO;
@@ -119,19 +144,25 @@ public class Persona {
         }
     }
 
-    /**Retorna la coordenada x de la posicion*/
+    /**
+     * Consulta la posicion en el eje horizontal de la Persona
+     * @return La coordenada x de la posicion
+     */
     public final int getPosicionX(){
         return posicionx;
     }
 
-    /**Retorna la coordenada y de la posicion*/
+    /**
+     * Consulta la posicion en el eje vertical de la Persona
+     * @return La coordenada y de la posicion
+     */
     public final int getPosicionY(){
         return posiciony;
     }
     
     /**
      * Retorna el nombre de la persona
-     * @return Cadena con la informaciÃ³n requerida
+     * @return Cadena con la información requerida
      */
     public String toString(){
         return nombre;

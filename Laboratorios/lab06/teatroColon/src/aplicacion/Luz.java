@@ -1,14 +1,10 @@
 package aplicacion;
-import java.awt.Color;
 
 public class Luz extends Elemento implements EnEscena{
     
-    private Teatro teatro;
-    
     public Luz(Teatro teatro,String name,int posicionx, int posiciony){
         super(name,posicionx,posiciony);
-        this.teatro=teatro;
-        color=Color.BLACK;        
+        color="black";        
     }
     
     public void actue(){
