@@ -20,22 +20,11 @@ public class DonkeyPOOBGUI{
 	
 	private DonkeyPOOBGUI() {
 		menuP = new MenuPrincipal(this);
-		try {
-			logicaJuego = new DonkeyPOOB(gameWidth, gameHeight);
-		}catch (DonkeyPOOBException dke) {
-			JOptionPane.showConfirmDialog(null, dke.getStackTrace(), null, JOptionPane.OK_OPTION);
-		}
-	}
-	
-	public boolean nuevoJuego() {
-		ajustesJuego = new Configuracion(this);
-		//logicaJuego.nuevoJuego();
-		return true;
+		logicaJuego = DonkeyPOOB.getDonkeyPOOB();
 	}
 	
 	public static void main(String[] args) {
 		new DonkeyPOOBGUI();
 	}
-	
 	
 }

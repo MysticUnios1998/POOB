@@ -1,14 +1,26 @@
 package aplicacion;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DonkeyPOOB {
 
-	private int alturaSim;
-	private int anchoSim;
+	public static final int MAX_ALTURA = 500;
+	public static final int MAX_ANCHO = 500;
 	
-	public DonkeyPOOB(int height, int width) throws DonkeyPOOBException{
-		if (height<=0 || width<=0) throw new DonkeyPOOBException(DonkeyPOOBException.ALTURA_ANCHO_INVALIDO);
-		alturaSim = height;
-		anchoSim = width;
+	private static DonkeyPOOB app;
+	
+	public static DonkeyPOOB getDonkeyPOOB() {
+		if (app == null) app = new DonkeyPOOB();
+		return app;
+	}
+	
+	private ArrayList<Nivel> niveles;
+	private HashMap<String, Personaje> personajes;
+	
+	private DonkeyPOOB(){
+		niveles = new ArrayList<Nivel>();
+		personajes = new HashMap<String, Personaje>();
 	}
 	
 }

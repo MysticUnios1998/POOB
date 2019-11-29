@@ -1,18 +1,13 @@
 package presentacion;
 
-import java.awt.Dialog;
-import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
-import java.awt.Window;
+import java.awt.Canvas;
+import java.awt.event.*;
 
-import javax.swing.JDialog;
-
-public class Nivel extends JDialog {
+public class Nivel extends Canvas{
 
 	private DonkeyPOOBGUI mainFrame;
 	
 	public Nivel(DonkeyPOOBGUI d) {
-		// TODO Auto-generated constructor stub
 		super();
 		mainFrame = d;
 	}

@@ -10,6 +10,7 @@ public class MenuPrincipal extends JFrame{
 	private DonkeyPOOBGUI mainFrame;
 	
 	private JPanel background;
+	private JButton titulo;
 	private JButton nuevoJuego;
 	private JButton cargarJuego;
 	private JButton ajustesJuego;
@@ -29,25 +30,62 @@ public class MenuPrincipal extends JFrame{
 	}
 	
 	private void prepareVentana() {
-		this.setSize(600,500);
 		this.setLayout(new BorderLayout());
 		this.add(background, BorderLayout.CENTER);
+		this.pack();
 	}
 	
-	private void prepareBackground() {
+	private void prepareBackground() {		
 		background = new JPanel();
+		background.setLayout(new BoxLayout(background, BoxLayout.Y_AXIS));
 		background.setBackground(Color.BLACK);
-		background.add(nuevoJuego);
+		background.add(titulo);
+		background.add(Box.createRigidArea(new Dimension(0,20)));
+		background.add(nuevoJuego); 
+		background.add(Box.createRigidArea(new Dimension(0,20)));
 		background.add(cargarJuego);
+		background.add(Box.createRigidArea(new Dimension(0,20)));
 		background.add(ajustesJuego);
+		background.add(Box.createRigidArea(new Dimension(0,20)));
 		background.add(salir);
 	}
 	
 	private void prepareBotones(){
-		nuevoJuego = new JButton("Nuevo Juego");
-		cargarJuego = new JButton("Cargar Juego");
-		ajustesJuego = new JButton("Configuracion");
-		salir = new JButton("Salir");
+		prepareBotonTitulo(); 
+		prepareBotonNuevoJuego(); 
+		prepareBotonCargarJuego(); 
+		prepareBotonAjustes(); 
+		prepareBotonSalir(); 
+	}
+	
+	private void prepareBotonTitulo() {
+		titulo = new JButton(new ImageIcon("images/main/titulo.PNG"));
+		titulo.setBorder(BorderFactory.createEmptyBorder());
+		titulo.setAlignmentX(CENTER_ALIGNMENT);
+	}
+	
+	private void prepareBotonNuevoJuego() {
+		nuevoJuego = new JButton(new ImageIcon("images/main/nuevoJuego.PNG"));
+		nuevoJuego.setBorder(BorderFactory.createEmptyBorder());
+		nuevoJuego.setAlignmentX(CENTER_ALIGNMENT);
+	}
+	
+	private void prepareBotonCargarJuego() {
+		cargarJuego = new JButton(new ImageIcon("images/main/cargarJuego.PNG"));
+		cargarJuego.setBorder(BorderFactory.createEmptyBorder());
+		cargarJuego.setAlignmentX(CENTER_ALIGNMENT);
+	}
+	
+	private void prepareBotonAjustes() {
+		ajustesJuego = new JButton(new ImageIcon("images/main/configJuego.PNG"));
+		ajustesJuego.setBorder(BorderFactory.createEmptyBorder());
+		ajustesJuego.setAlignmentX(CENTER_ALIGNMENT);
+	}
+	
+	private void prepareBotonSalir() {
+		salir = new JButton(new ImageIcon("images/main/salirJuego.PNG")); 
+		salir.setBorder(BorderFactory.createEmptyBorder());
+		salir.setAlignmentX(CENTER_ALIGNMENT);
 	}
 	
 	private void prepareAcciones() {
@@ -65,12 +103,21 @@ public class MenuPrincipal extends JFrame{
 	private void prepareAccionesBotones() {
 		prepareAccionNuevo();
 		prepareAccionSalir();
+		prepareAccionAjustes();
 	}
 	
 	private void prepareAccionNuevo() {
 		nuevoJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.nuevoJuego();
+				//mainFrame.nuevoJuego();
+			}
+		});
+	}
+
+	private void prepareAccionAjustes() {
+		ajustesJuego.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//mainFrame.abrirAjustes();
 			}
 		});
 	}
@@ -78,7 +125,7 @@ public class MenuPrincipal extends JFrame{
 	private void prepareAccionSalir() {
 		salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro?", null, JOptionPane.YES_NO_OPTION);
+				int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro?", "Salir del juego", JOptionPane.YES_NO_OPTION);
 				if (opcion == 0) System.exit(0);
 			}
 		});
