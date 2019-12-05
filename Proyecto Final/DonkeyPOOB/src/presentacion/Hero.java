@@ -34,8 +34,9 @@ public class Hero extends Sprite {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent e) {}
-				// TODO Auto-generated method stub
+			public void keyReleased(KeyEvent e) {
+				
+			}
 			
 		});
 	}

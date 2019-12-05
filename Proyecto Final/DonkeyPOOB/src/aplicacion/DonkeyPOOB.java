@@ -1,5 +1,6 @@
 package aplicacion;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -50,26 +51,15 @@ public class DonkeyPOOB {
 		return null;
 	}
 	
-	public int[] getMario(){
-		return personajes.get("Mario").getPos();
-	}
-	
 	private void crearPersonaje(String[] personaje) {
 		Jugador nuevoJugador = null;
 		int[] pos = posicionValidaInicio();
-		switch (personaje[1]) {
-			case "Normal":
-				nuevoJugador = new Jugador(pos[0], pos[1]);
-				break;
-			case "Mimo":
-				nuevoJugador = new Mimo(pos[0], pos[1]);
-				break;
-			case "Temeroso":
-				nuevoJugador = new Temeroso(pos[0], pos[1]);
-				break;
-			case "Protector":
-				nuevoJugador = new Protector(pos[0], pos[1]);
-				break;
+		try {
+			nuevoJugador = (Jugador)Class.forName(String.format("aplicacion.%s", personaje[1])).
+					getDeclaredConstructor(int.class, int.class).newInstance(pos[0], pos[1]);
+		}catch(ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException |
+				InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			nuevoJugador = new Jugador(pos[0], pos[1]);
 		}
 		personajes.put(personaje[0], nuevoJugador);
 	}
