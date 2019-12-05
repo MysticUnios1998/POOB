@@ -45,42 +45,13 @@ public class Nivel extends JDialog{
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			drawPlataformas(g);
-			drawEscaleras(g);
+			drawEstructuras(g);
 			drawPersonajes(g);
 		}
 		
-		private void drawPlataformas(Graphics gr) {
-			int[][][] platsToDraw = mainFrame.getPlataformaInfo();
-			Graphics2D g = (Graphics2D)gr;
-			g.setColor(Color.RED);
-			g.setStroke(new BasicStroke(20));
-			for (int[][] pl: platsToDraw) {
-				g.draw(new Line2D.Double(pl[0][0], pl[0][1], pl[1][0], pl[1][1]));
-			}
-		}
-		
-		private void drawEscaleras(Graphics gr) {
-			int[][][] stairsToDraw = mainFrame.getEscalerasInfo();
-			int largo;
-			Graphics2D g = (Graphics2D)gr;
-			g.setColor(Color.LIGHT_GRAY);
-			g.setStroke(new BasicStroke(10));
-			for (int[][] st: stairsToDraw) {
-				largo = Math.abs(st[0][1]-st[1][1]);
-				g.draw(new Line2D.Double(
-						st[0][0], st[0][1], st[1][0], st[1][1]));
-				g.draw(new Line2D.Double(
-						st[0][0]+20, st[0][1], st[1][0]+20, st[1][1]));
-				for (int i=0; i<largo; i+=20) {
-					g.drawLine(st[0][0], st[0][1]+i, st[0][0]+20, st[0][1]+i);
-				}
-				if (st[2][0] == 1) {
-					g.setColor(Color.BLACK);
-					g.fillRect(st[0][0]-5, st[0][1]+largo/2, 30, 40);	
-					g.setColor(Color.LIGHT_GRAY);
-				}
-			}
+		private void drawEstructuras(Graphics g) {
+			ArrayList<Estructura> toDraw = mainFrame.getEstructurasToDraw();
+			for (Estructura es: toDraw) es.draw(g);
 		}
 		
 		private void drawPersonajes(Graphics g) {

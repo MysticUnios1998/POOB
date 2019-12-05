@@ -16,11 +16,13 @@ public class DonkeyPOOBGUI{
 	private Configuracion ajustesJuego;
 	private Nivel juego;
 	private ArrayList<Sprite> sprites;
+	private ArrayList<Estructura> estructuras;
 	
 	private DonkeyPOOBGUI() {
 		menuP = new MenuPrincipal(this);
 		logicaJuego = DonkeyPOOB.getDonkeyPOOB();
 		sprites = new ArrayList<Sprite>();
+		estructuras = new ArrayList<Estructura>();
 	}
 	
 	public static void main(String[] args) {
@@ -50,6 +52,10 @@ public class DonkeyPOOBGUI{
 	
 	public ArrayList<Sprite> getSpritesToDraw(){
 		return sprites;
+	}
+	
+	public ArrayList<Estructura> getEstructurasToDraw(){
+		return estructuras;
 	}
 	
 }

@@ -12,7 +12,8 @@ public class Jugador extends Personaje {
 	 */
 	public Jugador(int posX, int posY) {
 		super(posX, posY);
-		// TODO Auto-generated constructor stub
+		puntos = 0;
+		vidas = 3;
 	}
 
 	@Override
