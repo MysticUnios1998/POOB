@@ -8,6 +8,10 @@ public abstract class Personaje implements Movable {
 		posicion = new Ubicacion(new int[] {posX, posY});
 	}
 	
+	public int[] getPos() {
+		return new int[] {posicion.getCoorX(), posicion.getCoorY()};
+	}
+	
 	public abstract void destruir();
 	
 }

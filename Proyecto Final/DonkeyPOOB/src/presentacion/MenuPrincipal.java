@@ -9,6 +9,8 @@ public class MenuPrincipal extends JFrame{
 	
 	private DonkeyPOOBGUI mainFrame;
 	
+	private Configuracion opcionesJuego;
+	
 	private JPanel background;
 	private JButton titulo;
 	private JButton nuevoJuego;
@@ -18,7 +20,7 @@ public class MenuPrincipal extends JFrame{
 
 	public MenuPrincipal(DonkeyPOOBGUI d) {
 		super("DonkeyPOOB");
-		mainFrame = d;
+		mainFrame = d; 
 		prepareElementos();
 		prepareAcciones();
 	}
@@ -109,7 +111,9 @@ public class MenuPrincipal extends JFrame{
 	private void prepareAccionNuevo() {
 		nuevoJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.nuevoJuego();
+				setVisible(false);
+				opcionesJuego = new Configuracion(mainFrame);
+				mainFrame.nuevoJuego();
 			}
 		});
 	}

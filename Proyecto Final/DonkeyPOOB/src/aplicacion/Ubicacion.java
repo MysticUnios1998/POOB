@@ -1,6 +1,6 @@
 package aplicacion;
 
-public class Ubicacion {
+public class Ubicacion implements Comparable{
 
 	private int xPos;
 	private int yPos;
@@ -45,7 +45,21 @@ public class Ubicacion {
 		this.cambiarCoorX(posArray[0]);
 		this.cambiarCoorY(posArray[1]);
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		return this.compareTo((Ubicacion)o);
+	}
 	
-	
+	public int compareTo(Ubicacion ub) {
+		int result = 0;
+		if (this.getCoorY() < ub.getCoorY()) result = -1;
+		else if (this.getCoorY() > ub.getCoorY()) result = 1;
+		else {
+			if (this.getCoorX() < ub.getCoorX()) result = -1;
+			else if (this.getCoorX() > ub.getCoorX()) result = 1;
+		}
+		return result;
+	}
 	
 }
