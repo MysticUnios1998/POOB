@@ -25,4 +25,10 @@ public class Princesa extends Personaje {
 
 	}
 
+	@Override
+	public void moveTo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

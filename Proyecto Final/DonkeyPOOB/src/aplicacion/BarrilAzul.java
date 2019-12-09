@@ -31,4 +31,10 @@ public class BarrilAzul extends Barril {
 
 	}
 
+	@Override
+	public void moveTo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

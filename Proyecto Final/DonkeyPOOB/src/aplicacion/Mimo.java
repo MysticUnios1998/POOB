@@ -7,4 +7,28 @@ public class Mimo extends IA {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void moveTo(int xCoor, int yCoor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveTo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move(int xDistance, int yDistance) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destruir() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

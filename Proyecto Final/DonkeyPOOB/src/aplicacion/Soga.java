@@ -20,4 +20,10 @@ public class Soga extends Sorpresa {
 		
 	}
 
+	@Override
+	public void moveTo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

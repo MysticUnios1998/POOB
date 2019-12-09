@@ -1,6 +1,6 @@
 package aplicacion;
 
-public class Jugador extends Personaje {
+public abstract class Jugador extends Personaje {
 	
 	private int puntos;
 	private int vidas;
@@ -15,23 +15,13 @@ public class Jugador extends Personaje {
 		puntos = 0;
 		vidas = 3;
 	}
-
-	@Override
-	public void moveTo(int xCoor, int yCoor) {
-		// TODO Auto-generated method stub
-
+	
+	public void morir() {
+		vidas -= 1;
 	}
-
-	@Override
-	public void move(int xDistance, int yDistance) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void destruir() {
-		// TODO Auto-generated method stub
-		
+	
+	public int getVidas() {
+		return this.vidas;
 	}
 
 }

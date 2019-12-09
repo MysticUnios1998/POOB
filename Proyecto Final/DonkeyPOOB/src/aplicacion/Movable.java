@@ -11,6 +11,11 @@ public interface Movable {
 	void moveTo(int xCoor, int yCoor);
 	
 	/**
+	 * Mueve el objeto a una posición por defecto (dependiendo del objeto)
+	 */
+	void moveTo();
+	
+	/**
 	 * Mueve el objeto una distancia de su ubicacion actual.
 	 * @param xDistance distancia en el eje x.
 	 * @param yDistance distancia en el eje y.

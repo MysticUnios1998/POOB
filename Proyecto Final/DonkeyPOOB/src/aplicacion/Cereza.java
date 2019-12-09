@@ -19,4 +19,10 @@ public class Cereza extends Sorpresa {
 		
 	}
 
+	@Override
+	public void moveTo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

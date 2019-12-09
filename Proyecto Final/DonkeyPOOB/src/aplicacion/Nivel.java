@@ -1,27 +1,26 @@
-package aplicacion;
+ package aplicacion;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 
 public class Nivel {
 	
 	private int dificultad;
+	private boolean sorpresas;
 	private ArrayList<Plataforma> plataformas;
 	private ArrayList<Escalera> escaleras;
 	
-	public Nivel(int dificultad) {
+	private Nivel(int dificultad) {
 		this.dificultad = dificultad;
 		plataformas = new ArrayList<Plataforma>();
 		escaleras = new ArrayList<Escalera>();
 	}
 	
-	public Nivel(int[][][] plataformas, int[][] escaleras) {
+	public Nivel(int[][][] plataformas, int[][] escaleras, boolean sorpresas) {
 		this(1);
-		for (int[][] plataforma: plataformas) {
-			this.plataformas.add(new Plataforma(plataforma[0], plataforma[1]));
-		}
+		this.sorpresas = sorpresas;
+		for (int[][] plataforma: plataformas) this.plataformas.add(new Plataforma(plataforma[0], plataforma[1]));
 		agregarEscaleras(escaleras);
 	}
 	

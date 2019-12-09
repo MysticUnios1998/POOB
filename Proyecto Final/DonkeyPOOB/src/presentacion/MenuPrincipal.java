@@ -1,8 +1,21 @@
 package presentacion;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import aplicacion.DonkeyPOOBException;
 
 @SuppressWarnings("serial")
 public class MenuPrincipal extends JFrame{
@@ -112,8 +125,12 @@ public class MenuPrincipal extends JFrame{
 		nuevoJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				opcionesJuego = new Configuracion(mainFrame);
-				mainFrame.nuevoJuego();
+				//opcionesJuego = new Configuracion(mainFrame);
+				try {
+					mainFrame.nuevoJuego();
+				} catch (DonkeyPOOBException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				}
 			}
 		});
 	}
