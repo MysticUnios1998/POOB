@@ -8,12 +8,6 @@ public class Mono extends Enemigo {
 	}
 
 	@Override
-	public void moveTo(int xCoor, int yCoor) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void move(int xDistance, int yDistance) {
 		// TODO Auto-generated method stub
 

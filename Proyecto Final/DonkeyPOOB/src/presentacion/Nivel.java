@@ -2,11 +2,16 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import aplicacion.DonkeyPOOBException;
 
@@ -15,6 +20,7 @@ public class Nivel extends JDialog{
 
 	private DonkeyPOOBGUI mainFrame;
 	private JPanel screen;
+	private Timer t;
 	
 	private ArrayList<Sprite> sprites;
 	private ArrayList<Estructura> estructuras;
@@ -31,12 +37,11 @@ public class Nivel extends JDialog{
 		for (String[] personaje: personajes)
 			try {
 				sprites.add(
-							(Sprite)Class.forName(String.format("presentacion.%s", Sprite.traducir(personaje[1]))).
-							getDeclaredConstructor(String.class, Nivel.class).newInstance(personaje[0], this)
-							);
+						(Sprite)Class.forName(String.format("presentacion.%s", Sprite.traducir(personaje[1]))).
+						getDeclaredConstructor(String.class, Nivel.class).newInstance(personaje[0], this)
+				);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | NoSuchMethodException | SecurityException
-					| ClassNotFoundException e) {
+					| InvocationTargetException | NoSuchMethodException | SecurityException| ClassNotFoundException e) {
 				throw new DonkeyPOOBException(DonkeyPOOBException.PLAYER_UNKNOWN);
 			}
 	}
@@ -50,6 +55,18 @@ public class Nivel extends JDialog{
 				(escalera[3] == 0) ? new Escalera(new int[] {escalera[0], escalera[1]}, escalera[2]) : 
 					new EscaleraSegmentada(new int[] {escalera[0], escalera[1]}, escalera[2])
 				);
+	}
+	
+	public void mover(String name, int dir) {
+		mainFrame.mover(name, dir);
+	}
+	
+	public void mover(String name) {
+		mainFrame.mover(name);
+	}
+	
+	public void detener(String name, int key) {
+		mainFrame.detener(name, key);
 	}
 	
 	public int[] getPos(String name) throws DonkeyPOOBException{
@@ -66,8 +83,25 @@ public class Nivel extends JDialog{
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		this.setTitle("DonkeyPOOB");
 		this.setResizable(false);
-		this.requestFocus();
 		this.setVisible(true);
+		this.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				for (Sprite s: sprites) s.mover(e);
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				for (Sprite s: sprites) s.detener(e);
+			}
+		});
+		t = new Timer(10, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				update();
+			}
+		});
+		t.start();
 	}
 	
 	private void preparePantalla() {
@@ -75,10 +109,16 @@ public class Nivel extends JDialog{
 		this.getContentPane().add(screen);
 	}
 	
+	private void update() {
+		for (Sprite s: sprites) s.mover();
+		screen.repaint();
+	}
+	
 	class PantallaNivel extends JPanel{
 		
 		public PantallaNivel() {
 			this.setBackground(Color.BLACK);
+			this.setLayout(null);
 		}
 		
 		public void paintComponent(Graphics g) {
@@ -94,7 +134,6 @@ public class Nivel extends JDialog{
 		private void drawPersonajes(Graphics g) {
 			for (Sprite sp: sprites) sp.draw(g);
 		}
-		
 	}
 
 }

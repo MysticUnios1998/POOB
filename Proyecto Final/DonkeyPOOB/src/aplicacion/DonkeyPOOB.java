@@ -3,6 +3,11 @@ package aplicacion;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
+/**
+ * Clase Backend del simulador
+ * @author Eduard Arias, Juan Diaz
+ *
+ */
 public class DonkeyPOOB {
 
 	/**
@@ -58,14 +63,14 @@ public class DonkeyPOOB {
 	public void crearPersonaje(String[] personaje) throws DonkeyPOOBException{
 		Personaje nuevoPersonaje = null;
 		try {
-			nuevoPersonaje = (Jugador)Class.forName(String.format("aplicacion.%s", personaje[1])).
+			nuevoPersonaje = (Personaje)Class.forName(String.format("aplicacion.%s", personaje[1])).
 					getDeclaredConstructor(int.class, int.class).newInstance(0, 0);
 		}catch(ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException |
 				InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 			throw new DonkeyPOOBException(DonkeyPOOBException.NO_PERSONAJE);
 		}
-		nuevoPersonaje.moveTo();
+		posicionInicial(nuevoPersonaje);
 		personajes.put(personaje[0], nuevoPersonaje);
 	}
 	
@@ -87,9 +92,90 @@ public class DonkeyPOOB {
 		return nivel.getEscaleras();
 	}
 	
+	
+	/**
+	 * Retorna la posicion de un personaje.
+	 * @param name nombre del personaje.
+	 * @return array con la posición del personaje.
+	 * @throws DonkeyPOOBException si el nombre no pertenece a ningun personaje existente.
+	 */
 	public int[] getPos(String name) throws DonkeyPOOBException{
 		if (!personajes.containsKey(name)) throw new DonkeyPOOBException(DonkeyPOOBException.PLAYER_UNKNOWN);
 		return personajes.get(name).getPos();
+	}
+	
+	
+	/**
+	 * Cambia la velocidad del personaje en un direccion
+	 * @param name nombre identificador del personaje
+	 * @param dir direccion deseada. 1- Derecha, 2- Izquierda, 3- Arriba, 4- Abajo, 5- Salto
+	 */
+	public void mover(String name, int dir) {
+		int x = 0, y = 0;
+		switch (dir) {
+			case 1:
+				x = 1;
+				break;
+			case 2:
+				x = -1;
+				break;
+			case 3:
+				y = -1;
+				break;
+			case 4:
+				y = 1;
+				break;
+			case 5:
+				((Jugador)personajes.get(name)).saltar();
+				break;
+		}
+		personajes.get(name).move(x,y);
+	}
+	
+	
+	/**
+	 * Mueve al personaje segun sus caracteristicas.
+	 * @param name nombre identificador del personaje
+	 */
+	public void mover(String name) {
+		personajes.get(name).move();
+	}
+	
+	
+	/**
+	 * Detiene el movimiento del personaje
+	 * @param name nombre identificador del personaje
+	 * @param key direccion deseada. 1- Derecha, 2- Izquierda, 3- Arriba, 4- Abajo, 5- Salto
+	 */
+	public void detener(String name, int key) {
+		int[] pos = personajes.get(name).getVelocidad();
+		if (key <= 2) {
+			pos[0] = 0;
+		}else if(key <= 4) {
+			pos[1] = 0;
+		}else if(key <= 5) {
+			//falta aqui detener salto
+		}
+		personajes.get(name).move(pos[0], pos[1]);
+	}
+	
+	private void posicionInicial(Personaje p) {
+		int x, y;
+		int[][] plataforma = null;
+		if (p instanceof Enemigo) {
+			plataforma = nivel.getPlataformas()[0];
+			x = (plataforma[0][1] <= plataforma[1][1]) ? plataforma[0][0]: plataforma[1][0];
+			y = Math.min(plataforma[0][1], plataforma[1][1])-35;
+		}
+		else if (p instanceof Jugador) {
+			plataforma = nivel.getPlataformas()[nivel.getTotalPlataformas()-1];
+			x = (plataforma[0][1] >= plataforma[1][1]) ? plataforma[0][0]: plataforma[1][0];
+			y = Math.max(plataforma[0][1], plataforma[1][1])-35;
+		}else {
+			x = 0;
+			y = 0;
+		}
+		p.moveTo(x, y);
 	}
 	
 }

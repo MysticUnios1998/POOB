@@ -1,5 +1,10 @@
 package aplicacion;
 
+/**
+ * La clase jugador tiene el objetivo de manejar la informacion de cualquier jugador del simulador.
+ * @author Eduard Arias, Juan Diaz
+ *
+ */
 public abstract class Jugador extends Personaje {
 	
 	private int puntos;
@@ -16,12 +21,26 @@ public abstract class Jugador extends Personaje {
 		vidas = 3;
 	}
 	
+	/**
+	 * Realiza la accion de "muerte" del jugador
+	 */
 	public void morir() {
 		vidas -= 1;
 	}
 	
+	/**
+	 * Retorna la cantidad de vidas restantes del jugador
+	 * @return entero con la informacion requerida
+	 */
 	public int getVidas() {
 		return this.vidas;
+	}
+
+	/**
+	 * Realiza la accion de "salto" del jugador. Es un movimiento semi-parabolico y mientras está activo no puede recibir otras acciones
+	 */
+	public void saltar() {
+		
 	}
 
 }

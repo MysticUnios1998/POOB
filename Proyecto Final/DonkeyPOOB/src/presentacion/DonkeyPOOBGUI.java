@@ -37,9 +37,21 @@ public class DonkeyPOOBGUI{
 		this.nuevoJuego(
 				new int[][][] {{{20,120}, {300, 120}}, {{100, 300}, {400, 300}}, {{120, 40}, {450, 100}}, {{10,	450}, {450, 430}}},
 				new int[][] {{100, 120, 180, 0}, {380, 90, 210, 0}, {200, 120, 180, 1}, {300, 300, 140, 0}},
-				new String[][] {{"Mario", "Manual"}},
+				new String[][] {{"Mario", "Manual"}, {"DonkeyKong", "Mono"}},
 				false
 		);
+	}
+	
+	public void mover(String name, int dir) {
+		logicaJuego.mover(name, dir);
+	}
+	
+	public void mover(String name) {
+		logicaJuego.mover(name);
+	}
+	
+	public void detener(String name, int key) {
+		logicaJuego.detener(name, key);
 	}
 	
 	public Dimension getGameSize() {

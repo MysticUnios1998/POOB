@@ -124,7 +124,6 @@ public class MenuPrincipal extends JFrame{
 	private void prepareAccionNuevo() {
 		nuevoJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
 				//opcionesJuego = new Configuracion(mainFrame);
 				try {
 					mainFrame.nuevoJuego();

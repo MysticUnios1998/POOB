@@ -8,12 +8,6 @@ public class Mimo extends IA {
 	}
 
 	@Override
-	public void moveTo(int xCoor, int yCoor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void moveTo() {
 		// TODO Auto-generated method stub
 		

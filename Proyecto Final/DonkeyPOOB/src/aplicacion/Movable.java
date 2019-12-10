@@ -1,5 +1,11 @@
 package aplicacion;
 
+
+/**
+ * Interfaz que abstrae todo el comportaminet de cualquier objeto desplazable en el simulador.
+ * @author Eduard Arias, Juan Diaz
+ *
+ */
 public interface Movable {
 
 	
@@ -21,5 +27,7 @@ public interface Movable {
 	 * @param yDistance distancia en el eje y.
 	 */
 	void move(int xDistance, int yDistance);
+	
+	void move();
 	
 }

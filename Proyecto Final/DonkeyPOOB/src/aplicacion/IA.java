@@ -1,5 +1,10 @@
 package aplicacion;
 
+/**
+ * Clase abstracta que manoejará la informacion de todo aquel jugador controlado por la cpu
+ * @author Eduard Arias, Juan Diaz
+ *
+ */
 public abstract class IA extends Jugador {
 
 	/**
