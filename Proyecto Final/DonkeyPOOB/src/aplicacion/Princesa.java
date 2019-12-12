@@ -1,6 +1,6 @@
 package aplicacion;
 
-public class Princesa extends Personaje {
+public abstract class Princesa extends Personaje {
 
 	public Princesa(int posX, int posY) {
 		super(posX, posY);

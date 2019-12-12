@@ -111,7 +111,7 @@ public class DonkeyPOOB {
 	 * @param dir direccion deseada. 1- Derecha, 2- Izquierda, 3- Arriba, 4- Abajo, 5- Salto
 	 */
 	public void mover(String name, int dir) {
-		int x = 0, y = 0;
+		int x = 0, y = 1;
 		switch (dir) {
 			case 1:
 				x = 1;
@@ -126,7 +126,7 @@ public class DonkeyPOOB {
 				y = 1;
 				break;
 			case 5:
-				((Jugador)personajes.get(name)).saltar();
+				personajes.get(name).saltar();
 				break;
 		}
 		personajes.get(name).move(x,y);
@@ -152,7 +152,7 @@ public class DonkeyPOOB {
 		if (key <= 2) {
 			pos[0] = 0;
 		}else if(key <= 4) {
-			pos[1] = 0;
+			pos[1] = 1;
 		}else if(key <= 5) {
 			//falta aqui detener salto
 		}

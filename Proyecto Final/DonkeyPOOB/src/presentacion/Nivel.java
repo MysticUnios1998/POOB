@@ -95,7 +95,7 @@ public class Nivel extends JDialog{
 				for (Sprite s: sprites) s.detener(e);
 			}
 		});
-		t = new Timer(10, new ActionListener() {
+		t = new Timer(5, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				update();

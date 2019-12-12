@@ -26,4 +26,10 @@ public class Martillo extends Sorpresa {
 		
 	}
 
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

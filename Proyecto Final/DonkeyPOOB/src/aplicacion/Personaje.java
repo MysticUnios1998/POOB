@@ -65,4 +65,9 @@ public abstract class Personaje implements Movable {
 	 */
 	public abstract void destruir();
 	
+	/**
+	 * Realiza la accion de saltar del personaje. Para los enemigos, realiza una accion en contra del jugador
+	 */
+	public abstract void saltar();
+	
 }

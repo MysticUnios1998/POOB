@@ -14,6 +14,9 @@ public abstract class Barril extends Enemigo{
 		super(posX, posY);
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public void saltar() {}
 
 	
 

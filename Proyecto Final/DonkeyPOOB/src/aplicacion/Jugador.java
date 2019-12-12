@@ -5,10 +5,12 @@ package aplicacion;
  * @author Eduard Arias, Juan Diaz
  *
  */
-public abstract class Jugador extends Personaje {
+public abstract class Jugador extends Personaje{
 	
 	private int puntos;
 	private int vidas;
+	
+	private boolean onAir;
 
 	/**
 	 * Constructor principal de la clase Jugador
@@ -40,7 +42,22 @@ public abstract class Jugador extends Personaje {
 	 * Realiza la accion de "salto" del jugador. Es un movimiento semi-parabolico y mientras está activo no puede recibir otras acciones
 	 */
 	public void saltar() {
-		
+		if (!onAir) {
+			onAir = true;
+			move(getVelocidad()[0], -3);
+			move();
+		}
+	}
+	
+	@Override
+	public void move() {
+		super.move();
+	}
+	
+	@Override
+	public void move(int dx, int dy) {
+		if (!onAir) super.move(dx,  dy);
+		onAir = false;
 	}
 
 }

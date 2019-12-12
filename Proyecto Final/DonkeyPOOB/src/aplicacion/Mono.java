@@ -31,4 +31,10 @@ public class Mono extends Enemigo {
 		
 	}
 
+	@Override
+	public void saltar() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

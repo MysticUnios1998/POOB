@@ -32,7 +32,7 @@ public class Hero extends Sprite {
 		else if (e.getKeyCode() == KeyEvent.VK_A) mover(2);
 		else if (e.getKeyCode() == KeyEvent.VK_W) mover(3);
 		else if (e.getKeyCode() == KeyEvent.VK_S) mover(4);
-		else if (e.getKeyCode() == KeyEvent.VK_S) mover(5);
+		else if (e.getKeyCode() == KeyEvent.VK_SPACE) mover(5);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class Hero extends Sprite {
 		else if (e.getKeyCode() == KeyEvent.VK_A) detener(2);
 		else if (e.getKeyCode() == KeyEvent.VK_W) detener(3);
 		else if (e.getKeyCode() == KeyEvent.VK_S) detener(4);
-		else if (e.getKeyCode() == KeyEvent.VK_S) detener(5);
+		else if (e.getKeyCode() == KeyEvent.VK_SPACE) detener(5);
 	}
 
 }
